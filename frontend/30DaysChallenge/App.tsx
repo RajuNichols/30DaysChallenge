@@ -8,7 +8,7 @@ export default function App() {
     Inter_900Black,
   });
   if (fontsLoaded) {
-    <AppLoading />;
+    return <AppLoading />;
   }
   return (
     <View style={styles.container}>

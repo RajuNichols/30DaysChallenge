@@ -14,7 +14,7 @@ import {
   Inter_800ExtraBold,
   Inter_400Regular,
 } from "@expo-google-fonts/inter";
-import React, { useEffect, useCallback, ReactNode } from "react";
+import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 // import { Button } from "react-native-paper";
 
@@ -29,6 +29,8 @@ const DismissKeyboard = ({ children }: Props) => (
   </TouchableWithoutFeedback>
 );
 export default function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -51,19 +53,33 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
+  const handleLogin = () => {
+    // #TODO
+    // This is where we will use the backend to check the login values to see if they are valid
+
+    console.log(username + password, "this is the login information");
+  };
   return (
     <DismissKeyboard>
       <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
         <Text style={styles.text}>30 Days Challenge</Text>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.input} placeholder="Username" />
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={username}
+            onChangeText={(val) => setUsername(val)}
+          />
           <TextInput
             style={styles.input}
             placeholder="Password"
             secureTextEntry={true}
+            value={password}
+            onChangeText={(val) => setPassword(val)}
           />
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.register}>
@@ -136,6 +152,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 17,
     textAlign: "center",
-    left: 35
+    left: 35,
   },
 });

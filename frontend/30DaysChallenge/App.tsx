@@ -58,7 +58,7 @@ export default function App() {
     // #TODO
     // This is where we will use the backend to check the login values to see if they are valid
 
-    console.log(username + password, "this is the login information");
+    console.log("username: " + username +" password: "+ password, " this is the login information");
   };
   return (
     <DismissKeyboard>

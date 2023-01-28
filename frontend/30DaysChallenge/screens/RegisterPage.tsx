@@ -35,6 +35,7 @@ import {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [checkPassword, setCheckPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     let [fontsLoaded, error] = useFonts({
       Inter_900Black,
       Inter_800ExtraBold,
@@ -61,21 +62,17 @@ import {
     const handleRegister = () => {
       // #TODO
       // This is where we will use the backend to check the register values to see if they are valid, if so we will transition to the questionnaire.
-      if (password == checkPassword) {
-        console.log("\nPasswords match.");
-        // If passwords are valid and other register values are not already in the database, then continue
-      } else {
-          console.log("\nPasswords DON'T match.")
-          // #TODO send an error message
-      }
-
-      // Check if email is valid
-      // Don't think this REGEX is 100% fail proof but it's better than nothing
-      if (/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)) { 
-          console.log("Email is valid.");
-      } else {
-          console.log("Email is NOT valid.")
-      }
+      
+      // Check that the user entered something for each input
+      if (username == "") { setErrorMessage("Enter a username."); } else
+      if (email == "") { setErrorMessage("Enter an email."); } else
+      if (password == "") { setErrorMessage("Enter a password"); } else 
+      
+      // Check that email and passwords are valid
+      if (!(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email))) { setErrorMessage("Enter a valid email."); } else
+      if (password != checkPassword) { setErrorMessage("The passwords do not match."); } 
+      else { setErrorMessage(""); }
+      
       console.log(
         "Name: " + username + "\n" +
         "Email: " + email + "\n" +
@@ -121,6 +118,7 @@ import {
             <TouchableOpacity style={styles.button} onPress={handleRegister}>
               <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
+            <Text style={styles.error}>{errorMessage}</Text>
           </SafeAreaView>
         </KeyboardAvoidingView>
       </DismissKeyboard>
@@ -163,7 +161,7 @@ import {
       backgroundColor: "#F45D9A",
       width: 327,
       height: 44,
-      top: 140,
+      top: 150,
       alignSelf: "center",
       borderRadius: 4,
       justifyContent: "center",
@@ -174,20 +172,13 @@ import {
       alignSelf: "center",
       fontSize: 17,
     },
-    register: {
-      width: 327,
-      height: 48,
-      top: 459,
-      justifyContent: "center",
-      textAlign: "center",
-    },
-    registerText: {
-      color: "#FFFFFF",
-      fontFamily: "Inter_400Regular",
-      alignSelf: "center",
-      fontSize: 17,
-      textAlign: "center",
-      left: 35,
+    error: {
+        color: "#FF0000",
+        fontFamily: "Inter_400Regular",
+        alignSelf: "center",
+        fontSize: 15,
+        textAlign: "center",
+        top: 80,
     },
   });
   

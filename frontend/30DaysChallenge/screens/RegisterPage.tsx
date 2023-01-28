@@ -8,6 +8,7 @@ import {
   Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import {
   useFonts,
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     top: 95,
   },
   inputContainer: {
-    top: 100,
+    top: Platform.OS === "ios"? 0 : 70,
   },
   input: {
     height: 44,
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    top: 130,
+    top: Platform.OS === "ios" ? 30 : 100,
     alignSelf: "center",
     backgroundColor: "#FFFFFF",
     borderRadius: 4,
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F45D9A",
     width: 327,
     height: 44,
-    top: 250,
+    top: Platform.OS === "ios" ? 150: 200,
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
@@ -196,6 +197,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 15,
     textAlign: "center",
-    top: 180,
+    top: Platform.OS === "ios"? 80: 125,
   },
 });

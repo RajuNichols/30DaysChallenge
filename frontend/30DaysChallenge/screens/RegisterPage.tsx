@@ -60,8 +60,14 @@ import {
   
     const handleRegister = () => {
       // #TODO
-      // This is where we will use the backend to check the register values to see if they are valid, if so we will transition to the dashboard.
-      console.log("clicked on register\n");
+      // This is where we will use the backend to check the register values to see if they are valid, if so we will transition to the questionnaire.
+      if (password == checkPassword) {
+        console.log("\nPasswords match.");
+        // If passwords are valid and other register values are not already in the database, then continue
+      } else {
+          console.log("\nPasswords DON'T match.")
+          // #TODO send an error message
+      }
       console.log(
         "Name: " + username + "\n" +
         "Email: " + email + "\n" +
@@ -98,12 +104,13 @@ import {
              <TextInput
                 style={styles.input}
                 placeholder="Verify Password"
+                secureTextEntry={true}
                 value={checkPassword}
                 onChangeText={(val) => setCheckPassword(val)}
               />
             </View>
             <TouchableOpacity style={styles.button} onPress={handleRegister}>
-              <Text style={styles.buttonText}>Login</Text>
+              <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
           </SafeAreaView>
         </KeyboardAvoidingView>
@@ -121,7 +128,7 @@ import {
     text: {
       fontFamily: "Inter_800ExtraBold",
       color: "white",
-      fontSize: 70,
+      fontSize: 30,
       textAlign: "center",
       alignItems: "center",
       width: "100%",
@@ -138,7 +145,7 @@ import {
       margin: 12,
       borderWidth: 1,
       padding: 10,
-      top: 439,
+      top: 130,
       alignSelf: "center",
       backgroundColor: "#FFFFFF",
       borderRadius: 4,
@@ -147,7 +154,7 @@ import {
       backgroundColor: "#F45D9A",
       width: 327,
       height: 44,
-      top: 449,
+      top: 140,
       alignSelf: "center",
       borderRadius: 4,
       justifyContent: "center",

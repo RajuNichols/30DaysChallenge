@@ -7,7 +7,10 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage">
+      <Stack.Navigator
+        initialRouteName="LandingPage"
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name="LandingPage" component={LandingPage} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 import {
   useFonts,
@@ -57,7 +58,7 @@ export default function LandingPage() {
 
   const handleLogin = () => {
     // #TODO
-    // This is where we will use the backend to check the login values to see if they are valid
+    // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
 
     console.log(
       "username: " + username + " password: " + password,
@@ -65,34 +66,42 @@ export default function LandingPage() {
     );
   };
 
+  const handleRegister = () => {
+    // #TODO
+    // this is where we will transition the screen to the register screen.
+    console.log("clicked on register");
+  };
+
   return (
     <DismissKeyboard>
-      <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-        <Text style={styles.text}>30 Days Challenge</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            value={username}
-            onChangeText={(val) => setUsername(val)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={(val) => setPassword(val)}
-          />
-        </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.register}>
-          <Text style={styles.registerText}>
-            New to 30 Days Challenge? Click here to register
-          </Text>
-        </TouchableOpacity>
-      </SafeAreaView>
+      <KeyboardAvoidingView>
+        <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+          <Text style={styles.text}>30 Days Challenge</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Username"
+              value={username}
+              onChangeText={(val) => setUsername(val)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={(val) => setPassword(val)}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.register} onPress={handleRegister}>
+            <Text style={styles.registerText}>
+              New to 30 Days Challenge? Click here to register
+            </Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </DismissKeyboard>
   );
 }

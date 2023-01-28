@@ -68,6 +68,14 @@ import {
           console.log("\nPasswords DON'T match.")
           // #TODO send an error message
       }
+
+      // Check if email is valid
+      // Don't think this REGEX is 100% fail proof but it's better than nothing
+      if (/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)) { 
+          console.log("Email is valid.");
+      } else {
+          console.log("Email is NOT valid.")
+      }
       console.log(
         "Name: " + username + "\n" +
         "Email: " + email + "\n" +
@@ -92,6 +100,7 @@ import {
                 style={styles.input}
                 placeholder="Email"
                 value={email}
+                keyboardType="email-address"
                 onChangeText={(val) => setEmail(val)}
               />
               <TextInput

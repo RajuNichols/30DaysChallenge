@@ -20,17 +20,19 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-interface Props {
+interface DissmissKeyboardProps {
   children?: ReactNode;
 }
-
-const DismissKeyboard = ({ children }: Props) => (
+const DismissKeyboard = ({ children }: DissmissKeyboardProps) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 );
+interface LandingPageProps {
+  navigation: any;
+}
 
-export default function LandingPage() {
+export default function LandingPage(props: LandingPageProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let [fontsLoaded, error] = useFonts({
@@ -70,6 +72,7 @@ export default function LandingPage() {
     // #TODO
     // this is where we will transition the screen to the register screen.
     console.log("clicked on register");
+    props.navigation.navigate("RegisterPage");
   };
 
   return (

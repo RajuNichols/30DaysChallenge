@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    top: Platform.OS === "ios" ? 30 : 100,
+    top: Platform.OS === "ios" ? 125 : 100,
     alignSelf: "center",
     backgroundColor: "#FFFFFF",
     borderRadius: 4,

@@ -58,6 +58,6 @@ gen = []
 # search(["Skin"], "Skin")
 
 
-new = load2d("file.txt")
+new = load2d("generated.txt")
 
 # print(new)

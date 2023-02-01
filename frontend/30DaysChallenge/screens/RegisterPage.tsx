@@ -8,6 +8,7 @@ import {
   Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import {
   useFonts,
@@ -20,21 +21,22 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-interface DissmissKeyboardProps {
+interface Props {
   children?: ReactNode;
 }
-const DismissKeyboard = ({ children }: DissmissKeyboardProps) => (
+
+const DismissKeyboard = ({ children }: Props) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 );
-interface LandingPageProps {
-  navigation: any;
-}
 
-export default function LandingPage(props: LandingPageProps) {
+export default function RegisterPage() {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -58,21 +60,42 @@ export default function LandingPage(props: LandingPageProps) {
     return null;
   }
 
-  const handleLogin = () => {
-    // #TODO
-    // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
-
-    console.log(
-      "username: " + username + " password: " + password,
-      " this is the login information"
-    );
-  };
-
   const handleRegister = () => {
     // #TODO
-    // this is where we will transition the screen to the register screen.
-    console.log("clicked on register");
-    props.navigation.navigate("RegisterPage");
+    // This is where we will use the backend to check the register values to see if they are valid, if so we will transition to the questionnaire.
+
+    // Check that the user entered something for each input
+    if (username == "") {
+      setErrorMessage("Enter a username.");
+    } else if (email == "") {
+      setErrorMessage("Enter an email.");
+    } else if (password == "") {
+      setErrorMessage("Enter a password");
+    }
+
+    // Check that email and passwords are valid
+    else if (!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)) {
+      setErrorMessage("Enter a valid email.");
+    } else if (password != checkPassword) {
+      setErrorMessage("The passwords do not match.");
+    } else {
+      setErrorMessage("");
+    }
+
+    console.log(
+      "Name: " +
+        username +
+        "\n" +
+        "Email: " +
+        email +
+        "\n" +
+        "Password: " +
+        password +
+        "\n" +
+        "Verify Pass: " +
+        checkPassword +
+        "\n"
+    );
   };
 
   return (
@@ -89,20 +112,30 @@ export default function LandingPage(props: LandingPageProps) {
             />
             <TextInput
               style={styles.input}
+              placeholder="Email"
+              value={email}
+              keyboardType="email-address"
+              onChangeText={(val) => setEmail(val)}
+            />
+            <TextInput
+              style={styles.input}
               placeholder="Password"
               secureTextEntry={true}
               value={password}
               onChangeText={(val) => setPassword(val)}
             />
+            <TextInput
+              style={styles.input}
+              placeholder="Verify Password"
+              secureTextEntry={true}
+              value={checkPassword}
+              onChangeText={(val) => setCheckPassword(val)}
+            />
           </View>
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Login</Text>
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
+            <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.register} onPress={handleRegister}>
-            <Text style={styles.registerText}>
-              New to 30 Days Challenge? Click here to register
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.error}>{errorMessage}</Text>
         </SafeAreaView>
       </KeyboardAvoidingView>
     </DismissKeyboard>
@@ -119,7 +152,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Inter_800ExtraBold",
     color: "white",
-    fontSize: 70,
+    fontSize: 30,
     textAlign: "center",
     alignItems: "center",
     width: "100%",
@@ -128,7 +161,9 @@ const styles = StyleSheet.create({
     lineHeight: 105,
     top: 95,
   },
-  inputContainer: {},
+  inputContainer: {
+    top: Platform.OS === "ios"? 0 : 70,
+  },
   input: {
     height: 44,
     width: 327,
@@ -136,7 +171,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    top: 439,
+    top: Platform.OS === "ios" ? 125 : 100,
     alignSelf: "center",
     backgroundColor: "#FFFFFF",
     borderRadius: 4,
@@ -145,7 +180,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F45D9A",
     width: 327,
     height: 44,
-    top: 449,
+    top: Platform.OS === "ios" ? 150: 200,
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
@@ -156,19 +191,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 17,
   },
-  register: {
-    width: 327,
-    height: 48,
-    top: 459,
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  registerText: {
-    color: "#FFFFFF",
+  error: {
+    color: "#FF0000",
     fontFamily: "Inter_400Regular",
     alignSelf: "center",
-    fontSize: 17,
+    fontSize: 15,
     textAlign: "center",
-    left: 35,
+    top: Platform.OS === "ios"? 80: 125,
   },
 });

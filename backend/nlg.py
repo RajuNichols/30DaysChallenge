@@ -17,14 +17,14 @@ def search(terms, root):
     temp.append(row[0].replace("_", " "))
   gen.append(temp)
  
-# dump 2d list into txt file in json format
+# dump 2d list into txt file in json format, gen is list being dumped
 def dump(gen, filename):
   with open(filename, "w") as f:
   json.dump(gen, f, indent=4)
 
 #load json array from txt file into python 2d list
 def load2d(filename):
-  with open("file.txt") as f:
+  with open(filename) as f:
     new = json.load(f)
   return new
   

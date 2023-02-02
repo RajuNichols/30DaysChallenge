@@ -1,0 +1,39 @@
+ [
+  [
+        "Smoking",
+        "cigarette",
+        "Secondhand Smoke",
+        "passive smoking",
+        "Nicotine",
+        "Obesity",
+        "Vaping",
+        "E-cigarettes",
+        "Tobacco",
+        "Electronic cigarettes",
+        "Smoking cessation",
+        "cigarette cessation",
+        "passive smoking cessation",
+        "Nicotine cessation",
+        "effects on Obesity",
+        "Vaping cessation",
+        "E-cigarettes cessation",
+        "Tobacco cessation",
+        "Electronic cigarettes cessation"
+    ],
+    [
+        "Alcohol",
+        "substance abuse",
+        "addiction",
+        "alcohol addictions",
+        "alcoholic",
+        "chemical dependency",
+        "alcholism",
+        "Alcohol cessation",
+        "substance abuse cessation",
+        "addiction cessation",
+        "alcohol addictions cessation",
+        "alcoholic cessation",
+        "chemical dependency cessation",
+        "alcholism cessation"
+    ]
+ ]

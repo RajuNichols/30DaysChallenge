@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LandingPage from "./screens/LandingPage";
 import RegisterPage from "./screens/RegisterPage";
+import ChallengeDescriptionPage from "./screens/ChallengeDescriptionPage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -14,6 +15,10 @@ export default function App() {
       >
         <Stack.Screen name="LandingPage" component={LandingPage} />
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
+        <Stack.Screen
+          name="ChallengeDescriptionPage"
+          component={ChallengeDescriptionPage}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

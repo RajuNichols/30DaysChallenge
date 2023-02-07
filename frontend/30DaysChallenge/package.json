@@ -11,11 +11,13 @@
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo/webpack-config": "^0.17.2",
+    "@react-native-clipboard/clipboard": "^1.11.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
     "expo": "~47.0.8",
     "expo-app-loading": "~2.1.1",
+    "expo-clipboard": "~4.0.1",
     "expo-font": "~11.0.1",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",

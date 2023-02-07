@@ -17,17 +17,9 @@ import {
 } from "@expo-google-fonts/inter";
 import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import DismissKeyboard from "../components/dismisskeyboard";
 
 SplashScreen.preventAutoHideAsync();
-
-interface DissmissKeyboardProps {
-  children?: ReactNode;
-}
-const DismissKeyboard = ({ children }: DissmissKeyboardProps) => (
-  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    {children}
-  </TouchableWithoutFeedback>
-);
 interface LandingPageProps {
   navigation: any;
 }

@@ -13,6 +13,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Platform
 } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import DifficultyStars from "../components/difficultystars";
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 327,
     height: 295,
-    top: 200,
+    top: Platform.OS === "ios" ? 250 : 100,
     backgroundColor: "#E6E6E6",
     borderRadius: 6,
   },

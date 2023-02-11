@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <title>30 Days Challenge</title>
+    <script type="module">
+      import { createCity, readCity, updateCity, deleteCity } from "./js/firebase.js";
+      document.querySelector('#create').addEventListener('click', createCity);
+      document.querySelector('#read').addEventListener('click', readCity);
+      document.querySelector('#update').addEventListener('click', updateCity);
+      document.querySelector('#delete').addEventListener('click', deleteCity);
+    </script>
+  </head>
+  <body>
+    <h1>Oh CRUD!</h1>
+    <button id="create">Create</button>
+    <button id="read">Read</button>
+    <button id="update">Update</button>
+    <button id="delete">Delete</button>
+    <p id="json"></p>
+    <script type="module" src="./js/firebase.js"></script>
+  </body>
+</html>
+

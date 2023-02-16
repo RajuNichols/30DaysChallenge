@@ -44,7 +44,11 @@
         "gray hair",
         "wavy hair",
         "facial hair",
-        "hair oiling"
+        "hair oiling",
+        "castor oil",
+        "rosemary oil",
+        "dry hair",
+        "rice water"
     ],
     [
         "Sleep",
@@ -234,7 +238,9 @@
         "Skin redness",
         "red light therapy",
         "retinol",
-        "Centella asiatica"
+        "Centella asiatica",
+        "benzoyl peroxide",
+        "salicylic acid"
     ],
     [
         "Effects Anxiety",
@@ -281,7 +287,11 @@
         "Effects gray hair",
         "Effects wavy hair",
         "Effects facial hair",
-        "Effects hair oiling"
+        "Effects hair oiling",
+        "Effects castor oil",
+        "Effects rosemary oil",
+        "Effects dry hair",
+        "Effects rice water"
     ],
     [
         "Effects Sleep",
@@ -471,6 +481,8 @@
         "Effects Skin redness",
         "Effects red light therapy",
         "Effects retinol",
-        "Effects Centella asiatica"
+        "Effects Centella asiatica",
+        "Effects benzoyl peroxide",
+        "Effects salicylic acid"
     ]
 ]

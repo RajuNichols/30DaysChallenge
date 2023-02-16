@@ -83,8 +83,6 @@ export default function LandingPage(props: LandingPageProps) {
   ];
 
   return (
-    // <DismissKeyboard>
-    //   <KeyboardAvoidingView>
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
           <ScrollView style={styles.desc}> 
             <Text style={styles.text}>30 Days Challenge</Text>
@@ -97,7 +95,7 @@ export default function LandingPage(props: LandingPageProps) {
                   initial={0} //initial value of this group
                   buttonColor={"#F45D9A"}
                   labelColor={"white"}
-                
+                  
                   onPress={(value) => {
                     setq1ChosenOption(value);
                   }}
@@ -152,7 +150,7 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={q1Options}
                   initial={0} //initial value of this group
-                  buttonColor={"#F45D9A"}
+                  buttonColor={'#F45D9A'}
                   labelColor={"white"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
@@ -163,6 +161,7 @@ export default function LandingPage(props: LandingPageProps) {
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
+            <View style={styles.padding}></View>
             </ScrollView>
         </SafeAreaView>
   );
@@ -196,6 +195,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
+    // position: "absolute",
   },
   buttonText: {
     color: "#FFFFFF",
@@ -229,12 +229,11 @@ const styles = StyleSheet.create({
       alignContent: "center",
       position: "absolute",
       flexGrow: 1,
-      // width: 327,
       height: 800,
       top: 50,
-      // top: Platform.OS === "ios" ? 250 : 100,
-      // backgroundColor: "#E6E6E6",
-      // borderRadius: 6,
-    }
+    },
+    padding: {
+      height: 100
+    },
 });
 

@@ -3,8 +3,7 @@ class User{
     username:string;
     userPassword:string;
     challenges:{ [key: string]: Challenges };
-    private numOfChallenges:number;
- 
+    numOfChallenges:number;
  
     constructor(username:string, userPassword:string){
         this.username = username;
@@ -12,76 +11,36 @@ class User{
         this.challenges = {};
         this.numOfChallenges = 0;
     }
- 
- 
-    public login(username:string, userPassword:string){
-        /*
-        Connect to Database and check username and password
-        If they exist, login
-        else, send error
-        */
-    }
- 
- 
-    public forgotPassword(username:string, newUserPassword){
-        /*
-        Connect to Database and check username exists
-        If they exist, change password on database
-        else, send error
-        */
-    }
- 
- 
-    public createUser(username:string, userPassword:string){
-        /*Connect to Database and check if user exists
-        if not, create user
-        else, tell user to login
-        */
-    }
- 
- 
-    public addChallenge(challengeName:string, challengeDifficulty:string){
-        let temp = new Challenges(challengeName,challengeDifficulty);
-        this.challenges[challengeName] = temp;
-        this.numOfChallenges++;
-    }
- 
- 
-    public endChallenge(challengeName:string){
-        this.challenges[challengeName].challengeComplete();
-    }
  }
  
  
  class Challenges{
     challengeName:string;
-    challengeDifficulty:string;
+    challengeDifficulty:number;
     daysCompleted:boolean[];
-    date:Date;
+    startDate:Date;
+    endDate:Date;
+    isComplete:boolean;
  
- 
-    constructor(challengeName:string, challengeDifficulty:string){
+    constructor(challengeName:string, challengeDifficulty:number){
         this.challengeName = challengeName;
         this.challengeDifficulty = challengeDifficulty;
- 
+        this.startDate = new Date();
+        this.endDate = new Date();
+        this.endDate.setDate(this.startDate.getDate() + 30);
+        this.isComplete = false;
  
         var i:number;
         for(i=0; i<30; i++){
             this.daysCompleted[i] = false;
         }
- 
- 
-        this.date = new Date();
     }
- 
  
     public getDayCompleted(index:number): boolean{
         return this.daysCompleted[index];
     }
  
- 
     public challengeComplete(){
- 
- 
+        this.isComplete = true;
     }
  } 

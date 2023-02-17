@@ -221,7 +221,9 @@
         "preventative medicine",
         "sensory overload",
         "hypervigilance",
-        "vertigo"
+        "vertigo",
+        "efficacy dysmenorrhea",
+        "dysmenorrhea"
     ],
     [
         "Skin",
@@ -464,7 +466,8 @@
         "Effects preventative medicine",
         "Effects sensory overload",
         "Effects hypervigilance",
-        "Effects vertigo"
+        "Effects vertigo",
+        "Effects dysmenorrhea"
     ],
     [
         "Effects Skin",

@@ -223,7 +223,9 @@
         "hypervigilance",
         "vertigo",
         "efficacy dysmenorrhea",
-        "dysmenorrhea"
+        "dysmenorrhea",
+        "PMS",
+        "Menstrual cramps"
     ],
     [
         "Skin",
@@ -467,7 +469,9 @@
         "Effects sensory overload",
         "Effects hypervigilance",
         "Effects vertigo",
-        "Effects dysmenorrhea"
+        "Effects dysmenorrhea",
+        "Effects PMS",
+        "Effects Menstrual cramps"
     ],
     [
         "Effects Skin",

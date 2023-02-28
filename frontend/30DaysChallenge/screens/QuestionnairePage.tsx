@@ -2,14 +2,9 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput,
   SafeAreaView,
   ScrollView,
-  TouchableWithoutFeedback,
-  Keyboard,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  Pressable
 } from "react-native";
 import {
   useFonts,
@@ -90,11 +85,13 @@ export default function LandingPage(props: LandingPageProps) {
               {/* Question 1 */}
               <View style={styles.radiobuttons}>
               <Text style={styles.questionText}>{ questions.at(0) }<Text style={styles.grayText}>Select one option.</Text></Text>
-                <RadioForm
+              <RadioForm
                   radio_props={q1Options}
                   initial={0} //initial value of this group
                   buttonColor={"#F45D9A"}
                   labelColor={"white"}
+                  selectedButtonColor={"#F45D9A"}
+                  selectedLabelColor={"white"}
                   
                   onPress={(value) => {
                     setq1ChosenOption(value);
@@ -110,6 +107,8 @@ export default function LandingPage(props: LandingPageProps) {
                   initial={0} //initial value of this group
                   buttonColor={"#F45D9A"}
                   labelColor={"white"}
+                  selectedButtonColor={"#F45D9A"}
+                  selectedLabelColor={"white"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -124,6 +123,8 @@ export default function LandingPage(props: LandingPageProps) {
                   initial={0} //initial value of this group
                   buttonColor={"#F45D9A"}
                   labelColor={"white"}
+                  selectedButtonColor={"#F45D9A"}
+                  selectedLabelColor={"white"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -138,6 +139,8 @@ export default function LandingPage(props: LandingPageProps) {
                   initial={0} //initial value of this group
                   buttonColor={"#F45D9A"}
                   labelColor={"white"}
+                  selectedButtonColor={"#F45D9A"}
+                  selectedLabelColor={"white"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -152,6 +155,8 @@ export default function LandingPage(props: LandingPageProps) {
                   initial={0} //initial value of this group
                   buttonColor={'#F45D9A'}
                   labelColor={"white"}
+                  selectedButtonColor={"#F45D9A"}
+                  selectedLabelColor={"white"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -195,7 +200,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
-    // position: "absolute",
   },
   buttonText: {
     color: "#FFFFFF",
@@ -217,23 +221,26 @@ const styles = StyleSheet.create({
       fontFamily: "Inter_400Regular",
       fontSize: 17,
     }, 
-    radiobuttons: {
-      top: 95,
-      paddingLeft: 15,
-      paddingRight: 15,
-      paddingTop: 10,
-      paddingBottom: 10,
-    },
-    desc: {
-      alignSelf: "center",
-      alignContent: "center",
-      position: "absolute",
-      flexGrow: 1,
-      height: 800,
-      top: 50,
-    },
-    padding: {
-      height: 100
-    },
+  radiobuttons: {
+    top: 95,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  desc: {
+    alignSelf: "center",
+    alignContent: "center",
+    position: "absolute",
+    flexGrow: 1,
+    height: 800,
+    top: 50,
+  },
+  padding: {
+    height: 100
+  },
+  radio: {
+
+  }
 });
 

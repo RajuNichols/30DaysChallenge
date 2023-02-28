@@ -13,9 +13,9 @@ import {
   Inter_400Regular,
   Inter_700Bold
 } from "@expo-google-fonts/inter";
-import React, { useEffect, useCallback, ReactNode, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -88,10 +88,10 @@ export default function LandingPage(props: LandingPageProps) {
               <RadioForm
                   radio_props={q1Options}
                   initial={0} //initial value of this group
-                  buttonColor={"#F45D9A"}
-                  labelColor={"white"}
-                  selectedButtonColor={"#F45D9A"}
-                  selectedLabelColor={"white"}
+                  buttonColor={"#FBB749"}
+                  labelColor={"#020202"}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
                   
                   onPress={(value) => {
                     setq1ChosenOption(value);
@@ -105,10 +105,10 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={q2Options}
                   initial={0} //initial value of this group
-                  buttonColor={"#F45D9A"}
-                  labelColor={"white"}
-                  selectedButtonColor={"#F45D9A"}
-                  selectedLabelColor={"white"}
+                  buttonColor={"#FBB749"}
+                  labelColor={"#020202"}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -121,10 +121,10 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={q3Options}
                   initial={0} //initial value of this group
-                  buttonColor={"#F45D9A"}
-                  labelColor={"white"}
-                  selectedButtonColor={"#F45D9A"}
-                  selectedLabelColor={"white"}
+                  buttonColor={"#FBB749"}
+                  labelColor={"#020202"}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -137,10 +137,10 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={q3Options}
                   initial={0} //initial value of this group
-                  buttonColor={"#F45D9A"}
-                  labelColor={"white"}
-                  selectedButtonColor={"#F45D9A"}
-                  selectedLabelColor={"white"}
+                  buttonColor={"#FBB749"}
+                  labelColor={"#020202"}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -153,10 +153,10 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={q1Options}
                   initial={0} //initial value of this group
-                  buttonColor={'#F45D9A'}
-                  labelColor={"white"}
-                  selectedButtonColor={"#F45D9A"}
-                  selectedLabelColor={"white"}
+                  buttonColor={"#FBB749"}
+                  labelColor={"#020202"}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
                   onPress={(value) => {
                     setq2ChosenOption(value);
                   }} 
@@ -174,14 +174,14 @@ export default function LandingPage(props: LandingPageProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#123166",
+    backgroundColor: "#F3F5F6",
     width: "100%",
     height: "100%",
     display: "flex",
   },
   text: {
     fontFamily: "Inter_800ExtraBold",
-    color: "white",
+    color: "#020202",
     fontSize: 30,
     textAlign: "center",
     alignItems: "center",
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {},
   button: {
-    backgroundColor: "#F45D9A",
+    backgroundColor: "#0D9968",
     width: 327,
     height: 44,
     top: 100,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   questionText: {
-    color: "#FFFFFF",
+    color: "#020202",
     fontFamily: "Inter_700Bold",
     fontSize: 17,
     textAlign: "left",
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   grayText: {
-      color: "#656668",
+      color: "#0D9968",
       fontFamily: "Inter_400Regular",
       fontSize: 17,
     }, 

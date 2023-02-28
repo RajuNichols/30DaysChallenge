@@ -451,10 +451,12 @@ class QuotesSpider(scrapy.Spider):
 
     def parse(self, response):
         for re in response.css('.docsum-pmid').getall():
+            #get inner text from scraped html element
             ind = re.find(">")
             re = re[ind+1:]
             re = re[:re.find("<")]
 
+            #APPENDS comma-separated ids to given filename
             # filename = 'healthpmids.txt'
             # with Path(filename).open("a") as f:
             #     f.write(re+ ",")

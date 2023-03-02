@@ -21,6 +21,7 @@ import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
 import DifficultyStars from "../components/difficultystars";
+import ChallengeListItem from "../components/challengeListItem";
 
 SplashScreen.preventAutoHideAsync();
 interface ListOfChallengesPageProps {
@@ -53,23 +54,6 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
     return null;
   }
 
-//   const handleLogin = () => {
-//     // #TODO
-//     // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
-
-//     console.log(
-//       "username: " + username + " password: " + password,
-//       " this is the login information"
-//     );
-//   };
-
-//   const handleRegister = () => {
-//     // #TODO
-//     // this is where we will transition the screen to the register screen.
-//     console.log("clicked on register");
-//     props.navigation.navigate("RegisterPage");
-//   };
-
   return (
     <DismissKeyboard>
       <KeyboardAvoidingView>
@@ -77,24 +61,9 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
           <Text style={styles.text}>New Challenges</Text>
           <View style={styles.searchBar}><Text>Search</Text></View>
           <ScrollView> 
-            <View style={styles.challengeContainer}>
-              <Text style={styles.challengeName}>Challenge Name</Text>
-              <View style={styles.stars}>
-                <DifficultyStars difficulty={4}></DifficultyStars>
-              </View>
-            </View>
-            <View style={styles.challengeContainer}>
-              <Text style={styles.challengeName}>Challenge Name</Text>
-              <View style={styles.stars}>
-                <DifficultyStars difficulty={1}></DifficultyStars>
-              </View>
-            </View>
-            <View style={styles.challengeContainer}>
-              <Text style={styles.challengeName}>Challenge Name</Text>
-              <View style={styles.stars}>
-                <DifficultyStars difficulty={2}></DifficultyStars>
-              </View>
-            </View>
+            <ChallengeListItem name={"Challenge #1"} difficulty={1}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
           </ScrollView>
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -130,19 +99,21 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   button: {
-    backgroundColor: "#F45D9A",
-    width: 327,
-    height: 44,
-    top: 449,
+    backgroundColor: "#FBB749",
+    width: "20%",
+    height: "40%",
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
+    position: "absolute",
+    left: "75%",
+    top: "35%",
   },
   buttonText: {
-    color: "#FFFFFF",
-    fontFamily: "Inter_400Regular",
+    color: "white",
+    fontFamily: "Inter_800ExtraBold",
     alignSelf: "center",
-    fontSize: 17,
+    fontSize: 13,
   },
   register: {
     width: 327,
@@ -160,13 +131,7 @@ const styles = StyleSheet.create({
     left: 35,
   },
   stars: {
-    // alignItems: "center",
-    // paddingLeft: 5,
-    // backgroundColor: "blue",
-    // position: "absolute",
-    width: 50,
-
-    // top: 90,
+    paddingLeft: 5,
   },
   searchBar: {
     marginTop: 80,
@@ -204,9 +169,9 @@ const styles = StyleSheet.create({
   challengeName: {
     fontFamily: "Inter_800ExtraBold",
     color: "white",
-    paddingTop: 5,
+    paddingTop: 10,
     paddingLeft: 5,
-    fontSize: 20,
+    fontSize: 18,
     // top: 60,
-  }
+  },
 });

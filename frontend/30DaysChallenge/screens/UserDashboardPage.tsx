@@ -270,8 +270,8 @@ export default function UserDashboardPage() {
       <ScrollView style={styles.challenges}>
         {User.challenges.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
-            <View style={styles.challengeTitleContainer}>
-              <Text style={styles.challengeTitle}>{challenge.title}</Text>
+            <View key={index}style={styles.challengeTitleContainer}>
+              <Text key={index} style={styles.challengeTitle}>{challenge.title}</Text>
             </View>
 
             <View style={styles.calendar}>
@@ -314,11 +314,9 @@ const styles = StyleSheet.create({
   challenges: {
     display: "flex",
     alignSelf: "center",
-    top: "10%",
+    top: "5%",
   },
   challengeView: {
-    width: 321,
-    height: 281,
     alignItems: "center",
   },
   challengeTitle: {
@@ -334,10 +332,22 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.green,
     borderRadius: 6,
     marginBottom: 8,
+    marginTop: 8,
     justifyContent: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
+    
   },
   calendar: {
     width: 321,
-    height: 350,
+    height: 280,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
 });

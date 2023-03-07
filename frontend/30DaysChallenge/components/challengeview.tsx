@@ -51,6 +51,8 @@ const ChallengeView: React.FC<CalendarProps> = ({
     }
   };
 
+  const monthName = format(startDate, "MMM yyyy");
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.ChallengeDay}>Day {challengeDay}: </Text>
@@ -64,29 +66,63 @@ const ChallengeView: React.FC<CalendarProps> = ({
             <Text style={styles.meText}>Me</Text>
           </View>
           {friends.map((friend, index) => (
-            <View style={styles.friends}>
+            <View key={index}style={styles.friends}>
               <Checkbox
                 key={index}
                 value={checkedState[index + 1]}
                 onValueChange={() => handleCheckbox(index + 1)}
               />
-              <Text style={styles.friendsText}key={index + 1}>{friend.name}</Text>
+              <Text style={styles.friendsText} key={index + 1}>
+                {friend.name}
+              </Text>
             </View>
           ))}
         </View>
         <View style={styles.calendarSection}>
-          {datesArray.map((date, index) => (
-            <View key={format(date, "yyyy-MM-dd")} style={styles.calendar}>
-              <Text style={styles.calendarDayText}>{format(date, "dd")}</Text>
-              {challengeDay > index && completedDates[index] ? (
-                <Text style={styles.calendarDayMarker}>✅</Text>
-              ) : challengeDay > index ? (
-                <Text style={styles.calendarDayMarker}>❌</Text>
-              ) : (
-                <Text style={styles.calendarDayMarker}></Text>
-              )}
+          <View style={styles.monthWeekdaysContainer}>
+            <View style={styles.monthContainer}>
+              <Text style={styles.monthText}>{monthName}</Text>
             </View>
-          ))}
+            <View style={styles.weekdaysContainer}>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>S</Text>
+              </View>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>M</Text>
+              </View>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>T</Text>
+              </View>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>W</Text>
+              </View>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>T</Text>
+              </View>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>F</Text>
+              </View>
+              <View style={styles.weekday}>
+                <Text style={styles.weekdaysText}>S</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.calendarDaysContainer}>
+            {datesArray.map((date, index) => (
+              <View key={index} style={styles.calendar}>
+                <Text key={index} style={styles.calendarDayText}>
+                  {format(date, "dd")}
+                </Text>
+                {challengeDay > index && completedDates[index] ? (
+                  <Text style={styles.calendarDayMarker}>✅</Text>
+                ) : challengeDay > index ? (
+                  <Text style={styles.calendarDayMarker}>❌</Text>
+                ) : (
+                  <Text style={styles.calendarDayMarker}></Text>
+                )}
+              </View>
+            ))}
+          </View>
         </View>
       </View>
     </View>
@@ -94,9 +130,9 @@ const ChallengeView: React.FC<CalendarProps> = ({
 };
 
 const styles = StyleSheet.create({
-  wrapper:{
-    width: 321,
-    height: 210,
+  wrapper: {
+    width: "100%",
+    height: "100%",
     backgroundColor: COLORS.blue,
     alignSelf: "center",
     borderRadius: 6,
@@ -104,22 +140,26 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   calendar: {
     width: "14.28%",
     aspectRatio: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    borderWidth: 1,
+    borderColor: "gray",
   },
   calendarDayText: {
-    fontSize: 16,
+    fontSize: 15,
+    textAlign: "center",
+    fontFamily: "Inter_400Regular",
   },
-  calendarDayMarker:{
+  calendarDayMarker: {
     fontSize: 10,
   },
   friendsSection: {
-    width: 85,
+    width: "27%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -127,21 +167,20 @@ const styles = StyleSheet.create({
   },
   friends: {
     paddingLeft: 5,
-    height: 30,
+    height: "12%",
     flexDirection: "row",
     backgroundColor: COLORS.white,
     marginTop: 8,
     alignItems: "center",
-    borderRadius: 3
+    borderRadius: 3,
   },
-  friendsText:{
-    marginLeft: 7,
+  friendsText: {
+    marginLeft: 6,
   },
   calendarSection: {
-    marginTop: 10,
-    padding: 10,
     right: 10,
-    width: 200,
+    height: "125%",
+    width: "63%",
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: COLORS.white,
@@ -153,17 +192,39 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: COLORS.white,
     alignItems: "center",
-    borderRadius: 3
+    borderRadius: 3,
   },
-  meText:{
+  meText: {
     marginLeft: 7,
   },
   ChallengeDay: {
     textAlign: "center",
     display: "flex",
-    fontSize: 16,
-    color: COLORS.black
-    
+    fontSize: 20,
+    color: COLORS.black,
+  },
+  monthContainer: {
+    alignItems: "center",
+  },
+  weekdaysContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  monthText: { fontFamily: "Inter_400Regular" },
+  weekdaysText: { fontFamily: "Inter_400Regular" },
+  monthWeekdaysContainer: {
+    flexDirection: "column",
+  },
+  weekday: {
+    width: "14.28%",
+    aspectRatio: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  calendarDaysContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
   },
 });
 

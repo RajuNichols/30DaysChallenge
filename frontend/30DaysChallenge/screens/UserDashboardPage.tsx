@@ -16,9 +16,10 @@ export default function UserDashboardPage() {
     Inter_800ExtraBold,
     Inter_400Regular,
   });
+
+  //this is start of mock information
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
   const startDate = today;
   const endDate = new Date(startDate.getTime() + 30 * 24 * 60 * 60 * 1000);
 
@@ -101,6 +102,43 @@ export default function UserDashboardPage() {
           true,
         ],
       },
+      {title: "Gym",
+        start: startDate,
+        end: endDate,
+        difficulty: 4,
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+      }
     ],
     friends: [
       {
@@ -295,7 +333,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     width: "100%",
     height: "100%",
-    display: "flex",
+    flex: 1
   },
   pageTitle: {
     fontSize: 30,
@@ -312,9 +350,10 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   challenges: {
-    display: "flex",
+    marginTop: "12%",
+    marginBottom: "5%",
+    flex: 1,
     alignSelf: "center",
-    top: "5%",
   },
   challengeView: {
     alignItems: "center",

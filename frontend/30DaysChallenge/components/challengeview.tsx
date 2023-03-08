@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
   },
   friendsText: {
     marginLeft: 6,
+    fontFamily: "Inter_400Regular"
   },
   calendarSection: {
     right: 10,
@@ -195,7 +196,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   meText: {
-    marginLeft: 7,
+    marginLeft: 6,
+    fontFamily: "Inter_400Regular"
   },
   ChallengeDay: {
     textAlign: "center",

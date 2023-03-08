@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { eachDayOfInterval, format } from "date-fns";
 import Checkbox from "expo-checkbox";
 import { COLORS } from "../colors";
@@ -55,29 +55,29 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.ChallengeDay}>Day {challengeDay}: </Text>
+      <Text style={styles.ChallengeDay}>Day {challengeDay} </Text>
       <View style={styles.container}>
-        <View style={styles.friendsSection}>
-          <View style={styles.me}>
-            <Checkbox
-              value={checkedState[0]}
-              onValueChange={() => handleCheckbox(0)}
-            />
-            <Text style={styles.meText}>Me</Text>
-          </View>
-          {friends.map((friend, index) => (
-            <View key={index}style={styles.friends}>
+        <ScrollView style={styles.friendsSection}>
+            <View style={styles.friends}>
               <Checkbox
-                key={index}
-                value={checkedState[index + 1]}
-                onValueChange={() => handleCheckbox(index + 1)}
+                value={checkedState[0]}
+                onValueChange={() => handleCheckbox(0)}
               />
-              <Text style={styles.friendsText} key={index + 1}>
-                {friend.name}
-              </Text>
+              <Text style={styles.friendsText}>Me</Text>
             </View>
-          ))}
-        </View>
+            {friends.map((friend, index) => (
+              <View key={index} style={styles.friends}>
+                <Checkbox
+                  key={index}
+                  value={checkedState[index + 1]}
+                  onValueChange={() => handleCheckbox(index + 1)}
+                />
+                <Text style={styles.friendsText} key={index + 1}>
+                  {friend.name}
+                </Text>
+              </View>
+            ))}
+        </ScrollView>
         <View style={styles.calendarSection}>
           <View style={styles.monthWeekdaysContainer}>
             <View style={styles.monthContainer}>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
     height: "100%",
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.white,
     alignSelf: "center",
     borderRadius: 6,
   },
@@ -157,12 +157,12 @@ const styles = StyleSheet.create({
   },
   calendarDayMarker: {
     fontSize: 10,
+    top: -2
   },
   friendsSection: {
-    width: "27%",
+    top: "20%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
     marginLeft: 15,
   },
   friends: {
@@ -176,10 +176,10 @@ const styles = StyleSheet.create({
   },
   friendsText: {
     marginLeft: 6,
-    fontFamily: "Inter_400Regular"
+    fontFamily: "Inter_400Regular",
   },
   calendarSection: {
-    right: 10,
+    right: 15,
     height: "125%",
     width: "63%",
     flexDirection: "row",
@@ -197,13 +197,16 @@ const styles = StyleSheet.create({
   },
   meText: {
     marginLeft: 6,
-    fontFamily: "Inter_400Regular"
+    fontFamily: "Inter_400Regular",
   },
   ChallengeDay: {
-    textAlign: "center",
+    marginTop: "3%",
+    paddingLeft: "7%",
+    textAlign: "left",
     display: "flex",
     fontSize: 20,
     color: COLORS.black,
+    fontFamilyt: "Inter_400Regular",
   },
   monthContainer: {
     alignItems: "center",

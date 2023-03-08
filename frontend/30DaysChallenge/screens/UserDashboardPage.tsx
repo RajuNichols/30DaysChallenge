@@ -330,7 +330,7 @@ export default function UserDashboardPage() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.white,
+    backgroundColor: "#d7dada",
     width: "100%",
     height: "100%",
     flex: 1
@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.green,
     borderRadius: 6,
     marginBottom: 8,
-    marginTop: 8,
+    marginTop: 25,
     justifyContent: "center",
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   },
   calendar: {
     width: 321,
-    height: 280,
+    height: 290,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,

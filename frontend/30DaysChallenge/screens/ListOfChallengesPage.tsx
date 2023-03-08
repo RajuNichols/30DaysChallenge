@@ -54,6 +54,13 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
     return null;
   }
 
+  const handleRegister = () => {
+    // #TODO
+    // this is where we will transition the screen to the register screen.
+    console.log("clicked on register");
+    props.navigation.navigate("RegisterPage");
+  };
+
   return (
     <DismissKeyboard>
       <KeyboardAvoidingView>
@@ -64,6 +71,9 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
             <ChallengeListItem name={"Challenge #1"} difficulty={1}></ChallengeListItem>
             <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
             <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
+            {/* <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText} onPress={handleRegister}>View</Text>
+            </TouchableOpacity> */}
           </ScrollView>
         </SafeAreaView>
       </KeyboardAvoidingView>

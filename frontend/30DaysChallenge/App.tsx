@@ -4,13 +4,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LandingPage from "./screens/LandingPage";
 import RegisterPage from "./screens/RegisterPage";
 import ChallengeDescriptionPage from "./screens/ChallengeDescriptionPage";
+import ListOfChallengesPage from "./screens/ListOfChallengesPage";
+import ChallengeListItem from "./components/challengeListItem";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LandingPage"
+        initialRouteName="ListOfChallengesPage"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="LandingPage" component={LandingPage} />
@@ -19,6 +21,8 @@ export default function App() {
           name="ChallengeDescriptionPage"
           component={ChallengeDescriptionPage}
         />
+        <Stack.Screen name="ListOfChallengesPage" component={ListOfChallengesPage} />
+        {/* <Stack.Screen name="ChallengeListItem" component={ChallengeListItem} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

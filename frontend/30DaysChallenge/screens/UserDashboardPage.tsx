@@ -364,6 +364,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_800ExtraBold",
     fontSize: 20,
     paddingLeft: 10,
+    color: COLORS.white
   },
   challengeTitleContainer: {
     width: 321,

@@ -18,8 +18,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import RadioForm from 'react-native-simple-radio-button';
 import 'core-js/features/array/at';
-
-
+import { COLORS } from "../colors";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -118,8 +117,8 @@ export default function LandingPage(props: LandingPageProps) {
               <RadioForm
                   radio_props={yesNoOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   
@@ -135,8 +134,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={customOptions1}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -151,8 +150,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={scaleOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -167,8 +166,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={scaleOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -183,8 +182,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={yesNoOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -223,13 +222,18 @@ const styles = StyleSheet.create({
     top: 5,
   },
   button: {
-    backgroundColor: "#0D9968",
+    backgroundColor: COLORS.green,
     width: 327,
     height: 44,
     top: 100,
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   buttonText: {
     color: "#FFFFFF",

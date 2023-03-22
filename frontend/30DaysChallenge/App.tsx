@@ -13,16 +13,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="UserDashboardPage"
+        initialRouteName="LandingPage"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="LandingPage" component={LandingPage} />
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
         <Stack.Screen name="UserDashboardPage" component={UserDashboardPage}/>
-        <Stack.Screen
-          name="ChallengeDescriptionPage"
-          component={ChallengeDescriptionPage}
-        />
         <Stack.Screen name="QuestionnairePage" component={QuestionnairePage} />
         <Stack.Screen name="ChallengeDescriptionPage" component={ChallengeDescriptionPage} />
       </Stack.Navigator>

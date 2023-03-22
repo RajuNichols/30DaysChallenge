@@ -18,6 +18,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import DifficultyStars from "../components/difficultystars";
 import * as Clipboard from "expo-clipboard";
+import { COLORS } from "../colors";
 
 export default function ChallengeDescriptionPage() {
   const [linkMessage, setLinkMessage] = useState("");
@@ -93,7 +94,7 @@ export default function ChallengeDescriptionPage() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#123166",
+    backgroundColor: COLORS.white,
     width: "100%",
     height: "100%",
     display: "flex",
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   text: {
     alignSelf: "center",
     fontFamily: "Inter_800ExtraBold",
-    color: "white",
+    color: COLORS.black,
     fontSize: 30,
     top: 80,
   },
@@ -115,9 +116,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 327,
     height: 295,
-    top: Platform.OS === "ios" ? 250 : 100,
-    backgroundColor: "#E6E6E6",
+    top: Platform.OS === "ios" ? 250 : 200,
+    backgroundColor: COLORS.gray,
     borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5,
   },
   descHeader: {
     fontFamily: "Inter_900Black",
@@ -136,9 +142,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: 327,
     height: 44,
-    backgroundColor: "#F45D9A",
+    backgroundColor: COLORS.green,
     borderRadius: 4,
     justifyContent: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   buttonText: {
     textAlign: "center",
@@ -150,7 +161,7 @@ const styles = StyleSheet.create({
   inviteText: {
     textAlign: "center",
     alignSelf: "center",
-    color: "white",
+    color: COLORS.black,
     fontFamily: "Inter_400Regular",
     fontSize: 15,
     top: 530,
@@ -167,21 +178,32 @@ const styles = StyleSheet.create({
     top: 540,
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "#FAFAFA",
+    backgroundColor: COLORS.gray,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   inviteLinkText: {
     textAlign: "center",
     fontFamily: "Inter_400Regular",
+    color: COLORS.black,
   },
   copyLink: {
     top: 541,
-    backgroundColor: "#F45D9A",
     width: 40,
     height: 39,
     borderRadius: 10,
     marginLeft: 10,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: COLORS.blue,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   linkMessage:{
     top: 551,
@@ -189,7 +211,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 10,
     fontWeight: "bold",
-    color: "white",
+    color: COLORS.black,
     fontFamily: "Inter_400Regular",
   }
 });

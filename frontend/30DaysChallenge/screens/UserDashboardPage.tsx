@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { SafeAreaView, View, StyleSheet, Text, ScrollView } from "react-native";
+import { SafeAreaView, View, StyleSheet, Text, ScrollView, Touchable, TouchableOpacity } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import {
   useFonts,
@@ -9,8 +9,10 @@ import {
 } from "@expo-google-fonts/inter";
 import { COLORS } from "../colors";
 import ChallengeView from "../components/challengeview";
-
-export default function UserDashboardPage() {
+interface UserDashBoardProps {
+  navigation: any;
+}
+export default function UserDashboardPage(props: UserDashBoardProps) {
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -297,6 +299,10 @@ export default function UserDashboardPage() {
     }
   }, [fontsLoaded]);
 
+  const handleChallengeClick = () => {
+    props.navigation.navigate("ChallengeDescriptionPage")
+  }
+
   if (!fontsLoaded) {
     return null;
   }
@@ -308,9 +314,9 @@ export default function UserDashboardPage() {
       <ScrollView style={styles.challenges}>
         {User.challenges.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
-            <View key={index}style={styles.challengeTitleContainer}>
+            <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={handleChallengeClick}>
               <Text key={index} style={styles.challengeTitle}>{challenge.title}</Text>
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.calendar}>
               <ChallengeView

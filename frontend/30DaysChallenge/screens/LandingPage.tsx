@@ -59,6 +59,7 @@ export default function LandingPage(props: LandingPageProps) {
       "username: " + username + " password: " + password,
       " this is the login information"
     );
+    props.navigation.navigate("Home")
   };
 
   const handleRegister = () => {

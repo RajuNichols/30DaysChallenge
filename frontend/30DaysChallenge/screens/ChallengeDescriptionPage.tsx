@@ -19,8 +19,13 @@ import * as SplashScreen from "expo-splash-screen";
 import DifficultyStars from "../components/difficultystars";
 import * as Clipboard from "expo-clipboard";
 import { COLORS } from "../colors";
+import BackButton from "../components/backbutton";
 
-export default function ChallengeDescriptionPage() {
+interface ChallengeDescriptionPageProps{
+  navigation: any
+}
+
+export default function ChallengeDescriptionPage(props: ChallengeDescriptionPageProps) {
   const [linkMessage, setLinkMessage] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
@@ -51,6 +56,9 @@ export default function ChallengeDescriptionPage() {
 
   return (
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+       <View>
+            <BackButton navigation={props.navigation} />
+        </View>
       <Text style={styles.text}> Challenge Name</Text>
       <View style={styles.stars}>
         <DifficultyStars difficulty={3}></DifficultyStars>

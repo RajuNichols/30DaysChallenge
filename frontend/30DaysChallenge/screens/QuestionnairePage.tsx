@@ -22,11 +22,11 @@ import { COLORS } from "../colors";
 
 SplashScreen.preventAutoHideAsync();
 
-interface LandingPageProps {
+interface QuestionnairePageProps {
   navigation: any;
 }
 
-export default function LandingPage(props: LandingPageProps) {
+export default function QuestionnairePage(props: QuestionnairePageProps) {
   const [q1ChosenOption, setq1ChosenOption] = useState(null);
   const [q2ChosenOption, setq2ChosenOption] = useState(null);
   const [q3ChosenOption, setq3ChosenOption] = useState(null);
@@ -98,6 +98,8 @@ export default function LandingPage(props: LandingPageProps) {
         "Q5: " + q5ChosenOption
       );
       setErrorMessage("");
+      props.navigation.navigate("Home");
+
     } else {
       setErrorMessage("Please answer all the questions.");
       console.log(

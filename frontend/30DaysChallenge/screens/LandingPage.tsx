@@ -25,9 +25,15 @@ interface LandingPageProps {
   navigation: any;
 }
 
+const LoginValues=[
+  {username: "Melissa", password:"test123"},
+  {username: "Dev", password:"dev123"}
+]
+
 export default function LandingPage(props: LandingPageProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -51,6 +57,7 @@ export default function LandingPage(props: LandingPageProps) {
     return null;
   }
 
+
   const handleLogin = () => {
     // #TODO
     // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
@@ -59,12 +66,16 @@ export default function LandingPage(props: LandingPageProps) {
       "username: " + username + " password: " + password,
       " this is the login information"
     );
-    props.navigation.navigate("Home")
+    const user = LoginValues.find((data)=> data.username === username && data.password === password)
+    if(user){
+      props.navigation.navigate("Home")
+    }else{
+      setErrorMessage("Incorrect username of password");
+    }
+    
   };
 
   const handleRegister = () => {
-    // #TODO
-    // this is where we will transition the screen to the register screen.
     console.log("clicked on register");
     props.navigation.navigate("RegisterPage");
   };
@@ -91,6 +102,7 @@ export default function LandingPage(props: LandingPageProps) {
               selectionColor={COLORS.black} 
             />
           </View>
+          <Text style={styles.error}>{errorMessage}</Text>
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
@@ -178,4 +190,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     left: 35,
   },
+  error:{
+    color:COLORS.red,
+    fontFamily: "Inter_400Regular",
+    fontSize: 17,
+    textAlign: "center",
+    top: "49%"
+  }
 });

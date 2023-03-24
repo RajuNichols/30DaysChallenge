@@ -70,7 +70,7 @@ export default function LandingPage(props: LandingPageProps) {
     if(user){
       props.navigation.navigate("Home")
     }else{
-      setErrorMessage("Incorrect username of password");
+      setErrorMessage("Incorrect username or password");
     }
     
   };

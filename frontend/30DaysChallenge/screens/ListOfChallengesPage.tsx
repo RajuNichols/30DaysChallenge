@@ -29,8 +29,7 @@ interface ListOfChallengesPageProps {
 }
 
 export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [search, setSearch] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -54,21 +53,37 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
     return null;
   }
 
-  const handleRegister = () => {
-    // #TODO
-    // this is where we will transition the screen to the register screen.
-    console.log("clicked on register");
-    props.navigation.navigate("RegisterPage");
-  };
+  const name = "Melissa"
+  // const handleRegister = () => {
+  //   // #TODO
+  //   // this is where we will transition the screen to the register screen.
+  //   console.log("clicked on register");
+  //   props.navigation.navigate("RegisterPage");
+  // };
 
   return (
     <DismissKeyboard>
       <KeyboardAvoidingView>
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
           <Text style={styles.text}>New Challenges</Text>
-          <View style={styles.searchBar}><Text>Search</Text></View>
-          <ScrollView> 
+          {/* <View style={styles.searchBar}><Text>Search</Text></View> */}
+          <TextInput
+              style={styles.searchBar}
+              placeholder="Search"
+              value={search}
+              onChangeText={(val) => setSearch(val)}
+            />
+            <TextInput></TextInput>
+          <ScrollView style={styles.desc}> 
             <ChallengeListItem name={"Challenge #1"} difficulty={1}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
+
+            <Text style={styles.smallerText}>Challenges for {name} </Text>
+            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
+            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
             <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
             <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
             {/* <TouchableOpacity style={styles.button}>
@@ -83,6 +98,7 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
 
 const styles = StyleSheet.create({
   container: {
+    // backgroundColor: "#D7DADA",
     backgroundColor: "#F3F5F6",
     width: "100%",
     height: "100%",
@@ -94,6 +110,14 @@ const styles = StyleSheet.create({
     color: "#020202",
     fontSize: 30,
     top: 60,
+  },
+  smallerText: {
+    alignSelf: "center",
+    fontFamily: "Inter_800ExtraBold",
+    color: "#020202",
+    fontSize: 20,
+    top: 60,
+    paddingBottom: 70,
   },
   inputContainer: {},
   input: {
@@ -151,7 +175,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "white",
     borderRadius: 10,
-    paddingTop: 7,
     paddingLeft: 10,
   },
   challengeContainer: {
@@ -170,10 +193,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     position: "absolute",
-    width: 327,
-    height: 295,
-    top: Platform.OS === "ios" ? 250 : 100,
-    backgroundColor: "#E6E6E6",
+    width: "100%",
+    height: "70%",
+    top: Platform.OS === "ios" ? 215 : 100,
+    // backgroundColor: "#E6E6E6",
     borderRadius: 6,
   },
   challengeName: {

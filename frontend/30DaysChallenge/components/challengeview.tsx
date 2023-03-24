@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,  
     elevation: 3,
-    borderColor: COLORS.gray,
+    borderColor: COLORS.blue,
     borderWidth: 5,
   },
   container: {

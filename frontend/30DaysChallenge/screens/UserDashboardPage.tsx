@@ -22,16 +22,23 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   //this is start of mock information
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const startDate = today;
-  const endDate = new Date(startDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+  const curentDate = today
+  const startDate1 = new Date(curentDate.getTime() - 18 * 24 * 60 * 60 * 1000);
+  const startDate2 = new Date(curentDate.getTime() - 10 * 24 * 60 * 60 * 1000);
+  const startDate3 = new Date(curentDate.getTime() - 27 * 24 * 60 * 60 * 1000);
+
+  const endDate1 = new Date(startDate1.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const endDate2 = new Date(startDate2.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const endDate3 = new Date(startDate3.getTime() + 30 * 24 * 60 * 60 * 1000);
 
   const User = {
     name: "Melissa",
     challenges: [
       {
         title: "Sleep",
-        start: startDate,
-        end: endDate,
+        start: startDate1,
+        end: endDate1,
         difficulty: 4,
         challengeDay: 19,
         completedDates: [
@@ -211,8 +218,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
       },
       {
         title: "Listen to Music",
-        start: startDate,
-        end: endDate,
+        start: startDate2,
+        end: endDate2,
         difficulty: 2,
         challengeDay: 10,
         completedDates: [
@@ -356,8 +363,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     ],
       },
       {title: "Workout/Diet",
-        start: startDate,
-        end: endDate,
+        start: startDate3,
+        end: endDate3,
         difficulty: 4,
         challengeDay: 28,
         completedDates: [

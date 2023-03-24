@@ -27,7 +27,6 @@ interface LandingPageProps {
 
 const LoginValues=[
   {username: "Melissa", password:"test123"},
-  {username: "Dev", password:"dev123"}
 ]
 
 export default function LandingPage(props: LandingPageProps) {

@@ -244,7 +244,8 @@
         "retinol",
         "Centella asiatica",
         "benzoyl peroxide",
-        "salicylic acid"
+        "salicylic acid",
+        "niacinamide"
     ],
     [
         "Effects Anxiety",
@@ -490,6 +491,7 @@
         "Effects retinol",
         "Effects Centella asiatica",
         "Effects benzoyl peroxide",
-        "Effects salicylic acid"
+        "Effects salicylic acid",
+        "Effects niacinamide"
     ]
 ]

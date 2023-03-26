@@ -29,7 +29,23 @@ interface ListOfChallengesPageProps {
 }
 
 export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
-  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredChallenges, setFilteredChallenges] = useState("");
+  function handleChange(text: string) {
+    setSearchInput(text)
+    // handleSearch(text)
+    for (let challenge of challengeNames)
+    {
+      const challengeName = challenge.toUpperCase()
+      const textName = text.toUpperCase()
+      if (challengeName.includes(textName))
+      {
+        console.log("Detected: " + challenge)
+        // setFilteredChallenges(`<ChallengeListItem name={challenge} difficulty={1}></ChallengeListItem>`)
+        // return <ChallengeListItem name={challenge} difficulty={1}></ChallengeListItem>
+      }
+    }
+  }
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -54,6 +70,7 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
   }
 
   const name = "Melissa"
+  const challengeNames = ['Stop Drinking Alcohol', 'Quit Smoking', 'Drink Water']
   // const handleRegister = () => {
   //   // #TODO
   //   // this is where we will transition the screen to the register screen.
@@ -70,14 +87,19 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
           <TextInput
               style={styles.searchBar}
               placeholder="Search"
-              value={search}
-              onChangeText={(val) => setSearch(val)}
+              value={searchInput}
+              // onChangeText={(val÷) => setSearchInput(val)}
+              onChangeText={text => handleChange(text) }
             />
             <TextInput></TextInput>
           <ScrollView style={styles.desc}> 
-            <ChallengeListItem name={"Challenge #1"} difficulty={1}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
+          {/* <Text >
+            {filteredChallenges}
+          </Text> */}
+            <ChallengeListItem name={challengeNames[0]} difficulty={1}></ChallengeListItem>
+          
+            <ChallengeListItem name={challengeNames[1]} difficulty={4}></ChallengeListItem>
+            <ChallengeListItem name={challengeNames[2]} difficulty={2}></ChallengeListItem>
 
             <Text style={styles.smallerText}>Challenges for {name} </Text>
             <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
@@ -86,9 +108,6 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
             <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
             <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
             <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
-            {/* <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText} onPress={handleRegister}>View</Text>
-            </TouchableOpacity> */}
           </ScrollView>
         </SafeAreaView>
       </KeyboardAvoidingView>

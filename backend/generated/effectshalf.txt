@@ -1,11 +1,11 @@
 [
   [
         "Effects Work Productivity",
-        "Effects operational efficiency",
-        "Effects efficiency",
+        "Effects on operational efficiency",
+        "Effects on efficiency",
         "Effects Effectiveness",
-        "Effects workflow",
-        "Effects incentive",
+        "Effects on workflow",
+        "Effects on incentive",
         "Effects of competition"
     ],
     [
@@ -21,9 +21,9 @@
         "Effects on gray hair",
         "Effects on wavy hair",
         "Effects on facial hair",
-        "Effects on hair oiling",
-        "Effects on castor oil",
-        "Effects on rosemary oil",
+        "Effects of hair oiling",
+        "Effects of castor oil",
+        "Effects of rosemary oil",
         "Effects on dry hair",
         "Effects of rice water"
     ],

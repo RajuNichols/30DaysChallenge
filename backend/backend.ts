@@ -17,20 +17,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
 const dbRef = ref(db);
-
-const express = require('express')
-const app = express()
-const port = 3000
-var user:User = new User("anushamish", "password");
-
-/*app.get('/', (req, res) => {
- res.send('Hello World!')
-})
-
-
-app.listen(port, () => {
- console.log(`Example app listening on port ${port}`)
-})*/
+var user:User;
 
 export async function login(username:string, userPassword:string):Promise<string>{
     /*

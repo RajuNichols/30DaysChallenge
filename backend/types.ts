@@ -36,7 +36,7 @@ export class Challenges{
  
         var i:number;
         for(i=0; i<30; i++){
-            this.daysCompleted[i] = false;
+            this.daysCompleted.push(false);
         }
 
         this.challengeToken=username+challengeName;

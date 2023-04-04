@@ -4,15 +4,15 @@ import { getDatabase, ref, set, child, get, remove } from "firebase/database";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
-  authDomain: "dayschallenge-d8b3c.firebaseapp.com",
-  databaseURL: "https://dayschallenge-d8b3c-default-rtdb.firebaseio.com",
-  projectId: "dayschallenge-d8b3c",
-  storageBucket: "dayschallenge-d8b3c.appspot.com",
-  messagingSenderId: "718109439350",
-  appId: "1:718109439350:web:7cf1441683172cd6efb657",
-  measurementId: "G-JKM4RHLFHS"
-};
+    apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
+    authDomain: "dayschallenge-d8b3c.firebaseapp.com",
+    databaseURL: "https://dayschallenge-d8b3c-default-rtdb.firebaseio.com",
+    projectId: "dayschallenge-d8b3c",
+    storageBucket: "dayschallenge-d8b3c.appspot.com",
+    messagingSenderId: "718109439350",
+    appId: "1:718109439350:web:7cf1441683172cd6efb657",
+    measurementId: "G-JKM4RHLFHS"
+  };
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
@@ -21,18 +21,18 @@ const dbRef = ref(db);
 const express = require('express')
 const app = express()
 const port = 3000
-var user:User;
+var user:User = new User("anushamish", "password");
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
  res.send('Hello World!')
 })
 
 
 app.listen(port, () => {
  console.log(`Example app listening on port ${port}`)
-})
+})*/
 
-export function login(username:string, userPassword:string):string{
+export async function login(username:string, userPassword:string):Promise<string>{
     /*
     Connect to Database and check username and password
     If they exist, login
@@ -53,10 +53,16 @@ export function login(username:string, userPassword:string):string{
                 user.numOfChallenges = snapshot.child("numOfChallenges").val();
 
                 var friendtemp:string = snapshot.child("friends").val();
-                var friendsArray = friendtemp.split(",");
+                var friendsArray;
+                if(friendtemp != ""){
+                    friendsArray = friendtemp.split(",");
+                }
 
                 var tokentemp:string = snapshot.child("challengeTokens").val();
-                var tokenArray = tokentemp.split(",");
+                var tokenArray;
+                if(tokentemp != ""){
+                    tokenArray = tokentemp.split(",");
+                }
 
                 var i:number;
                 for(i = 0; i < friendsArray.length; i++){
@@ -83,16 +89,17 @@ export function login(username:string, userPassword:string):string{
         return error;
     });
     
-    return "Something went wrong.";
+    return "Something went wrong in login.";
 }
 
-export function createAccount(username:string, userPassword:string):string{
+export async function createAccount(username:string, userPassword:string):Promise<boolean>{
     /*
     Connect to Database and check if user exists
     if not, create user
     else, tell user to login
     */
-    get(child(dbRef, `users/${username}`)).then((snapshot) => {
+   var check:boolean = false;
+   get(child(dbRef, `users/${username}`)).then((snapshot) => {
         if (!snapshot.exists())
         {
             set(ref(db, 'users/' + username), {
@@ -103,22 +110,22 @@ export function createAccount(username:string, userPassword:string):string{
             });
 
             console.log("Added user.");
-            return "Added user."
+            check = true;
 
         } else {
             var error = "User already exists.";
             console.log(error);
-            return error;
+            check = false;
         }
     }).catch((error) => {
         console.error(error);
-        return error;
+        check = false;
     });
 
-    return "Something went wrong.";
+    return check;
 }
 
-export function sendUser(username:string):User{
+export async function sendUser(username:string):Promise<User>{
     if(username == user.username){
         return user;
     }
@@ -159,7 +166,7 @@ export function sendUser(username:string):User{
     return temp;
 }
 
-export function updateUser(user:User):string{
+export async function updateUser(user:User):Promise<string>{
     get(child(dbRef, `users/${user.username}`)).then((snapshot) => {
         if (snapshot.exists())
         {
@@ -167,17 +174,21 @@ export function updateUser(user:User):string{
             var tokentemp:string = "";
 
             var i:number;
-            for(i = 0; i < user.friends.length; i++){
-                friendtemp += user.friends[i];
-                if(i + 1 != user.friends.length){
-                    friendtemp += ","
+            if(user.friends.length != 0){
+                for(i = 0; i < user.friends.length; i++){
+                    friendtemp += user.friends[i];
+                    if(i + 1 != user.friends.length){
+                        friendtemp += ","
+                    }
                 }
             }
 
-            for(i = 0; i < user.challenges.length; i++){
-                tokentemp += user.challenges[i];
-                if(i + 1 != user.challenges.length){
-                    tokentemp += ","
+            if(user.challenges.length != 0){
+                for(i = 0; i < user.challenges.length; i++){
+                    tokentemp += user.challenges[i];
+                    if(i + 1 != user.challenges.length){
+                        tokentemp += ","
+                    }
                 }
             }
             set(ref(db, 'users/' + user.username), {
@@ -203,10 +214,12 @@ export function updateUser(user:User):string{
     return "Something went wrong";
 }
 
-export function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription):string{
+export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string):Promise<string>{
+    var returnString:string = "";
+    try{
     if(user != null){
         let temp = new Challenges(challengeName, challengeDifficulty, user.username, challengeDescription);
-        user.challenges[user.numOfChallenges] = temp.challengeToken;
+        user.challenges.push(temp.challengeToken);
         user.numOfChallenges++;
 
         var string = updateUser(user);
@@ -222,13 +235,18 @@ export function addChallenge(challengeName:string, challengeDifficulty:number, c
             completed: temp.isComplete
         });
 
-        return "Success!";
+        returnString = "Success!";
     }else{
-        return "User is not logged in.";
+        returnString = "User is not logged in.";
     }
+    }catch(e){
+        console.error(e);
+    }
+
+    return returnString;
 }
 
-export function getChallenges():Challenges[]{
+export async function getChallenges():Promise<Challenges[]>{
     var temp:Challenges[] = [];
 
     if(user != null){
@@ -268,7 +286,7 @@ export function getChallenges():Challenges[]{
     return temp;
 }
 
-export function endChallenge(challengeName:string):string{
+export async function endChallenge(challengeName:string):Promise<string>{
     if(user != null){
         user.challenges[challengeName].challengeComplete();
 

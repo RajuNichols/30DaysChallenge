@@ -61,47 +61,6 @@ for i in concls:
         label = str(input("What's the label?: "))
         print(label)
         labels[id]= [value,label]
-        
-    
-         
-  
-# for ind in range(0,len(concls)):
-#   pp.pprint(concls[ind])
-
-#   if(concls[ind][0:8] in labels):
-#     print("There is a duplicate. Here's the previous entry.")
-#     print(concls[ind][0:8], labels[concls[ind][0:8]])
-
-#     print("And the new text: ")
-#     pp.pprint(concls[ind])
-#     #+, =, -, x, i
-#     label = str(input("What's the final label?: "))
-#     print(label)
-#     labels[concls[ind][0:8]]= label
-
-#   else:
-#     #+, =, -, x, i
-#     label = str(input("What's the label?: "))
-#     print(label)
-#     labels[concls[ind][0:8]]= label
-
-     
-
-# temp = ""
-# for ind in range(0,len(labels)):
-#     if(labels[ind][1]==temp):
-#         pp.pprint(concls[ind-1])
-#         pp.pprint(labels[ind-1])
-#         print(ind)
-#         pp.pprint(concls[ind])
-#         pp.pprint(labels[ind])
-
-#         label = str(input("What's the label?: "))
-#         finlabels.append([concls[ind][0:8], label])
-#         print(temp)
-#         temp = labels[ind][1]
-#     else:
-#       temp = labels[ind][1]
 
 
 for id,value in labels.items():

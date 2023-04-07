@@ -18,6 +18,7 @@ import {
 import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
+import * as backend from "../backendNew/backend";
 
 SplashScreen.preventAutoHideAsync();
 interface LandingPageProps {
@@ -50,14 +51,22 @@ export default function LandingPage(props: LandingPageProps) {
     return null;
   }
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
     // #TODO
     // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
+
+    const response = await backend.login(username, password);
 
     console.log(
       "username: " + username + " password: " + password,
       " this is the login information"
     );
+
+    if(response){
+      console.log("login success");
+    } else {
+      console.log("User does not exist");
+    }
   };
 
   const handleRegister = () => {

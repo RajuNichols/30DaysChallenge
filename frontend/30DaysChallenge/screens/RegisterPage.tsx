@@ -19,6 +19,7 @@ import {
 import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
+import * as backend from "../backendNew/backend";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -51,7 +52,7 @@ export default function RegisterPage() {
     return null;
   }
 
-  const handleRegister = () => {
+  const handleRegister = async() => {
     // #TODO
     // This is where we will use the backend to check the register values to see if they are valid, if so we will transition to the questionnaire.
 
@@ -87,6 +88,16 @@ export default function RegisterPage() {
         checkPassword +
         "\n"
     );
+
+    const response = await backend.createAccount(username, password, email)
+    console.log(response);
+
+    if(response){
+
+    } else{
+      setErrorMessage("User already exists");
+    }
+
   };
 
   return (

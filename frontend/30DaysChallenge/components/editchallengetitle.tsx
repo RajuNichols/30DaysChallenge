@@ -15,7 +15,7 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
     return (
             <Modal style={styles.Container} onDismiss={props.closeModal} visible={props.isOpen} transparent={true}>
                 <View style={styles.content}>
-                    <Text>Enter</Text>
+                    <Text style={styles.title}>Enter Title For Challenge</Text>
 
                     <TouchableOpacity onPress={props.closeModal}>
                         <View>
@@ -40,5 +40,10 @@ const styles = StyleSheet.create({
         width: "70%",
         height: "30%",
         backgroundColor: COLORS.blue,
+        borderRadius: 5,
+    },
+    title:{
+        fontSize: 20,
+        fontFamily: "Inter_800ExtraBold"
     }
 })

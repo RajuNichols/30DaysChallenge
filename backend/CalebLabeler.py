@@ -1,6 +1,8 @@
 
 from pathlib import Path
 
+p = Path('.')
+
 listOfPaths = []
 for uniquePath in list(p.glob('**/*.xml')):
   listOfPaths.append(str(uniquePath))

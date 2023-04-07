@@ -208,15 +208,24 @@ export async function updateUser(user:User):Promise<string>{
     return "Something went wrong in update User";
 }
 
-export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string):Promise<string>{
-    var returnString:string = "";
+export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string):Promise<boolean>{
+    var returnBool:boolean = false;
     try{
     if(user != null){
         let temp = new Challenges(challengeName, challengeDifficulty, user.username, challengeDescription);
-        user.challenges.push(temp.challengeToken);
+        user.challenges[user.numOfChallenges] = temp.challengeToken;
         user.numOfChallenges++;
 
         var string = await updateUser(user);
+
+        var daystemp:string = "";
+        var i:number;
+        for(i = 0; i < temp.daysCompleted.length; i++){
+            daystemp += temp.daysCompleted[i];
+            if(i + 1 != temp.daysCompleted.length){
+                daystemp += ","
+            }
+        }
 
         console.log(string);
 
@@ -226,18 +235,20 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
             description: challengeDescription,
             startDate: temp.startDate,
             endDate: temp.endDate,
+            daysCompleted: daystemp,
             completed: temp.isComplete
         });
 
-        returnString = "Success!";
+        returnBool = true;
     }else{
-        returnString = "User is not logged in.";
+        returnBool = false;
     }
     }catch(e){
         console.error(e);
+        returnBool = false;
     }
 
-    return returnString;
+    return returnBool;
 }
 
 export async function getChallenges():Promise<Challenges[]>{
@@ -263,10 +274,10 @@ export async function getChallenges():Promise<Challenges[]>{
                     var j:number;
 
                     for(j = 0; j < 30; j++){
-                        if(completed[i] == "true"){
-                            completedArray[i] = true;
+                        if(completed[j] == "true"){
+                            completedArray[j] = true;
                         }else{
-                            completedArray[i] = false;
+                            completedArray[j] = false;
                         }
                     }
 
@@ -280,12 +291,125 @@ export async function getChallenges():Promise<Challenges[]>{
     return temp;
 }
 
-export async function endChallenge(challengeName:string):Promise<boolean>{
+export async function getChallengeDates(username:string, challengeName:string):Promise<boolean[]>{
+    var array:boolean[] = [];
+    var challengeToken = username + challengeName;
+
+    await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
+        if (snapshot.exists())
+                {
+                    var completedtemp:string = snapshot.child("daysCompleted").val();
+                    var completed = completedtemp.split(",");
+                    var completedArray:boolean[] = [];
+                    var j:number;
+
+                    for(j = 0; j < 30; j++){
+                        if(completed[j] == "true"){
+                            completedArray[j] = true;
+                        }else{
+                            completedArray[j] = false;
+                        }
+                    }
+
+                    array = completedArray;
+                }
+
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    return array;
+}
+
+export async function completeDay(username:string, challengeName:string, dayCompleted:number):Promise<boolean>{
     if(user != null){
-        
+        var challengeToken = username + challengeName;
+
+        await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
+            if(snapshot.exists()){
+
+                var completedtemp:string = snapshot.child("daysCompleted").val();
+                var completed = completedtemp.split(",");
+                var completedArray:boolean[] = [];
+                var j:number;
+
+                for(j = 0; j < 30; j++){
+                    if(completed[j] == "true"){
+                        completedArray[j] = true;
+                    }else{
+                        completedArray[j] = false;
+                    }
+
+                    if(j == dayCompleted){
+                        completedArray[j] = true;
+                    }
+                }
+
+                var daystemp:string = "";
+                var i:number;
+                for(i = 0; i < completedArray.length; i++){
+                    daystemp += completedArray[i];
+                    if(i + 1 != completedArray.length){
+                        daystemp += ","
+                    }
+                }
+
+                set(ref(db, 'challenges/' + challengeToken), {
+                    daysCompleted: daystemp
+                });
+            }
+
+        }).catch((error) => {
+            console.error(error);
+        });
+        return true;
+    }else{
+        return false;
+    }
+}
+
+export async function endChallenge(username:string, challengeName:string):Promise<boolean>{
+    if(user != null){
+        var challengeToken = username + challengeName;
+        var index = user.challenges.findIndex((element) => element == challengeToken);
+
+        var challengeArray = await getChallenges();
+
+        challengeArray[index].challengeComplete();
+
+        set(ref(db, 'challenges/' + challengeToken), {
+            completed: true
+        });
 
         return true;
     }else{
         return false;
+    }
+}
+
+export async function addFriend(friendUsername:string): Promise<boolean>{
+    if(user != null){
+        var index = user.friends.length;
+        user.friends[index] = friendUsername;
+
+        var check = await updateUser(user);
+        console.log(check);
+
+        return true;
+    }else{
+        return false;
+    }
+}
+
+export async function getFriend():Promise<string[]>{
+    var array:string[] = [];
+
+    if(user != null){
+        for(var i = 0; i<user.friends.length; i++){
+            array[i] = user.friends[i];
+        }
+        return array;
+    }else{
+        return array;
     }
 }

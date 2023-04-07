@@ -26,6 +26,7 @@ export class Challenges{
     startDate:Date;
     endDate:Date;
     isComplete:boolean;
+    friends:string[];
  
     constructor(challengeName:string, challengeDifficulty:number, username:string, description:string){
         this.challengeName = challengeName;
@@ -39,18 +40,11 @@ export class Challenges{
  
         var i:number;
         for(i=0; i<30; i++){
-            this.daysCompleted.push(false);
+            this.daysCompleted[i] = false;
         }
 
         this.challengeToken=username+challengeName;
-    }
- 
-    public getCompletedArray(): boolean[]{
-        return this.daysCompleted;
-    }
-
-    public completeDay(index:number){
-        this.daysCompleted[index] = true;
+        this.friends = [];
     }
  
     public challengeComplete(){

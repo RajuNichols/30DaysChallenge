@@ -11,6 +11,7 @@ import pprint
 import xml.etree.ElementTree as ET
 pp = pprint.PrettyPrinter(width=41, compact=True)
 
+
 myfiles = listOfPaths
 
 #text
@@ -20,24 +21,37 @@ labels = {}
 
 finlabels = []
 
+
 filenum = 0
 for filename in myfiles:
   filenum += 1
   tree = ET.parse(filename)
   root = tree.getroot()
   next_up = False
+  title = ""
+  foundTitle = False
   for child in root[3]:
     if ((child.tag == "passage")):
         found = False
+        this_is_title = False
+
         if (next_up):
           next_up = False
           for gchild in child:
             if (gchild.tag == "text" and len(gchild.text) > 40):
               
-              concls.append([filename[:len(filename)-4], filename[:len(filename)-4]+ " " + str(gchild.text)])
+              concls.append([filename[:len(filename)-4], filename[:len(filename)-4]+ " " + str(gchild.text),title])
               
         else:
           for gchild in child:
+
+            if (this_is_title and not foundTitle):
+              title = gchild.text
+              foundTitle = True
+            else:
+              if (gchild.tag == "offset" and gchild.text == "0"):
+                this_is_title = True
+
             #if this is found in an infon element then we want to search it's siblings for the text at the bottom
             if ((gchild.tag == "infon" and gchild.attrib["key"] == "section_type" and gchild.text == "ABSTRACT") or (gchild.tag == "infon" and gchild.attrib["key"] == "section_type" and gchild.text == "CONCL")):
               found = True
@@ -52,6 +66,7 @@ printingTime = False
 for i in concls:
     id = i[0]
     value = i[1]
+    title = i[2]
     if(id in labels):
         print("There is a duplicate. Here's the previous entry.")
         # print(concls[ind][0:8], labels[concls[ind][0:8]])
@@ -66,6 +81,7 @@ for i in concls:
         labels[id] = [temp[0],label]
     else:
         pp.pprint(value)
+        pp.pprint("Article title is:"+title)
         #+, =, -, x, i
 
         # use 'P' to exit

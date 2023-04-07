@@ -88,7 +88,7 @@ for i in concls:
         label = str(input("What's the label?: "))
         print(label)
         if label != 'P':
-          labels[id]= [value,label]
+          labels[id]= [value,label,title]
         else:
           printingTime = True
           break

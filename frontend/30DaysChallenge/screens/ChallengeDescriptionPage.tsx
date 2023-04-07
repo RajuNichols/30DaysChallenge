@@ -20,6 +20,7 @@ import DifficultyStars from "../components/difficultystars";
 import * as Clipboard from "expo-clipboard";
 import { COLORS } from "../colors";
 import BackButton from "../components/backbutton";
+import EditChallengeModal from "../components/editchallengetitle";
 
 interface ChallengeDescriptionPageProps {
   navigation: any;
@@ -30,6 +31,7 @@ export default function ChallengeDescriptionPage(
   props: ChallengeDescriptionPageProps
 ) {
   const [linkMessage, setLinkMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [stars, setStars] = useState(0);
   const [description, setDescription] = useState("");
@@ -53,7 +55,7 @@ export default function ChallengeDescriptionPage(
     {
       title: "At-Home Workouts For Low-Back Pain",
       difficulty: 4,
-      desc: "The benefits of home exercise training on lbp patients this study is the first systematic review and meta-analysis of studies investigating the effectiveness of home exercise programs on pain and functional limitation in patients with lbp. Our meta-analysis showed strong evidence that physical exercise training can take place at home to improve lbp even though we found no studies comparing the same training program between home and another setting. If multiple short bouts of moderate-intensity physical exercise produce significant training effects, learning to integrate physical activity into daily life can become a main goal in the treatment of lbp. Similarly, to center-based exercise we found that yoga improved functional limitation as previous studies also showed. Importantly, our results were in favor of standardized exercise compared to individualized exercise  which may be discordant with the literature based on training in centers [2 26]. This may be explained by the fact that easily-performed standardized exercises can promote a better adherence, and could be more in line with home exercise  whereas individualized exercise may be more in line with practice in a center. The absence of such a significant influence on our study may be due to the wide variety of exercise interventions available and the inconsistency of the intensity and duration of exercise.We also demonstrated that the benefits of exercise were less effective in individuals with a higher body mass index in line with the literature. Meta-analyses also inherit the limitations of the individual studies of which they are composed. Some short time-frames (two weeks ) may also have been too short for a therapeutic effect." ,
+      desc: "The benefits of home exercise training on lbp patients this study is the first systematic review and meta-analysis of studies investigating the effectiveness of home exercise programs on pain and functional limitation in patients with lbp. Our meta-analysis showed strong evidence that physical exercise training can take place at home to improve lbp even though we found no studies comparing the same training program between home and another setting. If multiple short bouts of moderate-intensity physical exercise produce significant training effects, learning to integrate physical activity into daily life can become a main goal in the treatment of lbp. Similarly, to center-based exercise we found that yoga improved functional limitation as previous studies also showed. Importantly, our results were in favor of standardized exercise compared to individualized exercise  which may be discordant with the literature based on training in centers [2 26]. This may be explained by the fact that easily-performed standardized exercises can promote a better adherence, and could be more in line with home exercise  whereas individualized exercise may be more in line with practice in a center. The absence of such a significant influence on our study may be due to the wide variety of exercise interventions available and the inconsistency of the intensity and duration of exercise.We also demonstrated that the benefits of exercise were less effective in individuals with a higher body mass index in line with the literature. Meta-analyses also inherit the limitations of the individual studies of which they are composed. Some short time-frames (two weeks ) may also have been too short for a therapeutic effect.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
     },
@@ -93,8 +95,27 @@ export default function ChallengeDescriptionPage(
     setLinkMessage("Link Successfully Copied");
   };
 
+  const HandleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        isOpen
+          ? {
+              opacity: 0.5,
+              shadowColor: "#00000",
+              shadowOffset: { width: 0, height: 0 },
+              shadowOpacity: 0,
+              shadowRadius: 0,
+              elevation: 0,
+            }
+          : {},
+      ]}
+      onLayout={onLayoutRootView}
+    >
       <View>
         <BackButton navigation={props.navigation} />
       </View>
@@ -102,33 +123,106 @@ export default function ChallengeDescriptionPage(
       <View style={styles.stars}>
         <DifficultyStars difficulty={stars}></DifficultyStars>
       </View>
-      <ScrollView style={styles.desc}>
+      <ScrollView
+        style={[
+          styles.desc,
+          isOpen
+            ? {
+                opacity: 0.5,
+                shadowColor: "#00000",
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 0,
+                shadowRadius: 0,
+                elevation: 0,
+              }
+            : {},
+        ]}
+      >
         <Text style={styles.descHeader}>About:</Text>
-        <Text style={styles.descText}>
-          {description}
-        </Text>
+        <Text style={styles.descText}>{description}</Text>
         <Text style={styles.descHeader}>Citation:</Text>
-        <Text style={styles.descText}>
-          {citation}
-        </Text>
+        <Text style={styles.descText}>{citation}</Text>
       </ScrollView>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          isOpen
+            ? {
+                opacity: 0.5,
+                shadowColor: "#00000",
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 0,
+                shadowRadius: 0,
+                elevation: 0,
+              }
+            : {},
+        ]}
+        onPress={HandleModal}
+      >
         <Text style={styles.buttonText}>Start</Text>
       </TouchableOpacity>
       <Text style={styles.inviteText}>
         Use the link below to invite friends
       </Text>
-      <View style={styles.inviteSection}>
-        <View style={styles.inviteLink}>
+      <View
+        style={[
+          styles.inviteSection,
+          isOpen
+            ? {
+                opacity: 0.5,
+                shadowColor: "#00000",
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 0,
+                shadowRadius: 0,
+                elevation: 0,
+              }
+            : {},
+        ]}
+      >
+        <View
+          style={[
+            styles.inviteLink,
+            isOpen
+              ? {
+                  opacity: 0.5,
+                  shadowColor: "#00000",
+                  shadowOffset: { width: 0, height: 0 },
+                  shadowOpacity: 0,
+                  shadowRadius: 0,
+                  elevation: 0,
+                }
+              : {},
+          ]}
+        >
           <Text style={styles.inviteLinkText}>
             https://linkToCopy.com/Melissa
           </Text>
         </View>
-        <TouchableOpacity style={styles.copyLink} onPress={copyToClipBoard}>
+        <TouchableOpacity
+          style={[
+            styles.copyLink,
+            isOpen
+              ? {
+                  opacity: 0.5,
+                  shadowColor: "#00000",
+                  shadowOffset: { width: 0, height: 0 },
+                  shadowOpacity: 0,
+                  shadowRadius: 0,
+                  elevation: 0,
+                }
+              : {},
+          ]}
+          onPress={copyToClipBoard}
+        >
           <Image source={require("../assets/Vector.png")} />
         </TouchableOpacity>
       </View>
       <Text style={styles.linkMessage}>{linkMessage}</Text>
+
+      {/* -----------------Modal----------------- */}
+      <View style={styles.modal}>
+        <EditChallengeModal isOpen={isOpen} closeModal={HandleModal} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -254,5 +348,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: COLORS.black,
     fontFamily: "Inter_400Regular",
+  },
+  modal: {
+    alignSelf: "center",
   },
 });

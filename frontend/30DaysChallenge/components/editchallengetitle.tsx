@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
         top: "25%",
         width: "70%",
         height: "30%",
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.blue,
     }
 })

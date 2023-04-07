@@ -161,7 +161,19 @@ export default function ChallengeDescriptionPage(
       >
         <Text style={styles.buttonText}>Start</Text>
       </TouchableOpacity>
-      <Text style={styles.inviteText}>
+      <Text style={[
+        styles.inviteText,
+        isOpen
+          ? {
+              opacity: 0.5,
+              shadowColor: "#00000",
+              shadowOffset: { width: 0, height: 0 },
+              shadowOpacity: 0,
+              shadowRadius: 0,
+              elevation: 0,
+            }
+          : {},
+      ]}>
         Use the link below to invite friends
       </Text>
       <View

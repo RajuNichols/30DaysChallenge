@@ -82,7 +82,7 @@ for i in concls:
     else:
         pp.pprint(value)
         pp.pprint("Article title is:"+title)
-        #+, =, -, x, i
+        #+ (include positive), =(include), -(include negative), x(remove), i(informational)
 
         # use 'P' to exit
         label = str(input("What's the label?: "))
@@ -95,8 +95,11 @@ for i in concls:
 
 if printingTime:
   f = open("outputs.txt", "a")
-  f.write(labels)
-  # print(labels)
+  f.write(str(labels))
+  # print(str(labels))
 
-for id,value in labels.items():
-    print(id,value)
+f.close()
+
+f = open("outputs.txt", "r")
+print(f.read())
+f.close()

@@ -1,5 +1,5 @@
 import { User, Challenges } from "./types";
-import { initializeApp } from "../firebase/app";
+import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get, remove } from "firebase/database";
 
 
@@ -216,7 +216,7 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
         user.challenges.push(temp.challengeToken);
         user.numOfChallenges++;
 
-        var string = updateUser(user);
+        var string = await updateUser(user);
 
         console.log(string);
 

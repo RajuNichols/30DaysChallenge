@@ -227,6 +227,17 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
             }
         }
 
+        var friendstemp:string = "";
+        var j:number;
+        if(temp.friends.length != 0){
+            for(j = 0; j < temp.friends.length; j++){
+                friendstemp += temp.friends[j];
+                if(j + 1 != temp.friends.length){
+                    friendstemp += ","
+                }
+            }
+        }
+
         console.log(string);
 
         set(ref(db, 'challenges/' + temp.challengeToken), {
@@ -236,7 +247,8 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
             startDate: temp.startDate,
             endDate: temp.endDate,
             daysCompleted: daystemp,
-            completed: temp.isComplete
+            completed: temp.isComplete,
+            friends: friendstemp
         });
 
         returnBool = true;
@@ -282,6 +294,9 @@ export async function getChallenges():Promise<Challenges[]>{
                     }
 
                     temp[i].daysCompleted=completedArray;
+                    
+                    var friendstemp:string = snapshot.child("friends").val();
+                    var friends = friendstemp.split(",");
                 }
             }).catch((error) => {
                 console.error(error);
@@ -399,6 +414,100 @@ export async function addFriend(friendUsername:string): Promise<boolean>{
     }else{
         return false;
     }
+}
+
+export async function addFriendChallenge(friendUsername:string, challengeName:string): Promise<boolean>{
+    if(user != null){
+        var returnBool:boolean = false;
+        var challengeToken:string = user.username + challengeName;
+
+        await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
+            if (snapshot.exists())
+            {
+                var temp = new Challenges(challengeName, snapshot.child("challengeDifficulty").val(), user.username, snapshot.child("challengeDescription").val());
+                temp.startDate = snapshot.child("startDate").val();
+                temp.endDate = snapshot.child("endDate").val();
+                temp.isComplete = snapshot.child("completed").val();
+
+                var completedtemp:string = snapshot.child("daysCompleted").val();
+                var completed = completedtemp.split(",");
+                var completedArray:boolean[] = [];
+                var j:number;
+
+                for(j = 0; j < 30; j++){
+                    if(completed[j] == "true"){
+                        completedArray[j] = true;
+                    }else{
+                        completedArray[j] = false;
+                    }
+                }
+
+                temp.daysCompleted = completedArray;
+
+                var friendstemp:string = snapshot.child("friends").val();
+                var friends = friendstemp.split(",");
+
+                temp.friends = friends;
+
+                temp.friends[temp.friends.length] = friendUsername;
+
+                var friendsStringtemp:string = "";
+                var j:number;
+                if(temp.friends.length != 0){
+                for(j = 0; j < temp.friends.length; j++){
+                    friendsStringtemp += temp.friends[j];
+                    if(j + 1 != temp.friends.length){
+                        friendsStringtemp += ","
+                        }
+                    }
+                }
+                
+                set(ref(db, 'challenges/' + temp.challengeToken), {
+                    challengeName: challengeName,
+                    challengeDifficulty: temp.challengeDifficulty,
+                    description: temp.description,
+                    startDate: temp.startDate,
+                    endDate: temp.endDate,
+                    daysCompleted: temp.daysCompleted,
+                    completed: temp.isComplete,
+                    friends: friendsStringtemp
+                });
+
+                friendsStringtemp = "";
+                var friendChallengeToken:string = friendUsername + challengeName;
+                friends[friends.length] = user.username;
+
+                if(friends.length != 0){
+                    for(j = 0; j < friends.length; j++){
+                        friendsStringtemp += friends[j];
+                        if(j + 1 != friends.length){
+                            friendsStringtemp += ","
+                            }
+                        }
+                    }
+
+                set(ref(db, 'challenges/' + friendChallengeToken), {
+                    challengeName: challengeName,
+                    challengeDifficulty: temp.challengeDifficulty,
+                    description: temp.description,
+                    startDate: temp.startDate,
+                    endDate: temp.endDate,
+                    daysCompleted: temp.daysCompleted,
+                    completed: temp.isComplete,
+                    friends: friendsStringtemp
+                });
+
+                returnBool = true;
+            }
+        }).catch((error) => {
+            console.error(error);
+            returnBool = false;
+        });
+    }else{
+        returnBool = false;
+    }
+
+    return returnBool;
 }
 
 export async function getFriend():Promise<string[]>{

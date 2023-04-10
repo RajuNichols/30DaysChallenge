@@ -18,15 +18,15 @@ import React, { useEffect, useCallback, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import RadioForm from 'react-native-simple-radio-button';
 import 'core-js/features/array/at';
-
+import { COLORS } from "../colors";
 
 SplashScreen.preventAutoHideAsync();
 
-interface LandingPageProps {
+interface QuestionnairePageProps {
   navigation: any;
 }
 
-export default function LandingPage(props: LandingPageProps) {
+export default function QuestionnairePage(props: QuestionnairePageProps) {
   const [q1ChosenOption, setq1ChosenOption] = useState(null);
   const [q2ChosenOption, setq2ChosenOption] = useState(null);
   const [q3ChosenOption, setq3ChosenOption] = useState(null);
@@ -98,6 +98,8 @@ export default function LandingPage(props: LandingPageProps) {
         "Q5: " + q5ChosenOption
       );
       setErrorMessage("");
+      props.navigation.navigate("Home");
+
     } else {
       setErrorMessage("Please answer all the questions.");
       console.log(
@@ -117,8 +119,8 @@ export default function LandingPage(props: LandingPageProps) {
               <RadioForm
                   radio_props={yesNoOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   
@@ -134,8 +136,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={customOptions1}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -150,8 +152,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={scaleOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -166,8 +168,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={scaleOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -182,8 +184,8 @@ export default function LandingPage(props: LandingPageProps) {
                 <RadioForm
                   radio_props={yesNoOptions}
                   initial={-1} //initial value of this group
-                  buttonColor={"#FBB749"}
-                  labelColor={"#020202"}
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
                   selectedButtonColor={"#FBB749"}
                   selectedLabelColor={"#020202"}
                   onPress={(value) => {
@@ -222,13 +224,18 @@ const styles = StyleSheet.create({
     top: 5,
   },
   button: {
-    backgroundColor: "#0D9968",
+    backgroundColor: COLORS.green,
     width: 327,
     height: 44,
     top: 100,
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   buttonText: {
     color: "#FFFFFF",

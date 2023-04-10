@@ -18,15 +18,21 @@ import {
 import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
+import { COLORS } from "../colors";
 
 SplashScreen.preventAutoHideAsync();
 interface LandingPageProps {
   navigation: any;
 }
 
+const LoginValues=[
+  {username: "Dev", password:"test123"},
+]
+
 export default function LandingPage(props: LandingPageProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
@@ -50,6 +56,7 @@ export default function LandingPage(props: LandingPageProps) {
     return null;
   }
 
+
   const handleLogin = () => {
     // #TODO
     // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
@@ -58,11 +65,16 @@ export default function LandingPage(props: LandingPageProps) {
       "username: " + username + " password: " + password,
       " this is the login information"
     );
+    const user = LoginValues.find((data)=> data.username === username && data.password === password)
+    if(user){
+      props.navigation.navigate("Home")
+    }else{
+      setErrorMessage("Incorrect username or password");
+    }
+    
   };
 
   const handleRegister = () => {
-    // #TODO
-    // this is where we will transition the screen to the register screen.
     console.log("clicked on register");
     props.navigation.navigate("RegisterPage");
   };
@@ -78,6 +90,7 @@ export default function LandingPage(props: LandingPageProps) {
               placeholder="Username"
               value={username}
               onChangeText={(val) => setUsername(val)}
+              selectionColor={COLORS.black}       
             />
             <TextInput
               style={styles.input}
@@ -85,8 +98,10 @@ export default function LandingPage(props: LandingPageProps) {
               secureTextEntry={true}
               value={password}
               onChangeText={(val) => setPassword(val)}
+              selectionColor={COLORS.black} 
             />
           </View>
+          <Text style={styles.error}>{errorMessage}</Text>
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
@@ -103,14 +118,14 @@ export default function LandingPage(props: LandingPageProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#123166",
+    backgroundColor: COLORS.white,
     width: "100%",
     height: "100%",
     display: "flex",
   },
   text: {
     fontFamily: "Inter_800ExtraBold",
-    color: "white",
+    color: COLORS.black,
     fontSize: 70,
     textAlign: "center",
     alignItems: "center",
@@ -130,20 +145,31 @@ const styles = StyleSheet.create({
     padding: 10,
     top: 439,
     alignSelf: "center",
-    backgroundColor: "#FFFFFF",
     borderRadius: 4,
+    borderColor: COLORS.green,
+    backgroundColor: COLORS.white,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   button: {
-    backgroundColor: "#F45D9A",
+    backgroundColor: COLORS.green,
     width: 327,
     height: 44,
     top: 449,
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   buttonText: {
-    color: "#FFFFFF",
+    color: COLORS.white,
     fontFamily: "Inter_400Regular",
     alignSelf: "center",
     fontSize: 17,
@@ -156,11 +182,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   registerText: {
-    color: "#FFFFFF",
+    color: COLORS.black,
     fontFamily: "Inter_400Regular",
     alignSelf: "center",
     fontSize: 17,
     textAlign: "center",
     left: 35,
   },
+  error:{
+    color:COLORS.red,
+    fontFamily: "Inter_400Regular",
+    fontSize: 17,
+    textAlign: "center",
+    top: "49%"
+  }
 });

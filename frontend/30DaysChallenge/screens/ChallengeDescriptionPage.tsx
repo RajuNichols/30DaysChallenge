@@ -111,7 +111,7 @@ export default function ChallengeDescriptionPage(
         styles.container,
         isOpen
           ? {
-              opacity: 0.5,
+              opacity: 0.3,
               shadowColor: "#00000",
               shadowOffset: { width: 0, height: 0 },
               shadowOpacity: 0,
@@ -134,7 +134,7 @@ export default function ChallengeDescriptionPage(
           styles.desc,
           isOpen
             ? {
-                opacity: 0.5,
+                opacity: 0.3,
                 shadowColor: "#00000",
                 shadowOffset: { width: 0, height: 0 },
                 shadowOpacity: 0,
@@ -154,7 +154,7 @@ export default function ChallengeDescriptionPage(
           styles.button,
           isOpen
             ? {
-                opacity: 0.5,
+                opacity: 0.3,
                 shadowColor: "#00000",
                 shadowOffset: { width: 0, height: 0 },
                 shadowOpacity: 0,
@@ -171,7 +171,7 @@ export default function ChallengeDescriptionPage(
         styles.inviteText,
         isOpen
           ? {
-              opacity: 0.5,
+              opacity: 0.3,
               shadowColor: "#00000",
               shadowOffset: { width: 0, height: 0 },
               shadowOpacity: 0,
@@ -187,7 +187,7 @@ export default function ChallengeDescriptionPage(
           styles.inviteSection,
           isOpen
             ? {
-                opacity: 0.5,
+                opacity: 0.3,
                 shadowColor: "#00000",
                 shadowOffset: { width: 0, height: 0 },
                 shadowOpacity: 0,
@@ -202,7 +202,7 @@ export default function ChallengeDescriptionPage(
             styles.inviteLink,
             isOpen
               ? {
-                  opacity: 0.5,
+                  opacity: 0.3,
                   shadowColor: "#00000",
                   shadowOffset: { width: 0, height: 0 },
                   shadowOpacity: 0,
@@ -221,7 +221,7 @@ export default function ChallengeDescriptionPage(
             styles.copyLink,
             isOpen
               ? {
-                  opacity: 0.5,
+                  opacity: 0.3,
                   shadowColor: "#00000",
                   shadowOffset: { width: 0, height: 0 },
                   shadowOpacity: 0,

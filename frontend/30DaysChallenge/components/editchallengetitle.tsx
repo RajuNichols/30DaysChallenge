@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     top: "25%",
     width: "80%",
     height: 300,
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.white,
     borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignSelf: "center",
     borderRadius: 4,
-    borderColor: COLORS.green,
+    borderColor: COLORS.blue,
     backgroundColor: COLORS.white,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     fontFamily: "Inter_400Regular",
-    color: COLORS.black
+    color: COLORS.white
   },
 });

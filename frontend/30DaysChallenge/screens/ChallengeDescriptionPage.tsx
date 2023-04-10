@@ -21,6 +21,7 @@ import * as Clipboard from "expo-clipboard";
 import { COLORS } from "../colors";
 import BackButton from "../components/backbutton";
 import EditChallengeModal from "../components/editchallengetitle";
+import LoadingIndicator from "../components/loadingindicator";
 
 interface ChallengeDescriptionPageProps {
   navigation: any;
@@ -37,6 +38,8 @@ export default function ChallengeDescriptionPage(
   const [description, setDescription] = useState("");
   const [citation, setCitation] = useState("");
   const { itemId } = props?.route?.params;
+  const [isLoading, setIsLoading] = useState(true);
+
   const mockChallenges = [
     {
       title: "The Effects of Your Diet on Sleep",
@@ -65,6 +68,9 @@ export default function ChallengeDescriptionPage(
     setStars(mockChallenges[itemId].difficulty);
     setDescription(mockChallenges[itemId].desc);
     setCitation(mockChallenges[itemId].source);
+    setTimeout(() => {
+      setIsLoading(false);
+    },2000)
   }, []);
 
   let [fontsLoaded, error] = useFonts({
@@ -99,8 +105,8 @@ export default function ChallengeDescriptionPage(
     setIsOpen(!isOpen);
   };
 
-  return (
-    <SafeAreaView
+  return isLoading ? (<LoadingIndicator/>) : (
+    <View
       style={[
         styles.container,
         isOpen
@@ -233,9 +239,9 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal isOpen={isOpen} closeModal={HandleModal} />
+        <EditChallengeModal challenge={mockChallenges[0]} isOpen={isOpen} closeModal={HandleModal} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -28,6 +28,9 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   useEffect(() => {
     getCheckedStates();
+    setTimeout(() => {
+      setLoading(false);
+    },2000)
   }, []);
 
   const getCheckedStates = () => {
@@ -42,7 +45,6 @@ const ChallengeView: React.FC<CalendarProps> = ({
     });
 
     setCheckedState(checkboxState);
-    setLoading(false);
   };
 
   const handleCheckbox = (index: number) => {

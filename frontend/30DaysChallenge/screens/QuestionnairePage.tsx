@@ -20,7 +20,6 @@ import RadioForm from 'react-native-simple-radio-button';
 import 'core-js/features/array/at';
 
 
-
 SplashScreen.preventAutoHideAsync();
 
 interface LandingPageProps {

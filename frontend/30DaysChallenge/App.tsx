@@ -5,6 +5,8 @@ import LandingPage from "./screens/LandingPage";
 import RegisterPage from "./screens/RegisterPage";
 import QuestionnairePage from "./screens/QuestionnairePage";
 import ChallengeDescriptionPage from "./screens/ChallengeDescriptionPage";
+import ListOfChallengesPage from "./screens/ListOfChallengesPage";
+import ChallengeListItem from "./components/challengeListItem";
 import UserDashboardPage from "./screens/UserDashboardPage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "./colors";
@@ -25,6 +27,12 @@ function HomeStack(){
                 ? "ios-home-sharp"
                 : "ios-home-outline";
             }
+            if(route.name === "Challenge Search"){
+              iconName = focused
+                ? "ios-search-sharp"
+                : "ios-search-outline";
+            }
+
 
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -34,6 +42,7 @@ function HomeStack(){
         })}
       >
       <Tab.Screen name="Dashboard" component={UserDashboardPage} />
+      <Tab.Screen name="Challenge Search" component={ListOfChallengesPage} />
     </Tab.Navigator>
   )
 }

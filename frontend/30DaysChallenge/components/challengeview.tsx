@@ -58,7 +58,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   const monthName = format(startDate, "MMM yyyy");
 
-  return loading ? (<LoadingIndicator/> ): (
+  return (
     <View style={styles.wrapper}>
       <Text style={styles.ChallengeDay}>Day {challengeDay} </Text><View style={styles.container}>
         <View style={styles.friendsSection}>

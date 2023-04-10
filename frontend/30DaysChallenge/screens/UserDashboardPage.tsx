@@ -9,6 +9,7 @@ import {
 } from "@expo-google-fonts/inter";
 import { COLORS } from "../colors";
 import ChallengeView from "../components/challengeview";
+import LoadingIndicator from "../components/loadingindicator";
 interface UserDashBoardProps {
   navigation: any;
 }
@@ -18,6 +19,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     Inter_800ExtraBold,
     Inter_400Regular,
   });
+
+  const [isLoading, setIsLoading] = React.useState(true);
 
   //this is start of mock information
   const today = new Date();
@@ -476,6 +479,12 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 2000);
+  },[]);
+
+  useEffect(() => {
     async function prepare() {
       await SplashScreen.preventAutoHideAsync();
     }
@@ -493,7 +502,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     return null;
   }
 
-  return (
+
+  return isLoading ? (<LoadingIndicator/>) :(
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <Text style={styles.pageTitle}>30 Days Challenge</Text>
       <Text style={styles.welcomeUser}>Welcome {User.name}</Text>

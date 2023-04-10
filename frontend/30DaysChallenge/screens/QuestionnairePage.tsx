@@ -17,6 +17,7 @@ import {
 import React, { useEffect, useCallback, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import RadioForm from 'react-native-simple-radio-button';
+import 'core-js/features/array/at';
 
 
 SplashScreen.preventAutoHideAsync();

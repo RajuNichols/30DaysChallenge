@@ -6,6 +6,7 @@ interface challengeListItemProps{
     name: string
     difficulty: number
     navigation?: any
+    display?: boolean
 }
 const ChallengeListItem = (props: challengeListItemProps) => {
   const challengeName = props.name;
@@ -19,14 +20,18 @@ const ChallengeListItem = (props: challengeListItemProps) => {
   // };
 
   return(
-    <View style={styles.challengeContainer}>
-        <Text style={styles.challengeName}>{props.name}</Text>
-        <View style={styles.stars}>
-            <DifficultyStars difficulty={props.difficulty} size={1}></DifficultyStars>
-        </View>
-        <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>View</Text>
-        </TouchableOpacity>
+    <View
+    style={[props.display ? styles.textvalid : styles.textinvalid]}
+    >
+      <View style={styles.challengeContainer}>
+          <Text style={styles.challengeName}>{props.name}</Text>
+          <View style={styles.stars}>
+              <DifficultyStars difficulty={props.difficulty} size={1}></DifficultyStars>
+          </View>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>View</Text>
+          </TouchableOpacity>
+      </View>
     </View>
   )
 };
@@ -134,6 +139,16 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         fontSize: 18,
         // top: 60,
+      },
+
+      text2: {
+        height: 40, backgroundColor: 'white', borderRadius: 5, padding: 10, 
+      },
+      textvalid: {
+        display: 'none'
+      },
+      textinvalid: {
+          display: 'flex'
       },
 })
 

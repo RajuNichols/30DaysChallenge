@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_800ExtraBold",
     color: "#020202",
     fontSize: 30,
-    top: 60,
+    top: "10%",
   },
   smallerText: {
     alignSelf: "center",
@@ -226,7 +226,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   searchBar: {
-    marginTop: 80,
     position: "relative",
     height: 30,
     width: "80%",
@@ -234,6 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     paddingLeft: 10,
+    top: "12%",
   },
   challengeContainer: {
     position: "relative",
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "70%",
-    top: Platform.OS === "ios" ? 215 : 100,
+    top: "23%",
     // backgroundColor: "#E6E6E6",
     borderRadius: 6,
   },

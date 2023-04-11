@@ -20,10 +20,16 @@ import React, { useEffect, useCallback, ReactNode, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
 import * as backend from "../backendNew/backend";
+import { COLORS } from "../colors";
+import BackButton from "../components/backbutton";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RegisterPage() {
+interface RegisterPageProps {
+  navigation: any;
+}
+
+export default function RegisterPage(props: RegisterPageProps) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -72,6 +78,7 @@ export default function RegisterPage() {
       setErrorMessage("The passwords do not match.");
     } else {
       setErrorMessage("");
+      props.navigation.navigate("QuestionnairePage");
     }
 
     console.log(
@@ -104,6 +111,9 @@ export default function RegisterPage() {
     <DismissKeyboard>
       <KeyboardAvoidingView>
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+          <View>
+            <BackButton navigation={props.navigation} />
+          </View>
           <Text style={styles.text}>30 Days Challenge</Text>
           <View style={styles.inputContainer}>
             <TextInput
@@ -111,6 +121,7 @@ export default function RegisterPage() {
               placeholder="Username"
               value={username}
               onChangeText={(val) => setUsername(val)}
+              selectionColor={COLORS.black}
             />
             <TextInput
               style={styles.input}
@@ -118,6 +129,7 @@ export default function RegisterPage() {
               value={email}
               keyboardType="email-address"
               onChangeText={(val) => setEmail(val)}
+              selectionColor={COLORS.black}
             />
             <TextInput
               style={styles.input}
@@ -125,6 +137,7 @@ export default function RegisterPage() {
               secureTextEntry={true}
               value={password}
               onChangeText={(val) => setPassword(val)}
+              selectionColor={COLORS.black}
             />
             <TextInput
               style={styles.input}
@@ -132,6 +145,7 @@ export default function RegisterPage() {
               secureTextEntry={true}
               value={checkPassword}
               onChangeText={(val) => setCheckPassword(val)}
+              selectionColor={COLORS.black}
             />
           </View>
           <TouchableOpacity style={styles.button} onPress={handleRegister}>
@@ -146,14 +160,14 @@ export default function RegisterPage() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#123166",
+    backgroundColor: COLORS.white,
     width: "100%",
     height: "100%",
     display: "flex",
   },
   text: {
     fontFamily: "Inter_800ExtraBold",
-    color: "white",
+    color: COLORS.black,
     fontSize: 30,
     textAlign: "center",
     alignItems: "center",
@@ -164,7 +178,7 @@ const styles = StyleSheet.create({
     top: 95,
   },
   inputContainer: {
-    top: Platform.OS === "ios"? 0 : 70,
+    top: Platform.OS === "ios" ? 0 : 70,
   },
   input: {
     height: 44,
@@ -175,17 +189,28 @@ const styles = StyleSheet.create({
     padding: 10,
     top: Platform.OS === "ios" ? 125 : 100,
     alignSelf: "center",
-    backgroundColor: "#FFFFFF",
     borderRadius: 4,
+    borderColor: COLORS.green,
+    backgroundColor: COLORS.white,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   button: {
-    backgroundColor: "#F45D9A",
+    backgroundColor: COLORS.green,
     width: 327,
     height: 44,
-    top: Platform.OS === "ios" ? 150: 200,
+    top: Platform.OS === "ios" ? 150 : 200,
     alignSelf: "center",
     borderRadius: 4,
     justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   buttonText: {
     color: "#FFFFFF",
@@ -194,11 +219,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   error: {
-    color: "#FF0000",
+    color: COLORS.red,
     fontFamily: "Inter_400Regular",
     alignSelf: "center",
     fontSize: 15,
     textAlign: "center",
-    top: Platform.OS === "ios"? 80: 125,
+    top: Platform.OS === "ios" ? 80 : 125,
   },
 });

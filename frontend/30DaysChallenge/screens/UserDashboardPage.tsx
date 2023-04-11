@@ -9,6 +9,7 @@ import {
 } from "@expo-google-fonts/inter";
 import { COLORS } from "../colors";
 import ChallengeView from "../components/challengeview";
+import LoadingIndicator from "../components/loadingindicator";
 interface UserDashBoardProps {
   navigation: any;
 }
@@ -19,20 +20,30 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     Inter_400Regular,
   });
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
   //this is start of mock information
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const startDate = today;
-  const endDate = new Date(startDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+  const curentDate = today
+  const startDate1 = new Date(curentDate.getTime() - 18 * 24 * 60 * 60 * 1000);
+  const startDate2 = new Date(curentDate.getTime() - 10 * 24 * 60 * 60 * 1000);
+  const startDate3 = new Date(curentDate.getTime() - 27 * 24 * 60 * 60 * 1000);
+
+  const endDate1 = new Date(startDate1.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const endDate2 = new Date(startDate2.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const endDate3 = new Date(startDate3.getTime() + 30 * 24 * 60 * 60 * 1000);
 
   const User = {
     name: "Melissa",
     challenges: [
       {
-        title: "Smoking",
-        start: startDate,
-        end: endDate,
+        title: "Sleep",
+        start: startDate1,
+        end: endDate1,
         difficulty: 4,
+        challengeDay: 19,
         completedDates: [
           true,
           false,
@@ -65,84 +76,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
           true,
           true,
         ],
-      },
-      {
-        title: "Water",
-        start: startDate,
-        end: endDate,
-        difficulty: 2,
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {title: "Gym",
-        start: startDate,
-        end: endDate,
-        difficulty: 4,
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      }
-    ],
-    friends: [
+        friends: [
       {
         name: "Raju",
         completedDates: [
@@ -284,7 +218,271 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         ],
       },
     ],
+      },
+      {
+        title: "Listen to Music",
+        start: startDate2,
+        end: endDate2,
+        difficulty: 2,
+        challengeDay: 10,
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+        friends: [
+      {
+        name: "Raju",
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+      },
+      {
+        name: "Anusha",
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+      },
+      {
+        name: "Matt",
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+      },
+    ],
+      },
+      {title: "Workout/Diet",
+        start: startDate3,
+        end: endDate3,
+        difficulty: 4,
+        challengeDay: 28,
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+        friends: [
+      {
+        name: "Raju",
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+      },
+      {
+        name: "Caleb",
+        completedDates: [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+        ],
+      },
+    ],
+      }
+    ],
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 2000);
+  },[]);
 
   useEffect(() => {
     async function prepare() {
@@ -299,22 +497,22 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     }
   }, [fontsLoaded]);
 
-  const handleChallengeClick = () => {
-    props.navigation.navigate("ChallengeDescriptionPage")
-  }
 
   if (!fontsLoaded) {
     return null;
   }
 
-  return (
+
+  return isLoading ? (<LoadingIndicator/>) :(
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <Text style={styles.pageTitle}>30 Days Challenge</Text>
       <Text style={styles.welcomeUser}>Welcome {User.name}</Text>
       <ScrollView style={styles.challenges}>
         {User.challenges.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
-            <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={handleChallengeClick}>
+            <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={() => props.navigation.navigate("ChallengeDescriptionPage", {
+              itemId: index
+            })}>
               <Text key={index} style={styles.challengeTitle}>{challenge.title}</Text>
             </TouchableOpacity>
 
@@ -323,8 +521,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
                 startDate={challenge.start}
                 endDate={challenge.end}
                 completedDates={challenge.completedDates}
-                challengeDay={8}
-                friends={User.friends}
+                challengeDay={challenge.challengeDay}
+                friends={challenge.friends}
               />
             </View>
           </View>
@@ -336,7 +534,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#d7dada",
+    backgroundColor: COLORS.white,
     width: "100%",
     height: "100%",
     flex: 1
@@ -389,11 +587,6 @@ const styles = StyleSheet.create({
   },
   calendar: {
     width: 321,
-    height: 290,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,  
-    elevation: 5
+    height: 300,
   },
 });

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { eachDayOfInterval, format } from "date-fns";
 import Checkbox from "expo-checkbox";
 import { COLORS } from "../colors";
+import LoadingIndicator from "./loadingindicator";
 
 type CalendarProps = {
   startDate: Date;
@@ -23,18 +24,22 @@ const ChallengeView: React.FC<CalendarProps> = ({
   const [checkedState, setCheckedState] = useState(
     new Array(friends.length + 1).fill(false)
   );
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
     getCheckedStates();
+    setTimeout(() => {
+      setLoading(false);
+    },2000)
   }, []);
 
   const getCheckedStates = () => {
     const checkboxState: boolean[] = checkedState;
-    if (completedDates[challengeDay - 1] === true) {
+    if (completedDates[challengeDay - 1] == true) {
       checkboxState[0] = true;
     }
     friends.forEach((friend) => {
-      if (friend.completedDates[challengeDay - 1] === true) {
+      if (friend.completedDates[challengeDay - 1] == true) {
         checkboxState[friend + 1] = true;
       }
     });
@@ -55,29 +60,26 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.ChallengeDay}>Day {challengeDay} </Text>
-      <View style={styles.container}>
-        <ScrollView style={styles.friendsSection}>
-            <View style={styles.friends}>
+      <Text style={styles.ChallengeDay}>Day {challengeDay} </Text><View style={styles.container}>
+        <View style={styles.friendsSection}>
+          <View style={styles.friends}>
+            <Checkbox
+              value={checkedState[0]}
+              onValueChange={() => handleCheckbox(0)} />
+            <Text style={styles.friendsText}>Me</Text>
+          </View>
+          {friends.map((friend, index) => (
+            <View key={index} style={styles.friends}>
               <Checkbox
-                value={checkedState[0]}
-                onValueChange={() => handleCheckbox(0)}
-              />
-              <Text style={styles.friendsText}>Me</Text>
+                key={index}
+                value={checkedState[index + 1]}
+                onValueChange={() => handleCheckbox(index + 1)} />
+              <Text style={styles.friendsText} key={index + 1}>
+                {friend.name}
+              </Text>
             </View>
-            {friends.map((friend, index) => (
-              <View key={index} style={styles.friends}>
-                <Checkbox
-                  key={index}
-                  value={checkedState[index + 1]}
-                  onValueChange={() => handleCheckbox(index + 1)}
-                />
-                <Text style={styles.friendsText} key={index + 1}>
-                  {friend.name}
-                </Text>
-              </View>
-            ))}
-        </ScrollView>
+          ))}
+        </View>
         <View style={styles.calendarSection}>
           <View style={styles.monthWeekdaysContainer}>
             <View style={styles.monthContainer}>
@@ -126,7 +128,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
         </View>
       </View>
     </View>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
@@ -136,6 +138,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     alignSelf: "center",
     borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 3,
+    borderColor: COLORS.blue,
+    borderWidth: 5,
   },
   container: {
     display: "flex",
@@ -163,7 +172,9 @@ const styles = StyleSheet.create({
     top: "20%",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
     marginLeft: 15,
+    height: "70%"
   },
   friends: {
     paddingLeft: 5,
@@ -180,7 +191,7 @@ const styles = StyleSheet.create({
   },
   calendarSection: {
     right: 15,
-    height: "125%",
+    height: "100%",
     width: "63%",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -191,7 +202,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     height: 30,
     flexDirection: "row",
-    backgroundColor: COLORS.white,
     alignItems: "center",
     borderRadius: 3,
   },

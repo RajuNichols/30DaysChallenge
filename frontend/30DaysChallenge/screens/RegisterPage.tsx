@@ -89,7 +89,7 @@ export default function RegisterPage() {
         "\n"
     );
 
-    const response = await backend.createAccount(username, password, email)
+    const response = await backend.createAccount(username, password, email);
     console.log(response);
 
     if(response){

@@ -63,10 +63,11 @@ for filename in myfiles:
 print(concls)
 printingTime = False
 #labels = {id:conclusion text, sentiment label}...
-for i in concls:
-    id = i[0]
-    value = i[1]
-    title = i[2]
+for i in range(0,len(concls)):
+    id    = concls[i][0]
+    value = concls[i][1]
+    title = concls[i][2]
+    cat   = concls[i][3]
     if(id in labels):
         print("There is a duplicate. Here's the previous entry.")
         # print(concls[ind][0:8], labels[concls[ind][0:8]])
@@ -78,7 +79,9 @@ for i in concls:
         label = str(input("What's the final label?: "))
         print(label)
         temp = labels[id]
-        labels[id] = [temp[0],label]
+
+        # I think this is a good way to handle duplicates?
+        labels[id] = [temp[0] + " ||| " + value,label,title,cat]
     else:
         pp.pprint(value)
         pp.pprint("Article title is:"+title)
@@ -88,7 +91,7 @@ for i in concls:
         label = str(input("What's the label?: "))
         print(label)
         if label != 'P':
-          labels[id]= [value,label,title]
+          labels[id]= [value,label,title,cat]
         else:
           printingTime = True
           break

@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import pickle
 
 p = Path('.')
 
@@ -30,6 +31,7 @@ for filename in myfiles:
   next_up = False
   title = ""
   foundTitle = False
+  category = root.find('category').text
   for child in root[3]:
     if ((child.tag == "passage")):
         found = False
@@ -39,9 +41,8 @@ for filename in myfiles:
           next_up = False
           for gchild in child:
             if (gchild.tag == "text" and len(gchild.text) > 40):
-              
-              concls.append([filename[:len(filename)-4], filename[:len(filename)-4]+ " " + str(gchild.text),title])
-              
+              concls.append([filename[:len(filename)-4], filename[:len(filename)-4]+ " " + str(gchild.text),title,category])
+
         else:
           for gchild in child:
 
@@ -51,8 +52,7 @@ for filename in myfiles:
             else:
               if (gchild.tag == "offset" and gchild.text == "0"):
                 this_is_title = True
-
-            #if this is found in an infon element then we want to search it's siblings for the text at the bottom
+                        #if this is found in an infon element then we want to search it's siblings for the text at the bottom
             if ((gchild.tag == "infon" and gchild.attrib["key"] == "section_type" and gchild.text == "ABSTRACT") or (gchild.tag == "infon" and gchild.attrib["key"] == "section_type" and gchild.text == "CONCL")):
               found = True
             #if this is the contents then the next one will have the results paragraph
@@ -60,11 +60,13 @@ for filename in myfiles:
               next_up = True
 
 
-print(concls)
+
+
+# print(concls)
 printingTime = False
 #labels = {id:conclusion text, sentiment label}...
 for i in range(0,len(concls)):
-    id    = concls[i][0]
+    id = concls[i][0]
     value = concls[i][1]
     title = concls[i][2]
     cat   = concls[i][3]
@@ -97,12 +99,20 @@ for i in range(0,len(concls)):
           break
 
 if printingTime:
-  f = open("outputs.txt", "a")
-  f.write(str(labels))
+  file = open("outputs.txt", "ab")
+
+  pickle.dump(labels, file)
+
+  # f = open("outputs.txt", "a")
+  # f.write(str(labels))
   # print(str(labels))
 
-f.close()
+file.close()
 
-f = open("outputs.txt", "r")
-print(f.read())
-f.close()
+with open('outputs.txt', 'rb') as handle:
+    data = handle.read()
+d = pickle.loads(data)
+# print(f.read())
+
+for key,value in d.items():
+  print(value[0],value[1],value[2])

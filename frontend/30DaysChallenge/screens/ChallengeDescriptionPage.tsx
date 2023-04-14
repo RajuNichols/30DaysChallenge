@@ -22,6 +22,7 @@ import { COLORS } from "../colors";
 import BackButton from "../components/backbutton";
 import EditChallengeModal from "../components/editchallengetitle";
 import LoadingIndicator from "../components/loadingindicator";
+import * as backend from "../backendNew/backend";
 
 interface ChallengeDescriptionPageProps {
   navigation: any;

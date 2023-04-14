@@ -10,6 +10,7 @@ import {
 import { COLORS } from "../colors";
 import ChallengeView from "../components/challengeview";
 import LoadingIndicator from "../components/loadingindicator";
+import * as backend from "../backendNew/backend";
 interface UserDashBoardProps {
   navigation: any;
 }

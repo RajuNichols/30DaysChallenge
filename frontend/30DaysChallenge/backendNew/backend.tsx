@@ -208,11 +208,11 @@ export async function updateUser(user:User):Promise<string>{
     return "Something went wrong in update User";
 }
 
-export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string):Promise<boolean>{
+export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string, articleTitle:string):Promise<boolean>{
     var returnBool:boolean = false;
     try{
     if(user != null){
-        let temp = new Challenges(challengeName, challengeDifficulty, user.username, challengeDescription);
+        let temp = new Challenges(challengeName, challengeDifficulty, user.username, challengeDescription, articleTitle);
         user.challenges[user.numOfChallenges] = temp.challengeToken;
         user.numOfChallenges++;
 
@@ -248,7 +248,8 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
             endDate: temp.endDate,
             daysCompleted: daystemp,
             completed: temp.isComplete,
-            friends: friendstemp
+            friends: friendstemp,
+            articleTitle: articleTitle
         });
 
         returnBool = true;
@@ -273,12 +274,13 @@ export async function getChallenges():Promise<Challenges[]>{
             await get(child(dbRef, `challenges/${user.challenges[i]}`)).then((snapshot) => {
                 if (snapshot.exists())
                 {
-                    temp[i].challengeName = snapshot.child("challengeName").val();
+                    temp[i].userChallengeName = snapshot.child("challengeName").val();
                     temp[i].challengeDifficulty= snapshot.child("challengeDifficulty").val();
                     temp[i].description = snapshot.child("challengeDescription").val();
                     temp[i].startDate = snapshot.child("startDate").val();
                     temp[i].endDate = snapshot.child("endDate").val();
                     temp[i].isComplete = snapshot.child("completed").val();
+                    temp[i].articleTitle = snapshot.child("articleTitle").val();
 
                     var completedtemp:string = snapshot.child("daysCompleted").val();
                     var completed = completedtemp.split(",");
@@ -424,7 +426,7 @@ export async function addFriendChallenge(friendUsername:string, challengeName:st
         await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
             if (snapshot.exists())
             {
-                var temp = new Challenges(challengeName, snapshot.child("challengeDifficulty").val(), user.username, snapshot.child("challengeDescription").val());
+                var temp = new Challenges(challengeName, snapshot.child("challengeDifficulty").val(), user.username, snapshot.child("challengeDescription").val(), snapshot.child("articleTitle").val());
                 temp.startDate = snapshot.child("startDate").val();
                 temp.endDate = snapshot.child("endDate").val();
                 temp.isComplete = snapshot.child("completed").val();

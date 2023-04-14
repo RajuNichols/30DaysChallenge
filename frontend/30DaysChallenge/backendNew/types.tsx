@@ -18,7 +18,7 @@ export class User{
  
  
 export class Challenges{
-    challengeName:string;
+    userChallengeName:string;
     challengeToken:string;
     challengeDifficulty:number;
     description:string;
@@ -27,9 +27,10 @@ export class Challenges{
     endDate:Date;
     isComplete:boolean;
     friends:string[];
+    articleTitle:string;
  
-    constructor(challengeName:string, challengeDifficulty:number, username:string, description:string){
-        this.challengeName = challengeName;
+    constructor(userChallengeName:string, challengeDifficulty:number, username:string, description:string, articleTitle:string){
+        this.userChallengeName = userChallengeName;
         this.challengeDifficulty = challengeDifficulty;
         this.startDate = new Date();
         this.endDate = new Date();
@@ -43,8 +44,9 @@ export class Challenges{
             this.daysCompleted[i] = false;
         }
 
-        this.challengeToken=username+challengeName;
+        this.challengeToken=username+userChallengeName;
         this.friends = [];
+        this.articleTitle = articleTitle;
     }
  
     public challengeComplete(){

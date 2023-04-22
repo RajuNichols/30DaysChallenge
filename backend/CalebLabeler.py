@@ -5,15 +5,19 @@ import pickle
 p = Path('.')
 
 listOfPaths = []
-for uniquePath in list(p.glob('**/*.xml')):
+for uniquePath in list(p.glob('*.xml')):
   listOfPaths.append(str(uniquePath))
 
+listOfPaths.sort()
 import pprint
 import xml.etree.ElementTree as ET
 pp = pprint.PrettyPrinter(width=41, compact=True)
 
 
 myfiles = listOfPaths
+
+# for x in range(0,2):
+#   print(myfiles)
 
 #text
 concls = []
@@ -60,9 +64,15 @@ for filename in myfiles:
               next_up = True
 
 
+print("conclusions: ", labels)
 
+#if file is there save the data from the file into the labels data structure
+available = Path("pickle1.txt")
+if(available.is_file()):
+  file = open("pickle1.txt", "rb")
+  labels = pickle.load(file)
+  file.close()
 
-# print(concls)
 printingTime = False
 #labels = {id:conclusion text, sentiment label}...
 for i in range(0,len(concls)):
@@ -86,7 +96,7 @@ for i in range(0,len(concls)):
         labels[id] = [temp[0] + " ||| " + value,label,title,cat]
     else:
         pp.pprint(value)
-        pp.pprint("Article title is:"+title)
+        pp.pprint("Article title is: "+title)
         #+ (include positive), =(include), -(include negative), x(remove), i(informational)
 
         # use 'P' to exit
@@ -94,25 +104,15 @@ for i in range(0,len(concls)):
         print(label)
         if label != 'P':
           labels[id]= [value,label,title,cat]
+          print(labels)
         else:
           printingTime = True
           break
 
 if printingTime:
-  file = open("outputs.txt", "ab")
 
+  for key,value in labels.items():
+    print(key, value[2])
+  file = open("pickle1.txt", "wb")
   pickle.dump(labels, file)
-
-  # f = open("outputs.txt", "a")
-  # f.write(str(labels))
-  # print(str(labels))
-
-file.close()
-
-with open('outputs.txt', 'rb') as handle:
-    data = handle.read()
-d = pickle.loads(data)
-# print(f.read())
-
-for key,value in d.items():
-  print(value[0],value[1],value[2])
+  file.close()

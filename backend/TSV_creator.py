@@ -31,7 +31,7 @@ summaries = {}
 # Using the positive labeled ones only
 for row in labels:
   # print(row + ", " + labels[row][0][8:])
-  if (labels[row][1] == "+"):
+  if (labels[row][1] == "+" or labels[row][1] == "=" or labels[row][1] == "i"):
     summaries[row] = (labels[row][0][8:])
     print(row + " added!!\n")
 
@@ -61,11 +61,11 @@ for row in summaries:
 
 f = open("outputTest.txt", "w")
 for row in labels:
-  if (labels[row][1] == "+"):
-    print(row + "\t" + labels[row][2] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\n")
+  if (labels[row][1] == "+" or labels[row][1] == "=" or labels[row][1] == "i"):
+    print(row + "\t" + labels[row][2] + "\t" + labels[row][1] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\n")
     # print(labels[row][2])
     # print(labels[row][3])
     # print(proc_summaries[row]+"\n\n")
-    f.write(row + "\t" + labels[row][2] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\n")
+    f.write(row + "\t" + labels[row][2] + "\t" + labels[row][1] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\n")
 
 f.close()

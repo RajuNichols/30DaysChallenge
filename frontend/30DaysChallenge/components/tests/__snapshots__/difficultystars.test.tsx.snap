@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DifficultyStars renders the correct number of solid and blank stars based on difficulty 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+</View>
+`;
+
+exports[`DifficultyStars renders the correct star images based on size prop 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+  <Image
+    source={1}
+    style={Object {}}
+  />
+</View>
+`;

@@ -59,13 +59,16 @@ for row in summaries:
   proc_summaries[row] = (tmp)
   print()
 
+base = "https://pubmed.ncbi.nlm.nih.gov/"
+  
 f = open("outputTest.txt", "w")
 for row in labels:
   if (labels[row][1] == "+" or labels[row][1] == "=" or labels[row][1] == "i"):
-    print(row + "\t" + labels[row][2] + "\t" + labels[row][1] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\n")
+    # Edited this in github idk if there's syntax errors
+    print(row + "\t" + labels[row][2] + "\t" + labels[row][1] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\t" + base+row + "\n")
     # print(labels[row][2])
     # print(labels[row][3])
     # print(proc_summaries[row]+"\n\n")
-    f.write(row + "\t" + labels[row][2] + "\t" + labels[row][1] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\n")
+    f.write(row + "\t" + labels[row][2] + "\t" + labels[row][1] + "\t" + labels[row][3] + "\t" + proc_summaries[row] + "\t" + base+row + "\n")
 
 f.close()

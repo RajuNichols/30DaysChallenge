@@ -1,10 +1,9 @@
 import React from 'react';
-import renderer, { ReactTestRenderer, ReactTestInstance } from 'react-test-renderer';
+import renderer, { ReactTestRenderer } from 'react-test-renderer';
 import DifficultyStars from '../difficultystars';
 
 describe('DifficultyStars', () => {
   let testRenderer: ReactTestRenderer;
-  let testInstance: ReactTestInstance;
 
   afterEach(() => {
     testRenderer.unmount();

@@ -292,7 +292,7 @@ export async function getChallenges():Promise<Challenges[]>{
                 if (snapshot.exists())
                 {
                     //console.log(snapshot.child("challengeName").val());
-                    temp[i] = new Challenges(snapshot.child("challengeName").val(), snapshot.child("challengeDifficulty").val(), userName, snapshot.child("challengeDescription").val(), snapshot.child("articleTitle").val(), snapshot.child("articleSource").val());
+                    temp[i] = new Challenges(snapshot.child("challengeName").val(), snapshot.child("challengeDifficulty").val(), userName, snapshot.child("description").val(), snapshot.child("articleTitle").val(), snapshot.child("articleSource").val());
                     temp[i].startDate.setMilliseconds(snapshot.child("startDate").val());
                     temp[i].endDate.setMilliseconds(snapshot.child("endDate").val());
                     temp[i].isComplete = snapshot.child("completed").val();

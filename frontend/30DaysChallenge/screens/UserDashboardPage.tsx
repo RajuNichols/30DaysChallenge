@@ -11,6 +11,7 @@ import { COLORS } from "../colors";
 import ChallengeView from "../components/challengeview";
 import LoadingIndicator from "../components/loadingindicator";
 import * as backend from "../backendNew/backend";
+import { User, frontendDetails, friendsComplete} from "../backendNew/types";
 interface UserDashBoardProps {
   navigation: any;
 }
@@ -22,8 +23,10 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   });
 
   const [isLoading, setIsLoading] = React.useState(true);
+  const [user, setUser] = React.useState("");
+  const [data, setData] = React.useState<frontendDetails[]>([]);
 
-  //this is start of mock information
+  /*//this is start of mock information
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -477,12 +480,82 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     ],
       }
     ],
-  };
+  };*/
+
+  var usertemp:User = new User("", "", "");
+  var temp2:frontendDetails[] = [];
+  //var username:string = "Matt";
+
+  //const [data, setData] = React.useState(challenges);
+
+  async function getData():Promise<boolean>{
+    var check1 = await backend.login("Dev", "dev");
+    console.log(check1 + " check1");
+
+    usertemp = await backend.sendUser("Dev");
+
+    setUser(usertemp.username);
+
+    //console.log(user.username);
+
+    //var check2 = await backend.addChallenge("exercise", 2, "Description", "exercise", "source");
+    //console.log(check2 + " check2");
+
+    //var check3 = await backend.addChallenge("water", 2, "Description", "drink water", "source");
+    //console.log(check3 + " check2");
+
+    var temp = await backend.getChallenges();
+
+    //console.log(temp[0].userChallengeName);
+
+    var i:number
+    for(i = 0; i < temp.length; i++){
+      var challenges:frontendDetails
+      challenges = new frontendDetails();
+      challenges.challenge.userChallengeName = temp[i].userChallengeName 
+      challenges.challenge.challengeDifficulty = temp[i].challengeDifficulty 
+      challenges.challenge.description = temp[i].description
+      challenges.challenge.articleTitle = temp[i].articleTitle
+      challenges.challenge.articleSource = temp[i].articleSource;
+      challenges.challenge.startDate = temp[i].startDate;
+      challenges.challenge.endDate = temp[i].endDate;
+      challenges.challenge.daysCompleted = temp[i].daysCompleted;
+      challenges.challenge.challengeToken = usertemp.username + temp[i].userChallengeName;
+
+      var dateTemp = new Date();
+      var daysInMilliseconds = temp[i].startDate.getTime() - dateTemp.getTime();
+
+      challenges.currentDay = daysInMilliseconds / (24 * 60 * 60 * 1000);
+
+      console.log("Past challenge assign");
+
+      var friendTemp = temp[i].friends;
+      for(var j = 0; j < friendTemp.length; j++){
+        challenges.daysComplete[j] = new friendsComplete();
+        challenges.daysComplete[j].name = friendTemp[j];
+        challenges.daysComplete[j].daysCompleted = await backend.getChallengeDates(usertemp.username, challenges.challenge.userChallengeName);
+      }
+
+      temp2.push(challenges);
+
+      console.log("Past challenge friends");
+    }
+
+    setData(temp2);
+
+    console.log(data);
+
+    return true;
+  }
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000);
+    const fetchData = async () => {
+      var temp = await getData();
+      if(temp){
+        setIsLoading(false);
+      }
+    };
+    fetchData();
   },[]);
 
   useEffect(() => {
@@ -507,23 +580,23 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   return isLoading ? (<LoadingIndicator/>) :(
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <Text style={styles.pageTitle}>30 Days Challenge</Text>
-      <Text style={styles.welcomeUser}>Welcome {User.name}</Text>
+      <Text style={styles.welcomeUser}>Welcome {user}</Text>
       <ScrollView style={styles.challenges}>
-        {User.challenges.map((challenge, index) => (
+        {data.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
             <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={() => props.navigation.navigate("ChallengeDescriptionPage", {
               itemId: index
             })}>
-              <Text key={index} style={styles.challengeTitle}>{challenge.title}</Text>
+              <Text key={index} style={styles.challengeTitle}>{challenge.challenge.userChallengeName}</Text>
             </TouchableOpacity>
 
             <View style={styles.calendar}>
               <ChallengeView
-                startDate={challenge.start}
-                endDate={challenge.end}
-                completedDates={challenge.completedDates}
-                challengeDay={challenge.challengeDay}
-                friends={challenge.friends}
+                startDate={challenge.challenge.startDate}
+                endDate={challenge.challenge.endDate}
+                completedDates={challenge.challenge.daysCompleted}
+                challengeDay={challenge.currentDay}
+                friends={challenge.daysComplete}
               />
             </View>
           </View>

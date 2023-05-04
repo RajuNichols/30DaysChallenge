@@ -14,7 +14,7 @@ export class User{
         this.friends = [];
         this.numOfChallenges = 0;
     }
- }
+}
  
  
 export class Challenges{
@@ -28,13 +28,15 @@ export class Challenges{
     isComplete:boolean;
     friends:string[];
     articleTitle:string;
+    articleSource:string;
  
-    constructor(userChallengeName:string, challengeDifficulty:number, username:string, description:string, articleTitle:string){
+    constructor(userChallengeName:string, challengeDifficulty:number, username:string, description:string, articleTitle:string, articleSource:string){
         this.userChallengeName = userChallengeName;
         this.challengeDifficulty = challengeDifficulty;
         this.startDate = new Date();
+        this.startDate.setHours(0, 0, 0, 0);
         this.endDate = new Date();
-        this.endDate.setDate(this.startDate.getDate() + 30);
+        this.endDate.setMilliseconds(this.startDate.getTime() + (30 * 24 * 60 * 60 * 1000));
         this.isComplete = false;
         this.description = description;
         this.daysCompleted = [];
@@ -47,9 +49,32 @@ export class Challenges{
         this.challengeToken=username+userChallengeName;
         this.friends = [];
         this.articleTitle = articleTitle;
+        this.articleSource = articleSource;
     }
  
     public challengeComplete(){
         this.isComplete = true;
     }
- }
+}
+
+export class frontendDetails{
+    challenge:Challenges;
+    currentDay:number;
+    daysComplete:friendsComplete[];
+
+    constructor(){
+        this.challenge = new Challenges("", 0, "", "", "", "");
+        this.currentDay = 0;
+        this.daysComplete = [];
+    }
+}
+
+export class friendsComplete{
+    name:string;
+    daysCompleted:boolean[];
+
+    constructor(){
+        this.name = "";
+        this.daysCompleted = [];
+    }
+}

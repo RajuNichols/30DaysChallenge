@@ -23,6 +23,7 @@ import BackButton from "../components/backbutton";
 import EditChallengeModal from "../components/editchallengetitle";
 import LoadingIndicator from "../components/loadingindicator";
 import * as backend from "../backendNew/backend";
+import * as type from "../backendNew/types";
 
 interface ChallengeDescriptionPageProps {
   navigation: any;
@@ -41,7 +42,7 @@ export default function ChallengeDescriptionPage(
   const { itemId } = props?.route?.params;
   const [isLoading, setIsLoading] = useState(true);
 
-  const mockChallenges = [
+  /*const mockChallenges = [
     {
       title: "The Effects of Your Diet on Sleep",
       difficulty: 4,
@@ -63,15 +64,33 @@ export default function ChallengeDescriptionPage(
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
     },
-  ];
-  useEffect(() => {
-    setTitle(mockChallenges[itemId].title);
-    setStars(mockChallenges[itemId].difficulty);
-    setDescription(mockChallenges[itemId].desc);
-    setCitation(mockChallenges[itemId].source);
-    setTimeout(() => {
+  ];*/
+  
+  var challenge:type.Challenges[] = [];
+  async function getData():Promise<type.Challenges[]>{
+    var check1 = backend.login("Dev", "dev");
+    console.log(check1);
+
+    //var check2 = backend.addChallenge("water", 2, "Description", "drink water", "source");
+    //console.log(check2);
+
+    return backend.getChallenges();
+  }
+
+  async function begin(){
+    if(challenge != null){
+      challenge = await getData();
+      setTitle(challenge[itemId].userChallengeName);
+      setStars(challenge[itemId].challengeDifficulty);
+      setDescription(challenge[itemId].description);
+      setCitation(challenge[itemId].articleSource);
       setIsLoading(false);
-    },2000)
+    }
+  }
+
+  
+  useEffect(() => {
+    begin()
   }, []);
 
   let [fontsLoaded, error] = useFonts({
@@ -240,7 +259,7 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal challenge={mockChallenges[0]} isOpen={isOpen} closeModal={HandleModal} />
+        <EditChallengeModal challenge={challenge[itemId]} isOpen={isOpen} closeModal={HandleModal} />
       </View>
     </View>
   );

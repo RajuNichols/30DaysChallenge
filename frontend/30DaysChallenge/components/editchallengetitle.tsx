@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { COLORS } from "../colors";
 import { Ionicons } from "@expo/vector-icons";
+import * as backend from "../backendNew/backend";
 
 interface EditChallengeModalProps {
   closeModal: () => void;
@@ -21,9 +22,11 @@ interface EditChallengeModalProps {
 export default function EditChallengeModal(props: EditChallengeModalProps) {
   const [title, setTitle] = useState("");
 
-  const handleCreateChallenge = () => {
+  const handleCreateChallenge = async() => {
     console.log("Create Challenge");
     // This is where we will call the backend endpoint to create a challenge and navigate to the userdashboard.
+    const check = await backend.addChallenge(props.challenge.userChallengeName, props.challenge.challengeDifficulty, props.challenge.description, title, props.challenge.articleSource);
+    console.log(check);
     console.log(title);
     //here is where it uses the challenge info
     console.log(props.challenge);

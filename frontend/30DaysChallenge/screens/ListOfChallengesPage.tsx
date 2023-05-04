@@ -29,66 +29,99 @@ interface ListOfChallengesPageProps {
 }
 
 export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
-  // const challengeDisplays = [ false, true, true ]
-//   const challengeDisplays = [
-//     {
-//         id: 1,
-//         bool: true,
-//     },
-//     {
-//         id: 2,
-//         bool: true,
-//     },
-//     {
-//         id: 3,
-//         bool: false,
-//     },
-// ];
+const allChallenges = 
+  [
+    {
+      title: "Take Vitamins",
+      difficulty: 1,
+    },
+    {
+      title: "Eat Vegetables",
+      difficulty: 3,
+    },
+    {
+      title: "Sleep",
+      difficulty: 3,
+    },
+    {
+      title: "Listen to Music",
+      difficulty: 1,
+    },
+    {
+      title: "Diet",
+      difficulty: 4,
+    },
+    {
+      title: "Drink Water",
+      difficulty: 3,
+    },
+    {
+      title: "Watch TV",
+      difficulty: 1,
+    },
+    {
+      title: "Workout",
+      difficulty: 4,
+    }
+  ]
+
+const User = {
+  name: "Melissa",
+  personalChallenges: [
+    {
+      title: "Take Vitamins",
+      difficulty: 1,
+    },
+    {
+      title: "Eat Vegetables",
+      difficulty: 3,
+    },
+    {
+      title: "Sleep",
+      difficulty: 3,
+    },
+    {
+      title: "Listen to Music",
+      difficulty: 1,
+    },
+    {
+      title: "Workout/Diet",
+      difficulty: 4,
+    }
+  ],
+};
 
   const [searchInput, setSearchInput] = useState("");
-  const [filteredChallenges, setFilteredChallenges] = useState("");
-  var [challenge1, setChallenge1] = useState(Boolean);
-  var [challenge2, setChallenge2] = useState(Boolean);
-  var [challenge3, setChallenge3] = useState(Boolean);
-  var [challenge4, setChallenge4] = useState(Boolean);
-  var [challenge5, setChallenge5] = useState(Boolean);
-  // var [challenge6, setChallenge6] = useState(true);
+  const [filteredChallenges, setFilteredChallenges] = useState(allChallenges);
+
   function handleChange(text: string) {
     setSearchInput(text)
-    // handleSearch(text)
-    // for (let challenge of challengeNames)
-    for (let i = 0; i < challengeNames.length; i++)
+    const textName = text.toUpperCase();
+    var tempArray = filteredChallenges;
+    tempArray.splice(0, tempArray.length)
+    setFilteredChallenges(tempArray)
+
+    for (let i = 0; i < allChallenges.length; i++) 
     {
-      const challengeName = challengeNames[i].toUpperCase()
-      const textName = text.toUpperCase()
-      if (challengeName.includes(textName)) // add an || category
-      {
-        // challengeDisplays[i] = false
-        console.log("Detected: " + challengeNames[i])
-        if (i ==0) {  setChallenge1(false);}
-        else if (i == 1) {setChallenge2(false);}
-        else if (i ==2) {setChallenge3(false);}
-        else if (i == 3) {setChallenge4(false);}
-        else if (i ==4) {setChallenge5(false);}
-        // else if (i == 5) {setChallenge6(false);}
-        // setChallenge1(
-        //   challengeDisplays.map((friend) =>
-        //   friend.id === i
-        //   ? { ...friend, bool: false }
-        //   : { ...friend,  }
-        //   )       
-        // )
-      }
-      else 
-      {
-        // challengeDisplays[i] = true
-        if (i ==0) {  setChallenge1(true);}
-        else if (i == 1) {setChallenge2(true);}
-        else if (i ==2) {setChallenge3(true);}
-        else if (i == 3) {setChallenge4(true);}
-        else if (i ==4) {setChallenge5(true);}
-        // else if (i == 5) {setChallenge6(true);}
-      }
+        var tempArray = filteredChallenges;
+        const challengeTitle = allChallenges[i].title.toUpperCase();
+        if (textName === "")
+        {
+          continue;
+        }
+        else if (challengeTitle.includes(textName))
+        {
+          if (tempArray.includes(allChallenges[i]))
+          {
+            continue;
+          }
+          tempArray.push(allChallenges[i])
+          setFilteredChallenges(() => tempArray)
+        } else
+        {
+          tempArray.splice(i, 1)
+          setFilteredChallenges(() => tempArray)
+        }
     }
     
   }
@@ -115,39 +148,30 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
     return null;
   }
 
-  const name = "Melissa"
-  const challengeNames = ['Stop Drinking Alcohol', 'Quit Smoking', 'Drink Water', 'Take Vitamins', 'Exercise', 'Eat vegetables']
-
   return (
     <DismissKeyboard>
       <KeyboardAvoidingView>
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
           <Text style={styles.text}>New Challenges</Text>
-          {/* <View style={styles.searchBar}><Text>Search</Text></View> */}
           <TextInput
               style={styles.searchBar}
               placeholder="Search"
               value={searchInput}
               onChangeText={text => handleChange(text) }
             />
-            <TextInput></TextInput>
-          <ScrollView style={styles.desc}> 
-            <ChallengeListItem display={challenge1} name={challengeNames[0]} difficulty={2}></ChallengeListItem>
-            <ChallengeListItem display={challenge2} name={challengeNames[1]} difficulty={1}></ChallengeListItem>
-            <ChallengeListItem display={challenge3} name={challengeNames[2]} difficulty={2}></ChallengeListItem>
-            <ChallengeListItem display={challenge4} name={challengeNames[3]} difficulty={4}></ChallengeListItem>
-            <ChallengeListItem display={challenge5} name={challengeNames[4]} difficulty={2}></ChallengeListItem>
-            {/* <ChallengeListItem display={challenge6} name={challengeNames[5]} difficulty={3}></ChallengeListItem> */}
-
-
-            <Text style={styles.smallerText}>Challenges for {name} </Text>
-            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #2"} difficulty={4}></ChallengeListItem>
-            <ChallengeListItem name={"Challenge #3"} difficulty={2}></ChallengeListItem>
-          </ScrollView>
+            <ScrollView style={styles.desc}>
+              {filteredChallenges.map((challenge, index) => (
+                <View key={index}>
+                    <ChallengeListItem name={challenge.title} difficulty={1} index={index}></ChallengeListItem>
+                 </View>
+              ))}
+            <Text style={styles.smallerText}>Challenges for {User.name} </Text>
+              {User.personalChallenges.map((challenge, index) => (
+                <View key={index}>
+                    <ChallengeListItem name={challenge.title} difficulty={challenge.difficulty} index={index}></ChallengeListItem>
+                 </View>
+              ))}
+            </ScrollView>
         </SafeAreaView>
       </KeyboardAvoidingView>
     </DismissKeyboard>
@@ -156,7 +180,6 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#D7DADA",
     backgroundColor: "#F3F5F6",
     width: "100%",
     height: "100%",
@@ -177,54 +200,6 @@ const styles = StyleSheet.create({
     top: 60,
     paddingBottom: 70,
   },
-  inputContainer: {},
-  input: {
-    height: 44,
-    width: 327,
-    fontFamily: "Inter_400Regular",
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    top: 439,
-    alignSelf: "center",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 4,
-  },
-  button: {
-    backgroundColor: "#FBB749",
-    width: "20%",
-    height: "40%",
-    alignSelf: "center",
-    borderRadius: 4,
-    justifyContent: "center",
-    position: "absolute",
-    left: "75%",
-    top: "35%",
-  },
-  buttonText: {
-    color: "white",
-    fontFamily: "Inter_800ExtraBold",
-    alignSelf: "center",
-    fontSize: 13,
-  },
-  register: {
-    width: 327,
-    height: 48,
-    top: 459,
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  registerText: {
-    color: "#FFFFFF",
-    fontFamily: "Inter_400Regular",
-    alignSelf: "center",
-    fontSize: 17,
-    textAlign: "center",
-    left: 35,
-  },
-  stars: {
-    paddingLeft: 5,
-  },
   searchBar: {
     position: "relative",
     height: 30,
@@ -235,34 +210,13 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     top: "12%",
   },
-  challengeContainer: {
-    position: "relative",
-    marginTop: 10,
-    height: 80,
-    width: "80%",
-    alignSelf: "center",
-    // top: 80,
-    backgroundColor: "#0D9968",
-    borderRadius: 10,
-    paddingTop: 7,
-    paddingLeft: 10,
-  },
   desc: {
     alignSelf: "center",
     alignContent: "center",
     position: "absolute",
     width: "100%",
     height: "70%",
-    top: "23%",
-    // backgroundColor: "#E6E6E6",
+    top: "30%",
     borderRadius: 6,
-  },
-  challengeName: {
-    fontFamily: "Inter_800ExtraBold",
-    color: "white",
-    paddingTop: 10,
-    paddingLeft: 5,
-    fontSize: 18,
-    // top: 60,
   },
 });

@@ -149,24 +149,9 @@ export default function ChallengeDescriptionPage(
         <Text style={styles.descHeader}>Citation:</Text>
         <Text style={styles.descText}>{citation}</Text>
       </ScrollView>
-      <Text style={[
-        styles.inviteText,
-        isOpen
-          ? {
-              opacity: 0.3,
-              shadowColor: "#00000",
-              shadowOffset: { width: 0, height: 0 },
-              shadowOpacity: 0,
-              shadowRadius: 0,
-              elevation: 0,
-            }
-          : {},
-      ]}>
-        Use the link below to invite friends
-      </Text>
-      <View
+      <TouchableOpacity
         style={[
-          styles.inviteSection,
+          styles.button,
           isOpen
             ? {
                 opacity: 0.3,
@@ -178,45 +163,11 @@ export default function ChallengeDescriptionPage(
               }
             : {},
         ]}
+        onPress={HandleModal}
       >
-        <View
-          style={[
-            styles.inviteLink,
-            isOpen
-              ? {
-                  opacity: 0.3,
-                  shadowColor: "#00000",
-                  shadowOffset: { width: 0, height: 0 },
-                  shadowOpacity: 0,
-                  shadowRadius: 0,
-                  elevation: 0,
-                }
-              : {},
-          ]}
-        >
-          <Text style={styles.inviteLinkText}>
-            MGCKQ8
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={[
-            styles.copyLink,
-            isOpen
-              ? {
-                  opacity: 0.3,
-                  shadowColor: "#00000",
-                  shadowOffset: { width: 0, height: 0 },
-                  shadowOpacity: 0,
-                  shadowRadius: 0,
-                  elevation: 0,
-                }
-              : {},
-          ]}
-          onPress={copyToClipBoard}
-        >
-          <Image source={require("../assets/Vector.png")} />
-        </TouchableOpacity>
-      </View>
+        <Text style={styles.buttonText}>Start</Text>
+      </TouchableOpacity>
+
       <Text style={styles.linkMessage}>{linkMessage}</Text>
 
       {/* -----------------Modal----------------- */}

@@ -32,34 +32,42 @@ export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
 const allChallenges = 
   [
     {
+      name: "Vitamins",
       title: "Take Vitamins",
       difficulty: 1,
     },
     {
+      name: "Vegetables",
       title: "Eat Vegetables",
       difficulty: 3,
     },
     {
-      title: "Sleep",
+      name: "Sleep",
+      title: "Get 8 Hours of Sleep",
       difficulty: 3,
     },
     {
+      name: "Music",
       title: "Listen to Music",
       difficulty: 1,
     },
     {
+      name: "Diet",
       title: "Diet",
       difficulty: 4,
     },
     {
+      name: "Water",
       title: "Drink Water",
       difficulty: 3,
     },
     {
+      name: "TV",
       title: "Watch TV",
       difficulty: 1,
     },
     {
+      name: "Home Workouts",
       title: "Workout",
       difficulty: 4,
     }
@@ -69,23 +77,28 @@ const User = {
   name: "Melissa",
   personalChallenges: [
     {
+      name: "Vitamins",
       title: "Take Vitamins",
       difficulty: 1,
     },
     {
+      name: "Vegetables",
       title: "Eat Vegetables",
       difficulty: 3,
     },
     {
+      name: "Sleep",
       title: "Sleep",
       difficulty: 3,
     },
     {
+      name: "Music",
       title: "Listen to Music",
       difficulty: 1,
     },
     {
-      title: "Workout/Diet",
+      name: "Home Workouts",
+      title: "Workout",
       difficulty: 4,
     }
   ],
@@ -161,15 +174,31 @@ const User = {
             />
             <ScrollView style={styles.desc}>
               {filteredChallenges.map((challenge, index) => (
-                <View key={index}>
-                    <ChallengeListItem name={challenge.title} difficulty={1} index={index}></ChallengeListItem>
-                 </View>
+                  <View style={styles.challengeContainer}>
+                      <Text style={styles.challengeName}>{challenge.title}</Text>
+                      <View style={styles.stars}>
+                          <DifficultyStars difficulty={challenge.difficulty} size={1}></DifficultyStars>
+                      </View>
+                      <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
+                                itemId: challenge.name
+                              })}>
+                          <Text style={styles.buttonText}>View</Text>
+                      </TouchableOpacity>
+                  </View>
               ))}
             <Text style={styles.smallerText}>Challenges for {User.name} </Text>
               {User.personalChallenges.map((challenge, index) => (
-                <View key={index}>
-                    <ChallengeListItem name={challenge.title} difficulty={challenge.difficulty} index={index}></ChallengeListItem>
-                 </View>
+              <View style={styles.challengeContainer}>
+                <Text style={styles.challengeName}>{challenge.title}</Text>
+                <View style={styles.stars}>
+                    <DifficultyStars difficulty={challenge.difficulty} size={1}></DifficultyStars>
+                </View>
+                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
+                          itemId: challenge.name
+                        })}>
+                    <Text style={styles.buttonText}>View</Text>
+                </TouchableOpacity>
+            </View>
               ))}
             </ScrollView>
         </SafeAreaView>
@@ -218,5 +247,96 @@ const styles = StyleSheet.create({
     height: "70%",
     top: "30%",
     borderRadius: 6,
+  },
+  container: {
+    backgroundColor: "#F3F5F6",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+  },
+  text: {
+    alignSelf: "center",
+    fontFamily: "Inter_800ExtraBold",
+    color: "#020202",
+    fontSize: 30,
+    top: 60,
+  },
+  inputContainer: {},
+  input: {
+    height: 44,
+    width: 327,
+    fontFamily: "Inter_400Regular",
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    top: 439,
+    alignSelf: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 4,
+  },
+  button: {
+    backgroundColor: "#FBB749",
+    width: "20%",
+    height: "40%",
+    alignSelf: "center",
+    borderRadius: 4,
+    justifyContent: "center",
+    position: "absolute",
+    left: "75%",
+    top: "35%",
+  },
+  buttonText: {
+    color: "white",
+    fontFamily: "Inter_800ExtraBold",
+    alignSelf: "center",
+    fontSize: 13,
+  },
+  register: {
+    width: 327,
+    height: 48,
+    top: 459,
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  registerText: {
+    color: "#FFFFFF",
+    fontFamily: "Inter_400Regular",
+    alignSelf: "center",
+    fontSize: 17,
+    textAlign: "center",
+    left: 35,
+  },
+  stars: {
+    paddingLeft: 5,
+  },
+  challengeContainer: {
+    position: "relative",
+    marginTop: 10,
+    height: 80,
+    width: "80%",
+    alignSelf: "center",
+    // top: 80,
+    backgroundColor: "#0D9968",
+    borderRadius: 10,
+    paddingTop: 7,
+    paddingLeft: 10,
+  },
+  challengeName: {
+    fontFamily: "Inter_800ExtraBold",
+    color: "white",
+    paddingTop: 10,
+    paddingLeft: 5,
+    fontSize: 18,
+    // top: 60,
+  },
+
+  text2: {
+    height: 40, backgroundColor: 'white', borderRadius: 5, padding: 10, 
+  },
+  textvalid: {
+    display: 'none'
+  },
+  textinvalid: {
+      display: 'flex'
   },
 });

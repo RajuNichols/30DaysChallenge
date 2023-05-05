@@ -1,0 +1,1483 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChallengeView renders without errors 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "center",
+      "backgroundColor": "#F3F5F6",
+      "borderColor": "#338ca3",
+      "borderRadius": 6,
+      "borderWidth": 5,
+      "elevation": 3,
+      "height": "100%",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.8,
+      "shadowRadius": 2,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#020202",
+        "display": "flex",
+        "fontFamilyt": "Inter_400Regular",
+        "fontSize": 20,
+        "marginTop": "3%",
+        "paddingLeft": "7%",
+        "textAlign": "left",
+      }
+    }
+  >
+    Day 
+    5
+     
+  </Text>
+  <View
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "height": "70%",
+          "justifyContent": "space-between",
+          "marginLeft": 15,
+          "top": "20%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#F3F5F6",
+            "borderRadius": 3,
+            "flexDirection": "row",
+            "height": "12%",
+            "marginTop": 8,
+            "paddingLeft": 5,
+          }
+        }
+        testID="me-item"
+      >
+        <View
+          accessibilityRole="checkbox"
+          accessibilityState={
+            Object {
+              "checked": false,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "borderColor": "#657786",
+                "borderRadius": 2,
+                "borderWidth": 2,
+                "height": 20,
+                "width": 20,
+              },
+              undefined,
+              false,
+              false,
+              undefined,
+              false,
+            ]
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "Inter_400Regular",
+              "marginLeft": 6,
+            }
+          }
+        >
+          Me
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#F3F5F6",
+            "borderRadius": 3,
+            "flexDirection": "row",
+            "height": "12%",
+            "marginTop": 8,
+            "paddingLeft": 5,
+          }
+        }
+        testID="friend-item-0"
+      >
+        <View
+          accessibilityRole="checkbox"
+          accessibilityState={
+            Object {
+              "checked": false,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "borderColor": "#657786",
+                "borderRadius": 2,
+                "borderWidth": 2,
+                "height": 20,
+                "width": 20,
+              },
+              undefined,
+              false,
+              false,
+              undefined,
+              false,
+            ]
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "Inter_400Regular",
+              "marginLeft": 6,
+            }
+          }
+        >
+          Alice
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#F3F5F6",
+            "borderRadius": 3,
+            "flexDirection": "row",
+            "height": "12%",
+            "marginTop": 8,
+            "paddingLeft": 5,
+          }
+        }
+        testID="friend-item-1"
+      >
+        <View
+          accessibilityRole="checkbox"
+          accessibilityState={
+            Object {
+              "checked": false,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "borderColor": "#657786",
+                "borderRadius": 2,
+                "borderWidth": 2,
+                "height": 20,
+                "width": 20,
+              },
+              undefined,
+              false,
+              false,
+              undefined,
+              false,
+            ]
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "Inter_400Regular",
+              "marginLeft": 6,
+            }
+          }
+        >
+          Bob
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#F3F5F6",
+          "borderRadius": 6,
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "height": "100%",
+          "right": 15,
+          "width": "63%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+              }
+            }
+          >
+            May 2023
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              S
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              M
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              T
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              W
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              T
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              F
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "aspectRatio": 1,
+                "justifyContent": "center",
+                "width": "14.28%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Inter_400Regular",
+                }
+              }
+            >
+              S
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "flex-start",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            01
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          >
+            ❌
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            02
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          >
+            ❌
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            03
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          >
+            ❌
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            04
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          >
+            ❌
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            05
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          >
+            ❌
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            06
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            07
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            08
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            09
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            10
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            11
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            12
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            13
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            14
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            15
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            16
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            17
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            18
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            19
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            20
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            21
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            22
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            23
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            24
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            25
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            26
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            27
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            28
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            29
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            30
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "aspectRatio": 1,
+              "borderColor": "gray",
+              "borderWidth": 1,
+              "justifyContent": "flex-start",
+              "width": "14.28%",
+            }
+          }
+          testID="calendar-day"
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Inter_400Regular",
+                "fontSize": 15,
+                "textAlign": "center",
+              }
+            }
+          >
+            31
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 10,
+                "top": -2,
+              }
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

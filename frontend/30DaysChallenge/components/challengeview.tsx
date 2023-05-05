@@ -62,14 +62,14 @@ const ChallengeView: React.FC<CalendarProps> = ({
     <View style={styles.wrapper}>
       <Text style={styles.ChallengeDay}>Day {challengeDay} </Text><View style={styles.container}>
         <View style={styles.friendsSection}>
-          <View style={styles.friends}>
+          <View style={styles.friends} testID="me-item">
             <Checkbox
               value={checkedState[0]}
               onValueChange={() => handleCheckbox(0)} />
             <Text style={styles.friendsText}>Me</Text>
           </View>
           {friends.map((friend, index) => (
-            <View key={index} style={styles.friends}>
+            <View key={index} style={styles.friends} testID={`friend-item-${index}`}>
               <Checkbox
                 key={index}
                 value={checkedState[index + 1]}
@@ -111,7 +111,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
           </View>
           <View style={styles.calendarDaysContainer}>
             {datesArray.map((date, index) => (
-              <View key={index} style={styles.calendar}>
+              <View key={index} style={styles.calendar} testID="calendar-day">
                 <Text key={index} style={styles.calendarDayText}>
                   {format(date, "dd")}
                 </Text>

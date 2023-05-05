@@ -108,35 +108,15 @@ const User = {
   const [filteredChallenges, setFilteredChallenges] = useState(allChallenges);
 
   function handleChange(text: string) {
-    setSearchInput(text)
+    setSearchInput(text);
     const textName = text.toUpperCase();
-    var tempArray = filteredChallenges;
-    tempArray.splice(0, tempArray.length)
-    setFilteredChallenges(tempArray)
 
-    for (let i = 0; i < allChallenges.length; i++) 
-    {
-        var tempArray = filteredChallenges;
-        const challengeTitle = allChallenges[i].title.toUpperCase();
-        if (textName === "")
-        {
-          continue;
-        }
-        else if (challengeTitle.includes(textName))
-        {
-          if (tempArray.includes(allChallenges[i]))
-          {
-            continue;
-          }
-          tempArray.push(allChallenges[i])
-          setFilteredChallenges(() => tempArray)
-        } else
-        {
-          tempArray.splice(i, 1)
-          setFilteredChallenges(() => tempArray)
-        }
-    }
-    
+    const updatedFilteredChallenges = allChallenges.filter((challenge) => {
+      const challengeTitle = challenge.title.toUpperCase();
+      return textName === "" || challengeTitle.includes(textName);
+    });
+
+    setFilteredChallenges(updatedFilteredChallenges);
   }
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
@@ -174,7 +154,7 @@ const User = {
             />
             <ScrollView style={styles.desc}>
               {filteredChallenges.map((challenge, index) => (
-                  <View style={styles.challengeContainer}>
+                  <View style={styles.challengeContainer} key={index}>
                       <Text style={styles.challengeName}>{challenge.title}</Text>
                       <View style={styles.stars}>
                           <DifficultyStars difficulty={challenge.difficulty} size={1}></DifficultyStars>
@@ -188,7 +168,7 @@ const User = {
               ))}
             <Text style={styles.smallerText}>Challenges for {User.name} </Text>
               {User.personalChallenges.map((challenge, index) => (
-              <View style={styles.challengeContainer}>
+              <View style={styles.challengeContainer} key={index}>
                 <Text style={styles.challengeName}>{challenge.title}</Text>
                 <View style={styles.stars}>
                     <DifficultyStars difficulty={challenge.difficulty} size={1}></DifficultyStars>
@@ -247,19 +227,6 @@ const styles = StyleSheet.create({
     height: "70%",
     top: "30%",
     borderRadius: 6,
-  },
-  container: {
-    backgroundColor: "#F3F5F6",
-    width: "100%",
-    height: "100%",
-    display: "flex",
-  },
-  text: {
-    alignSelf: "center",
-    fontFamily: "Inter_800ExtraBold",
-    color: "#020202",
-    fontSize: 30,
-    top: 60,
   },
   inputContainer: {},
   input: {

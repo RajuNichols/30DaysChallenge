@@ -37,7 +37,9 @@ export default function ChallengeDescriptionPage(
   const [stars, setStars] = useState(0);
   const [description, setDescription] = useState("");
   const [citation, setCitation] = useState("");
+  const [code, setCode] = useState("");
   const { itemId } = props?.route?.params;
+  const { codeProp } = props?.route?.params;
   const [isLoading, setIsLoading] = useState(true);
 
   const mockChallenges = [
@@ -68,6 +70,7 @@ export default function ChallengeDescriptionPage(
     setStars(mockChallenges[itemId].difficulty);
     setDescription(mockChallenges[itemId].desc);
     setCitation(mockChallenges[itemId].source);
+    setCode(codeProp);
     setTimeout(() => {
       setIsLoading(false);
     },2000)
@@ -97,7 +100,7 @@ export default function ChallengeDescriptionPage(
   }
 
   const copyToClipBoard = async () => {
-    await Clipboard.setStringAsync("MGCKQ8");
+    await Clipboard.setStringAsync(code);
     setLinkMessage("Code Successfully Copied");
   };
 
@@ -195,7 +198,7 @@ export default function ChallengeDescriptionPage(
           ]}
         >
           <Text style={styles.inviteLinkText}>
-            MGCKQ8
+            {code}
           </Text>
         </View>
         <TouchableOpacity

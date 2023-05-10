@@ -13,6 +13,7 @@ type CalendarProps = {
   challengeDay: number;
   friends: any[];
   challengeTitle: string;
+  updateCompletedDates: Function;
 };
 
 const ChallengeView: React.FC<CalendarProps> = ({
@@ -22,6 +23,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
   challengeDay,
   friends,
   challengeTitle,
+  updateCompletedDates,
 }) => {
   const datesArray = eachDayOfInterval({ start: startDate, end: endDate });
   const [checkedState, setCheckedState] = useState(
@@ -31,10 +33,10 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   useEffect(() => {
     getCheckedStates();
-  }, []);
+  }, [completedDates]);
 
   const getCheckedStates = () => {
-    const checkboxState: boolean[] = checkedState;
+    const checkboxState: boolean[] = new Array(friends.length + 1).fill(false);
     if (completedDates[challengeDay - 1] == true) {
       checkboxState[0] = true;
     }
@@ -47,15 +49,21 @@ const ChallengeView: React.FC<CalendarProps> = ({
     setCheckedState(checkboxState);
   };
 
-  const handleCheckbox = (index: number) => {
+  const handleCheckbox = async (index: number) => {
     if (index === 0) {
+      var check = backend.completeDay("Dev", challengeTitle, challengeDay - 1);
+      console.log(check + "Challenge View");
+
+      completedDates = await backend.getChallengeDates("Dev", challengeTitle);
+    }
+
       const newCheck = [...checkedState];
       console.log(newCheck);
       newCheck[index] = !newCheck[index];
       setCheckedState(newCheck);
 
-      var check = backend.completeDay("Dev", challengeTitle, challengeDay);
-      console.log(check + "Challenge View");
+    if (index === 0) {
+      updateCompletedDates(completedDates);
     }
   };
 
@@ -71,17 +79,16 @@ const ChallengeView: React.FC<CalendarProps> = ({
               onValueChange={() => handleCheckbox(0)} />
             <Text style={styles.friendsText}>Me</Text>
           </View>
-          {friends.map((friend, index) => (
+          {friends[0] == "" ? friends.map((friend, index) => (
             <View key={index} style={styles.friends} testID={`friend-item-${index}`}>
               <Checkbox
                 key={index}
-                value={checkedState[index + 1]}
-                onValueChange={() => handleCheckbox(index + 1)} />
+                value={checkedState[index + 1]}/>
               <Text style={styles.friendsText} key={index + 1}>
                 {friend.name}
               </Text>
             </View>
-          ))}
+          )) : <View/>}
         </View>
         <View style={styles.calendarSection}>
           <View style={styles.monthWeekdaysContainer}>

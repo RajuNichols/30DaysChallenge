@@ -583,6 +583,13 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     return null;
   }
 
+  const updateCompletedDates = (challengeIndex:any, newCompletedDates:any) => {
+    setData(prevData => {
+      const newData = [...prevData]; // copy the old data
+      newData[challengeIndex].challenge.daysCompleted = newCompletedDates; // update the necessary field
+      return newData; // return the new data which will replace the old data
+    });
+  }
 
   return isLoading ? (<LoadingIndicator/>) :(
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
@@ -592,7 +599,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         {data.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
             <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={() => props.navigation.navigate("ChallengeDescriptionPage", {
-              itemId: index, codeProp: challenge.code
+              itemId: index, codeProp: challenge.challenge.code
             })}>
               <Text key={index} style={styles.challengeTitle}>{challenge.challenge.userChallengeName}</Text>
             </TouchableOpacity>
@@ -605,6 +612,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
                 challengeDay={challenge.currentDay}
                 friends={challenge.daysComplete}
                 challengeTitle={challenge.challenge.userChallengeName}
+                updateCompletedDates={(newCompletedDates:any) => updateCompletedDates(index, newCompletedDates)}
               />
             </View>
           </View>

@@ -29,7 +29,7 @@ export class Challenges{
     friends:string[];
     articleTitle:string;
     articleSource:string;
-    challengeCode:string;
+    code:string;
  
     constructor(userChallengeName:string, challengeDifficulty:number, username:string, description:string, articleTitle:string, articleSource:string, challengeCode:string){
         this.userChallengeName = userChallengeName;
@@ -50,7 +50,7 @@ export class Challenges{
         this.friends = [];
         this.articleTitle = articleTitle;
         this.articleSource = articleSource;
-        this.challengeCode = challengeCode;
+        this.code = challengeCode;
     }
  
     public challengeComplete(){
@@ -64,7 +64,7 @@ export class frontendDetails{
     daysComplete:friendsComplete[];
 
     constructor(){
-        this.challenge = new Challenges("", 0, "", "", "", "");
+        this.challenge = new Challenges("", 0, "", "", "", "", "");
         this.currentDay = 0;
         this.daysComplete = [];
     }

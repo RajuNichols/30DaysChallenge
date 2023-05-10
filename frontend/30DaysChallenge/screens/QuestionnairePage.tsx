@@ -149,9 +149,9 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
 
   return (
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-          <ScrollView > 
-            <Text style={styles.text}>30 Days Challenge</Text>
-              <View>
+          <Text style={styles.title}>30 Days Challenge</Text>
+          <ScrollView style={styles.scroll}> 
+              <View style={styles.content}>
               {/* Question 1 */}
               <View style={styles.radioButtonContainer}>
               <Text style={styles.questionText}>{ questions.at(0) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
@@ -410,5 +410,18 @@ const styles = StyleSheet.create({
     padding: 15,
     fontFamily: "Inter_400Regular",
   },
+  scroll:{
+    marginTop: "10%",
+  },
+  content:{
+    top: "-3%",
+  },
+  title:{
+    fontSize: 30,
+    fontFamily: "Inter_800ExtraBold",
+    textAlign: "center",
+    top: "5%",
+    color: COLORS.black,
+  }
 });
 

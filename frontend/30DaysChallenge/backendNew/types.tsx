@@ -70,10 +70,10 @@ export class frontendDetails{
 
 export class friendsComplete{
     name:string;
-    daysCompleted:boolean[];
+    completedDates:boolean[];
 
     constructor(){
         this.name = "";
-        this.daysCompleted = [];
+        this.completedDates = [];
     }
 }

@@ -512,20 +512,23 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     for(i = 0; i < temp.length; i++){
       var challenges:frontendDetails
       challenges = new frontendDetails();
-      challenges.challenge.userChallengeName = temp[i].userChallengeName 
-      challenges.challenge.challengeDifficulty = temp[i].challengeDifficulty 
-      challenges.challenge.description = temp[i].description
-      challenges.challenge.articleTitle = temp[i].articleTitle
-      challenges.challenge.articleSource = temp[i].articleSource;
-      challenges.challenge.startDate = temp[i].startDate;
-      challenges.challenge.endDate = temp[i].endDate;
-      challenges.challenge.daysCompleted = temp[i].daysCompleted;
-      challenges.challenge.challengeToken = usertemp.username + temp[i].userChallengeName;
+      // challenges.challenge.userChallengeName = temp[i].userChallengeName 
+      // challenges.challenge.challengeDifficulty = temp[i].challengeDifficulty 
+      // challenges.challenge.description = temp[i].description
+      // challenges.challenge.articleTitle = temp[i].articleTitle
+      // challenges.challenge.articleSource = temp[i].articleSource;
+      // challenges.challenge.startDate = temp[i].startDate;
+      // challenges.challenge.endDate = temp[i].endDate;
+      // challenges.challenge.daysCompleted = temp[i].daysCompleted;
+      // challenges.challenge.challengeToken = usertemp.username + temp[i].userChallengeName;
 
       var dateTemp = new Date();
+      dateTemp.setHours(0, 0, 0, 0);
       var daysInMilliseconds = temp[i].startDate.getTime() - dateTemp.getTime();
 
-      challenges.currentDay = daysInMilliseconds / (24 * 60 * 60 * 1000);
+      challenges.currentDay = (daysInMilliseconds / (24 * 60 * 60 * 1000)) + 1;
+
+      challenges.challenge = temp[i];
 
       console.log("Past challenge assign");
 
@@ -533,10 +536,11 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
       for(var j = 0; j < friendTemp.length; j++){
         challenges.daysComplete[j] = new friendsComplete();
         challenges.daysComplete[j].name = friendTemp[j];
-        challenges.daysComplete[j].daysCompleted = await backend.getChallengeDates(usertemp.username, challenges.challenge.userChallengeName);
+        challenges.daysComplete[j].completedDates = await backend.getChallengeDates(usertemp.username, challenges.challenge.userChallengeName);
       }
 
-      temp2.push(challenges);
+      temp2[i] = challenges;
+      console.log(temp2[i]);
 
       console.log("Past challenge friends");
     }

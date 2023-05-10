@@ -257,8 +257,8 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
                     challengeName: challengeName,
                     challengeDifficulty: challengeDifficulty,
                     description: challengeDescription,
-                    startDate: temp.startDate.getTime(),
-                    endDate: temp.endDate.getTime(),
+                    startDate: temp.startDate.getMilliseconds(),
+                    endDate: temp.endDate.getMilliseconds(),
                     daysCompleted: daystemp,
                     completed: temp.isComplete,
                     friends: friendstemp,
@@ -315,7 +315,14 @@ export async function getChallenges():Promise<Challenges[]>{
                     var friendstemp:string = snapshot.child("friends").val();
                     var friends = friendstemp.split(",");
 
-                    temp[i].friends = friends;
+                    if(friends.length){
+                        temp[i].friends[0] = friendstemp;
+                    }else{
+                        for(var j = 0; j < friends.length; j++){
+                            temp[i].friends[j] = friends[j];
+                        }
+                    }
+                    
                     temp[i].challengeToken = challengeNames[i]
                 }
             }).catch((error) => {

@@ -1,7 +1,7 @@
 import { User, Challenges } from "./types";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get } from "firebase/database";
-
+import { string } from "yargs";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
@@ -32,7 +32,7 @@ export async function login(username:string, userPassword:string):Promise<boolea
     await get(child(dbRef, `users/${username}`)).then((snapshot) => {
         if (snapshot.exists())
         {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
 
             var passwordSnap = snapshot.child("password");
             
@@ -54,15 +54,17 @@ export async function login(username:string, userPassword:string):Promise<boolea
                     }
                 }
 
-                if(snapshot.child("challengeTokens").exists()){
-                    var tokentemp:string = snapshot.child("challengeTokens").val();
+                if(snapshot.child("challenges").val() != ""){
+                    var tokentemp = snapshot.child("challenges").val();
+                    //console.log(tokentemp);
                     var tokenArray = tokentemp.split(",");
+                    //console.log(tokenArray[0]);
 
                     for(i = 0; i < tokenArray.length; i++){
-                        console.log(tokenArray[i]);
+                        //console.log(tokenArray[i]);
                         user.challenges.push(tokenArray[i]);
                         //challengeNames.push(tokenArray[i]);
-;                    }
+                    }
                 }
 
                 check = true;
@@ -119,16 +121,16 @@ export async function createAccount(username:string, userPassword:string, email:
 }
 
 export async function sendUser(username:string):Promise<User>{
-    if(username == user.username){
-        return user;
-    }
+    // if(username == user.username){
+    //     return user;
+    // }
 
     var temp:User = new User( "", "", "");
 
     await get(child(dbRef, `users/${username}`)).then((snapshot) => {
         if (snapshot.exists())
         {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
 
             temp.username = username; 
             temp.userPassword = snapshot.child("password").val();
@@ -141,17 +143,20 @@ export async function sendUser(username:string):Promise<User>{
                 var friendsArray = friendtemp.split(",");
 
                 for(i = 0; i < friendsArray.length; i++){
-                    user.friends[i] = friendsArray[i];
+                    temp.friends[i] = friendsArray[i];
                 }
             }
 
-            if(snapshot.child("challengeTokens").exists()){
-                var tokentemp:string = snapshot.child("challengeTokens").val();
-                var tokenArray = tokentemp.split(",");
+            if(snapshot.child("challenges").val() != ""){
+                var tokentemp:string = snapshot.child("challenges").val();
+                //console.log(tokentemp);
+                temp.challenges = tokentemp.split(",");
 
-                for(i = 0; i < tokenArray.length; i++){
-                    user.challenges[i] = tokenArray[i];
-                }
+                //console.log(temp.challenges);
+
+                // for(i = 0; i < tokenArray.length; i++){
+                //     user.challenges[i] = tokenArray[i];
+                // }
             }
 
         }else{
@@ -230,19 +235,50 @@ function makeid(length:number):string {
     return result;
 }
 
-export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string, articleTitle:string, articleSource:string):Promise<boolean>{
+async function updateGroupCode(code:string, user:string, username:string){
+    if(user.includes(",")){
+        user += ",";
+    }
+    user += username;
+    await set(ref(db, 'groupcode/' + code), {
+        users: user
+    });
+}
+
+export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string, articleTitle:string, articleSource:string, groupCode:string):Promise<boolean>{
     var returnBool:boolean = false;
-    var challengeToken = userName + challengeName;
+    user = await sendUser("Dev");
+    //user.username = "Melissa"
+    var challengeToken = user.username + challengeName;
+    var friends:string[] = [];
+
+    if(groupCode != ""){
+        await get(child(dbRef, `groupcode/${groupCode}`)).then((snapshot) => {
+            if(snapshot.exists()){
+                var usertemp:string = snapshot.child("users").val();
+                if(usertemp.includes(",")){
+                    friends = usertemp.split(",");
+                }else{
+                    friends[0] = usertemp
+                }
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+    //challengeNames[user.numOfChallenges] = challengeToken;
     await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
         if (!snapshot.exists()) {
             if (user != null) {
-                var code = makeid(5);
-                let temp = new Challenges(challengeName, challengeDifficulty, user.username, challengeDescription, articleTitle, articleSource, code);
+                if(groupCode == ""){
+                    groupCode = makeid(5);
+                }
+                let temp = new Challenges(challengeName, challengeDifficulty, user.username, challengeDescription, articleTitle, articleSource, groupCode);
                 user.challenges[user.numOfChallenges] = challengeToken;
-                challengeNames[user.numOfChallenges] = challengeToken;
                 user.numOfChallenges++;
 
-                var string = update(userName);
+                //var string = update(user.username);
 
                 var daystemp: string = "";
                 var i: number;
@@ -255,11 +291,32 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
 
                 var friendstemp: string = "";
                 var j: number;
-                if (temp.friends.length != 0) {
-                    for (j = 0; j < temp.friends.length; j++) {
-                        friendstemp += temp.friends[j];
-                        if (j + 1 != temp.friends.length) {
-                            friendstemp += ","
+                if(friends.length != 0){
+                    for (j = 0; j < friends.length; j++) {
+                        if(friends[j] != user.username){
+                            friendstemp += friends[j];
+                            if (j + 1 != friends.length) {
+                                friendstemp += ","
+                            }
+                        }
+                    }
+                    var count = friends.length;
+                    for (j = friends.length; j < temp.friends.length; j++){
+                        if(!friends.includes(temp.friends[j])){
+                            friendstemp += temp.friends[count];
+                            if (j + 1 != friends.length + temp.friends.length) {
+                                friendstemp += ","
+                            }
+                            count++;
+                        }
+                    }
+                }else{
+                    if (temp.friends.length != 0) {
+                        for (j = 0; j < temp.friends.length; j++) {
+                            friendstemp += temp.friends[j];
+                            if (j + 1 != temp.friends.length) {
+                                friendstemp += ","
+                            }
                         }
                     }
                 }
@@ -270,22 +327,24 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
                     challengeName: challengeName,
                     challengeDifficulty: challengeDifficulty,
                     description: challengeDescription,
-                    startDate: temp.startDate.getMilliseconds(),
-                    endDate: temp.endDate.getMilliseconds(),
+                    startDate: temp.startDate.getTime(),
+                    endDate: temp.endDate.getTime(),
                     daysCompleted: daystemp,
                     completed: temp.isComplete,
                     friends: friendstemp,
                     articleTitle: articleTitle,
                     articleSource: articleSource,
-                    challengeCode: code
+                    challengeCode: groupCode
                 });
+
+                updateGroupCode(groupCode, friendstemp, user.username);
 
                 returnBool = true;
             } else {
                 returnBool = false;
             }
         } else {
-            var error = "User already exists.";
+            var error = "Challenge already exists.";
             console.log(error);
         }
     }).catch((error) => {
@@ -294,22 +353,46 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
     return returnBool;
 }
 
+async function getFriendsWithCode(code:string):Promise<string[]>{
+    var friends:string[] = [];
+
+    await get(child(dbRef, `groupcode/${code}`)).then((snapshot) => {
+        if(snapshot.exists()){
+            var usertemp:string = snapshot.child("users").val();
+            if(usertemp.includes(",")){
+                friends = usertemp.split(",");
+            }else{
+                friends[0] = usertemp
+            }
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    return friends;
+}
+
 export async function getChallenges():Promise<Challenges[]>{
     var temp:Challenges[] = [];
+
+    user = await sendUser("Dev");
 
     if(user != null){
         var i:number;
         //console.log(user.numOfChallenges);
         for (i = 0; i < user.numOfChallenges; i++){
             //console.log(challengeNames[i]);
-            await get(child(dbRef, `challenges/${challengeNames[i]}`)).then((snapshot) => {
+            //console.log(user.challenges[i])
+            //console.log(user);
+            await get(child(dbRef, `challenges/${user.challenges[i]}`)).then(async (snapshot) => {
                 if (snapshot.exists())
                 {
                     //console.log(snapshot.child("challengeName").val());
                     temp[i] = new Challenges(snapshot.child("challengeName").val(), snapshot.child("challengeDifficulty").val(), userName, snapshot.child("description").val(), snapshot.child("articleTitle").val(), snapshot.child("articleSource").val(), snapshot.child("challengeCode").val());
-                    temp[i].startDate.setMilliseconds(snapshot.child("startDate").val());
-                    temp[i].endDate.setMilliseconds(snapshot.child("endDate").val());
+                    temp[i].startDate.setTime(snapshot.child("startDate").val());
+                    temp[i].endDate.setTime(snapshot.child("endDate").val());
                     temp[i].isComplete = snapshot.child("completed").val();
+                    temp[i].code = snapshot.child("challengeCode").val();
 
                     var completedtemp:string = snapshot.child("daysCompleted").val();
                     var completed = completedtemp.split(",");
@@ -327,6 +410,7 @@ export async function getChallenges():Promise<Challenges[]>{
                     temp[i].daysCompleted=completedArray;
                     
                     var friendstemp:string = snapshot.child("friends").val();
+                    var friendsCode = await getFriendsWithCode(temp[i].code);
 
                     if(friendstemp != null){
                         if (!friendstemp.includes(",")) {
@@ -338,8 +422,45 @@ export async function getChallenges():Promise<Challenges[]>{
                             }
                         }
                     }
+
+                    var count = temp[i].friends.length;
+
+                    if (friendstemp == "") {
+                        count = 0;
+                    }
+
+                    for (var x = temp[i].friends.length; x < friendsCode.length; x++) {
+                        if (!temp[i].friends.includes(friendsCode[x]) && friendsCode[x] != user.username) {
+                            //console.log(count);
+                            temp[i].friends[count] = friendsCode[x];
+                            count++;
+                        }
+                    }
+
+                    friendstemp = "";
+
+                    for (var y = 0; y < temp[i].friends.length; y++) {
+                        friendstemp += temp[i].friends[y];
+                        if (i + 1 != temp[i].friends.length) {
+                            friendstemp += ","
+                        }
+                    }
+
+                    set(ref(db, 'challenges/' + String(user.challenges[i])), {
+                        challengeName: temp[i].userChallengeName,
+                        challengeDifficulty: temp[i].challengeDifficulty,
+                        description: temp[i].description,
+                        startDate: temp[i].startDate.getTime(),
+                        endDate: temp[i].endDate.getTime(),
+                        daysCompleted: snapshot.child("daysCompleted").val(),
+                        completed: temp[i].isComplete,
+                        friends: friendstemp,
+                        articleTitle: temp[i].articleTitle,
+                        articleSource: temp[i].articleSource,
+                        challengeCode: temp[i].code
+                    });
                     
-                    temp[i].challengeToken = challengeNames[i]
+                    temp[i].challengeToken = user.challenges[i];
                 }
             }).catch((error) => {
                 console.error(error);

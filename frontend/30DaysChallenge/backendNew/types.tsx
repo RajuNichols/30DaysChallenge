@@ -36,6 +36,7 @@ export class Challenges{
         this.challengeDifficulty = challengeDifficulty;
         this.startDate = new Date();
         this.startDate.setHours(0, 0, 0, 0);
+        //this.startDate.setTime(this.startDate.getTime() - (10 * 24 * 60 * 60 * 1000));
         this.endDate = new Date(this.startDate.getTime() + (30 * 24 * 60 * 60 * 1000));
         this.isComplete = false;
         this.description = description;

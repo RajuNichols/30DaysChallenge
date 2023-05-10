@@ -14,6 +14,7 @@ type CalendarProps = {
   friends: any[];
   challengeTitle: string;
   updateCompletedDates: Function;
+  username:string;
 };
 
 const ChallengeView: React.FC<CalendarProps> = ({
@@ -24,6 +25,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
   friends,
   challengeTitle,
   updateCompletedDates,
+  username,
 }) => {
   const datesArray = eachDayOfInterval({ start: startDate, end: endDate });
   const [checkedState, setCheckedState] = useState(
@@ -51,19 +53,16 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   const handleCheckbox = async (index: number) => {
     if (index === 0) {
-      var check = backend.completeDay("Dev", challengeTitle, challengeDay - 1);
+      var check = backend.completeDay(username, challengeTitle, challengeDay - 1);
       console.log(check + "Challenge View");
 
       completedDates = await backend.getChallengeDates("Dev", challengeTitle);
-    }
+      updateCompletedDates(completedDates);
 
       const newCheck = [...checkedState];
       console.log(newCheck);
       newCheck[index] = !newCheck[index];
       setCheckedState(newCheck);
-
-    if (index === 0) {
-      updateCompletedDates(completedDates);
     }
   };
 

@@ -501,10 +501,10 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
     //console.log(user.username);
 
-    //var check2 = await backend.addChallenge("exercise", 2, "Description", "exercise", "source");
+    //var check2 = await backend.addChallenge("water", 2, "Description", "drink water", "source", "");
     //console.log(check2 + " check2");
 
-    //var check3 = await backend.addChallenge("water", 2, "Description", "drink water", "source");
+    //var check3 = await backend.addChallenge("water", 2, "Description", "drink water", "source", "DSpAc");
     //console.log(check3 + " check2");
 
     var temp = await backend.getChallenges();
@@ -527,13 +527,13 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
       var dateTemp = new Date();
       dateTemp.setHours(0, 0, 0, 0);
-      var daysInMilliseconds = temp[i].startDate.getTime() - dateTemp.getTime();
+      var daysInMilliseconds = dateTemp.getTime() - temp[i].startDate.getTime();
 
       challenges.currentDay = (daysInMilliseconds / (24 * 60 * 60 * 1000)) + 1;
 
       challenges.challenge = temp[i];
 
-      console.log("Past challenge assign");
+      //console.log("Past challenge assign");
 
       var friendTemp = temp[i].friends;
       for(var j = 0; j < friendTemp.length; j++){
@@ -543,14 +543,14 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
       }
 
       temp2[i] = challenges;
-      console.log(temp2[i]);
+      //console.log(temp2[i]);
 
-      console.log("Past challenge friends");
+      //console.log("Past challenge friends");
     }
 
     setData(temp2);
 
-    console.log(data);
+    //console.log(data);
 
     return true;
   }
@@ -613,6 +613,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
                 friends={challenge.daysComplete}
                 challengeTitle={challenge.challenge.userChallengeName}
                 updateCompletedDates={(newCompletedDates:any) => updateCompletedDates(index, newCompletedDates)}
+                username={user}
               />
             </View>
           </View>

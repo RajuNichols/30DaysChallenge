@@ -17,21 +17,63 @@ interface EditChallengeModalProps {
   isOpen: boolean;
   challenge: any;
   navigation: any;
+  isAlcOrSmoking: boolean;
 }
 
 export default function EditChallengeModal(props: EditChallengeModalProps) {
   const [title, setTitle] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [difficulty, setDifficulty] = useState("");
 
   const handleCreateChallenge = () => {
     console.log("Create Challenge");
     // This is where we will call the backend endpoint to create a challenge and navigate to the userdashboard.
-    console.log(title);
-    //here is where it uses the challenge info
-    console.log(props.challenge);
 
-    // navigate to the user dashboard
-    props.navigation.navigate("Dashboard");
+    if (!title)
+    {
+      setErrorMessage("Enter a title.")
+      console.log("User didn't enter a title.")
+      return;
+    } 
+    if (!props.isAlcOrSmoking)
+    {
+      if (!difficulty || !Number.isInteger(parseInt(difficulty)) || parseInt(difficulty) < 1 || parseInt(difficulty) > 5)
+      {
+        setErrorMessage("Enter a difficulty 1-5.")
+        console.log("User didn't enter a valid difficulty")
+      }
+      else 
+      {
+        setErrorMessage("");
+        props.navigation.navigate("Dashboard");
+      }
+    }
+    else 
+    {
+      setErrorMessage("");
+      props.navigation.navigate("Dashboard");
+    }
   };
+
+  const difficultyDisplay = 
+  {
+    height: 44,
+    width: 250,
+    fontFamily: "Inter_400Regular",
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    alignSelf: "center",
+    borderRadius: 4,
+    borderColor: COLORS.blue,
+    backgroundColor: COLORS.white,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+    display: props.isAlcOrSmoking ? 'none' : 'flex'
+  }
 
   return (
     <Modal
@@ -53,7 +95,15 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
               onChangeText={(val: any) => setTitle(val)}
               selectionColor={COLORS.black}
             ></TextInput>
+            <TextInput
+              style={difficultyDisplay}
+              placeholder="Difficulty: 1-5"
+              value={difficulty}
+              onChangeText={(val: any) => setDifficulty(val)}
+              selectionColor={COLORS.black}
+            ></TextInput>
           </View>
+          <Text style={styles.error}>{errorMessage}</Text>
           <TouchableOpacity
             style={styles.button}
             onPress={handleCreateChallenge}
@@ -131,4 +181,29 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     color: COLORS.white
   },
+  error:{
+    color:COLORS.red,
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    textAlign: "center",
+    top: -3
+  },
+  inputDiff: {
+    // height: 44,
+    // width: 250,
+    // fontFamily: "Inter_400Regular",
+    // margin: 12,
+    // borderWidth: 1,
+    // padding: 10,
+    // alignSelf: "center",
+    // borderRadius: 4,
+    // borderColor: COLORS.blue,
+    // backgroundColor: COLORS.white,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+    // elevation: 5,
+    // display: isAlcOrSmoking ? 'none' : 'flex'}
+  }
 });

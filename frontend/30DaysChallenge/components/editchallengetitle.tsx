@@ -16,6 +16,7 @@ interface EditChallengeModalProps {
   closeModal: () => void;
   isOpen: boolean;
   challenge: any;
+  navigation: any;
 }
 
 export default function EditChallengeModal(props: EditChallengeModalProps) {
@@ -27,6 +28,9 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
     console.log(title);
     //here is where it uses the challenge info
     console.log(props.challenge);
+
+    // navigate to the user dashboard
+    props.navigation.navigate("Dashboard");
   };
 
   return (

@@ -217,7 +217,7 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal challenge={mockChallenges[0]} isOpen={isOpen} closeModal={HandleModal} />
+        <EditChallengeModal challenge={mockChallenges[0]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation}/>
       </View>
     </View>
   );

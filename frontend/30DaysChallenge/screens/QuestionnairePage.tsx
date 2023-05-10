@@ -317,7 +317,10 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity> 
             <Text style={styles.error}>{errorMessage}</Text>
-            {/* <View style={styles.padding}></View> */}
+
+            <Text style={styles.descHeader}>Citations:</Text>
+            <Text style={styles.descText}>Lai CC, Huang WH, Chang BC, Hwang LC. Development of Machine Learning Models for Prediction of Smoking Cessation Outcome. Int J Environ Res Public Health. 2021 Mar 5;18(5):2584. doi: 10.3390/ijerph18052584. PMID: 33807561; PMCID: PMC7967540. </Text>
+            <Text style={styles.descText}>Stillman MA, Sutcliff J. Predictors of relapse in alcohol use disorder: identifying individuals most vulnerable to relapse. Addict Subst Abuse 2020. 1(1): 3-8. </Text>
             </ScrollView>
         </SafeAreaView>
   );
@@ -395,6 +398,17 @@ const styles = StyleSheet.create({
     top: Platform.OS === "ios"? 80: 125,
     marginBottom: 100,
     marginTop: 25
+  },
+  descHeader: {
+    fontFamily: "Inter_900Black",
+    padding: 15,
+    marginBottom: -30,
+    fontSize: 20,
+  },
+  descText: {
+    fontSize: 17,
+    padding: 15,
+    fontFamily: "Inter_400Regular",
   },
 });
 

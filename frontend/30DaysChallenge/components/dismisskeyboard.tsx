@@ -1,17 +1,22 @@
 import React, { ReactNode } from "react";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Keyboard } from "react-native";
 
-interface props{
-    children: ReactNode;
+interface props {
+  children: ReactNode;
 }
 
-const DismissKeyboard = ({children} : props) => {
-    return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            {children}
-        </TouchableWithoutFeedback>
-    )
-    
-}
+const DismissKeyboard = ({ children }: props) => {
+  return (
+    <View
+      style={{ flex: 1 }}
+      onStartShouldSetResponderCapture={() => {
+        Keyboard.dismiss();
+        return false;
+      }}
+    >
+      {children}
+    </View>
+  );
+};
 
 export default DismissKeyboard;

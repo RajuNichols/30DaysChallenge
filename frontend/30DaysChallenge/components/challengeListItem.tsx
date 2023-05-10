@@ -5,19 +5,13 @@ import DifficultyStars from "./difficultystars";
 interface challengeListItemProps{
     name: string
     difficulty: number
+    index: number
     navigation?: any
     display?: boolean
 }
 const ChallengeListItem = (props: challengeListItemProps) => {
   const challengeName = props.name;
   const difficulty = props.difficulty;
-
-  // const handleRegister = () => {
-  //   // #TODO
-  //   // this is where we will transition the screen to the register screen.
-  //   console.log("clicked on register");
-  //   props.navigation.navigate("RegisterPage");
-  // };
 
   return(
     <View
@@ -28,7 +22,9 @@ const ChallengeListItem = (props: challengeListItemProps) => {
           <View style={styles.stars}>
               <DifficultyStars difficulty={props.difficulty} size={1}></DifficultyStars>
           </View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
+                    itemId: props.index
+                  })}>
               <Text style={styles.buttonText}>View</Text>
           </TouchableOpacity>
       </View>

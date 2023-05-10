@@ -601,6 +601,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
                 completedDates={challenge.challenge.daysCompleted}
                 challengeDay={challenge.currentDay}
                 friends={challenge.daysComplete}
+                challengeTitle={challenge.challenge.userChallengeName}
               />
             </View>
           </View>

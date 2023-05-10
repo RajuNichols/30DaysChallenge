@@ -4,6 +4,7 @@ import { eachDayOfInterval, format } from "date-fns";
 import Checkbox from "expo-checkbox";
 import { COLORS } from "../colors";
 import LoadingIndicator from "./loadingindicator";
+import * as backend from "../backendNew/backend";
 
 type CalendarProps = {
   startDate: Date;
@@ -11,6 +12,7 @@ type CalendarProps = {
   completedDates: boolean[];
   challengeDay: number;
   friends: any[];
+  challengeTitle: string;
 };
 
 const ChallengeView: React.FC<CalendarProps> = ({
@@ -19,6 +21,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
   completedDates,
   challengeDay,
   friends,
+  challengeTitle,
 }) => {
   const datesArray = eachDayOfInterval({ start: startDate, end: endDate });
   const [checkedState, setCheckedState] = useState(
@@ -28,9 +31,6 @@ const ChallengeView: React.FC<CalendarProps> = ({
 
   useEffect(() => {
     getCheckedStates();
-    setTimeout(() => {
-      setLoading(false);
-    },2000)
   }, []);
 
   const getCheckedStates = () => {
@@ -53,6 +53,9 @@ const ChallengeView: React.FC<CalendarProps> = ({
       console.log(newCheck);
       newCheck[index] = !newCheck[index];
       setCheckedState(newCheck);
+
+      var check = backend.completeDay("Dev", challengeTitle, challengeDay);
+      console.log(check + "Challenge View");
     }
   };
 

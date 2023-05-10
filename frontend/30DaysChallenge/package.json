@@ -6,7 +6,14 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.2",
@@ -28,6 +35,8 @@
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.19.1",
+    "jest": "^26.6.3",
+    "jest-expo": "^48.0.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.8",
@@ -40,12 +49,17 @@
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.9",
+    "react-test-renderer": "18.1.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/jest-native": "^5.4.2",
+    "@testing-library/react-native": "^12.1.1",
+    "@types/jest": "^29.5.1",
     "@types/react": "~18.0.14",
     "@types/react-native": "~0.70.6",
+    "@types/react-test-renderer": "^18.0.0",
     "typescript": "^4.6.3"
   },
   "private": true

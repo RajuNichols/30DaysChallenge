@@ -29,8 +29,9 @@ export class Challenges{
     friends:string[];
     articleTitle:string;
     articleSource:string;
+    challengeCode:string;
  
-    constructor(userChallengeName:string, challengeDifficulty:number, username:string, description:string, articleTitle:string, articleSource:string){
+    constructor(userChallengeName:string, challengeDifficulty:number, username:string, description:string, articleTitle:string, articleSource:string, challengeCode:string){
         this.userChallengeName = userChallengeName;
         this.challengeDifficulty = challengeDifficulty;
         this.startDate = new Date();
@@ -49,6 +50,7 @@ export class Challenges{
         this.friends = [];
         this.articleTitle = articleTitle;
         this.articleSource = articleSource;
+        this.challengeCode = challengeCode;
     }
  
     public challengeComplete(){

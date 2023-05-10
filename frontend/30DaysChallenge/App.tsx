@@ -8,6 +8,7 @@ import ChallengeDescriptionPage from "./screens/ChallengeDescriptionPage";
 import ListOfChallengesPage from "./screens/ListOfChallengesPage";
 import ChallengeListItem from "./components/challengeListItem";
 import UserDashboardPage from "./screens/UserDashboardPage";
+import ChallengeDescriptionStartPage from "./screens/ChallengeDescriptionStartPage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -59,6 +60,7 @@ export default function App() {
         <Stack.Screen name={"RegisterPage"} component={RegisterPage}/>
         <Stack.Screen name={"QuestionnairePage"} component={QuestionnairePage}/>
         <Stack.Screen name={"ChallengeDescriptionPage"} component={ChallengeDescriptionPage}/>
+        <Stack.Screen name={"ChallengeDescriptionStartPage"} component={ChallengeDescriptionStartPage}/>
         <Stack.Screen name="Home" component={HomeStack} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -48,6 +48,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         end: endDate1,
         difficulty: 4,
         challengeDay: 19,
+        code: "U6BZS3",
         completedDates: [
           true,
           false,
@@ -229,6 +230,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         end: endDate2,
         difficulty: 2,
         challengeDay: 10,
+        code: "ZFUPKP",
         completedDates: [
           true,
           false,
@@ -374,6 +376,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         end: endDate3,
         difficulty: 4,
         challengeDay: 28,
+        code: "8AH263",
         completedDates: [
           true,
           false,
@@ -589,7 +592,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         {data.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
             <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={() => props.navigation.navigate("ChallengeDescriptionPage", {
-              itemId: index
+              itemId: index, codeProp: challenge.code
             })}>
               <Text key={index} style={styles.challengeTitle}>{challenge.challenge.userChallengeName}</Text>
             </TouchableOpacity>

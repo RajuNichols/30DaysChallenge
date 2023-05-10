@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChallengeListItem renders correctly with invalid display prop 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "display": "flex",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#0D9968",
+        "borderRadius": 10,
+        "height": 80,
+        "marginTop": 10,
+        "paddingLeft": 10,
+        "paddingTop": 7,
+        "position": "relative",
+        "width": "80%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Inter_800ExtraBold",
+          "fontSize": 18,
+          "paddingLeft": 5,
+          "paddingTop": 10,
+        }
+      }
+    >
+      Test Challenge
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingLeft": 5,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+      </View>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#FBB749",
+          "borderRadius": 4,
+          "height": "40%",
+          "justifyContent": "center",
+          "left": "75%",
+          "opacity": 1,
+          "position": "absolute",
+          "top": "35%",
+          "width": "20%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "fontFamily": "Inter_800ExtraBold",
+            "fontSize": 13,
+          }
+        }
+      >
+        View
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ChallengeListItem renders correctly with valid display prop 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "display": "none",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#0D9968",
+        "borderRadius": 10,
+        "height": 80,
+        "marginTop": 10,
+        "paddingLeft": 10,
+        "paddingTop": 7,
+        "position": "relative",
+        "width": "80%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Inter_800ExtraBold",
+          "fontSize": 18,
+          "paddingLeft": 5,
+          "paddingTop": 10,
+        }
+      }
+    >
+      Test Challenge
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingLeft": 5,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+        <Image
+          source={1}
+          style={Object {}}
+        />
+      </View>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#FBB749",
+          "borderRadius": 4,
+          "height": "40%",
+          "justifyContent": "center",
+          "left": "75%",
+          "opacity": 1,
+          "position": "absolute",
+          "top": "35%",
+          "width": "20%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "fontFamily": "Inter_800ExtraBold",
+            "fontSize": 13,
+          }
+        }
+      >
+        View
+      </Text>
+    </View>
+  </View>
+</View>
+`;

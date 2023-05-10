@@ -32,7 +32,6 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
   return (
     <Modal
       style={styles.Container}
-      onDismiss={props.closeModal}
       visible={props.isOpen}
       transparent={true}
     >

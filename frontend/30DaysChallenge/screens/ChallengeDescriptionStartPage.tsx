@@ -41,12 +41,18 @@ export default function ChallengeDescriptionPage(
   const [isLoading, setIsLoading] = useState(true);
   const [isAlcOrSmoking, setIsAlcOrSmoking] = useState(false);
 
+  // Mock user to show how alcohol and smoking difficulties are applied
+  const User = {
+    name: "Melissa",
+    alcDifficulty: 3,
+    smokingDifficulty: 2,
+  }
+
   const mockChallenges = [
     {
       name: "Diet",
       title: "The Effects of Your Diet on Sleep -- Alcohol challenge",
       category: "Alcohol",
-      difficulty: 4,
       desc: "The studies on the role of carbohydrates on sleep have mixed results. This prospective study of a much larger population of postmenopausal women population demonstrated that high-gi diet was associated with increased insomnia incidence over 3 years  and higher intakes of dietary added sugars, starch, and nonwhole/refined grains each were associated with higher incidence of insomnia. Since tryptophan competes with lnaa for transportation into the brain, this change in ratio may lead to increased tryptophan in the brain . Brain serotonin levels could indeed increase after ingestion of carbohydrate. Fatty acids are another major component of human diet including saturated fat and unsaturated fat. The relationship between fatty acids and sleep wellness has also been studied and is reviewed. Consumption of saturated fat is a major risk factor for cardiovascular disease and diabetes as has been suggested by many scientific societies. In addition, omega-3 fats are considered anti-inflammatory  consumption of which can reduce the inflammation in the body that benefit a number of chronic diseases ; thus, omega-3 fats are commonly used as nutritional supplements to prevent cardiovascular problems and stroke. However, despite the well-established role of pgd2 and pge2 in sleep regulation  studies on the consumption of their precursor omega-6 pufa on sleep wellness are rare. Numerous studies on the role of amino acids on sleep wellness and insomnia have been performed in the past decades.Tryptophan is the substrate for serotonin which has been intensively studied on its role on sleep for many decades. Fatty fish is a major source of dietary vitamin d. Multiple studies have studied the role of vitamin d on sleep. Overall, the study concluded that vitamin d deficiency is associated with a higher risk of sleep disorders including poor sleep quality short sleep duration and sleepiness. A cross-sectional study of adults in the uk suggested there is a relationship between fruit/vegetable intake and sleep wellness  and long sleepers have high plasma levels of vitamin c. However, other than that, literature actually does not have much evidence supporting the relationship of vitamin c and sleep wellness. A randomized double-blind  placebo-controlled study of vitamin b6 and b vitamins on the effects on dreaming and sleep showed no significant differences in the b6-treated group compared with the placebo in terms of time awake during the night, sleep quality, or tiredness on waking",
       source:
         "Zhao M, Tuo H, Wang S, Zhao L. The Effects of Dietary Nutrition on Sleep and Sleep Disorders. Mediators Inflamm. 2020 Jun 25;2020:3142874. doi: 10.1155/2020/3142874. PMID: 32684833; PMCID: PMC7334763.",
@@ -55,7 +61,6 @@ export default function ChallengeDescriptionPage(
       name: "Music",
       title: "Music For Improving Cognitive Function in Alzheimer's Patients -- Smoking challenge",
       category: "Smoking",
-      difficulty: 2,
       desc: "The present findings have certain practical and clinical implications. This study observed a global deterioration of musical abilities in ad patients. Nevertheless, the performances of musical emotions’ recognition in both ad groups are poorer than those of the control group  but they did not reach statistical significance. Thus, we can suggest that ad currently presents an aphaso-agnoso-apractic-amusia syndrome. Further studies are necessary to improve the limitations observed in this study in order to deep in the musical processing in ad. And future study cohorts should ideally encompass a wider range of ad and other neurodegenerative diseases with longitudinal assessments to determine the sensitivity and specificity of particular musical patterns  associated to histopathological and molecular data. The results of this study also suggest that it is possible to make a fast assessment of the subject’s musical abilities  considering three musical scores: extra-linguistic solfeggio and emotional recognition scores. We consider that the seashore test could be reserved only to deeply complete the musical profile of the subject. Furthermore  our data also suggest that the power of emotional music could enhance the general mental state in a more direct and involuntary neural network and it could enhance more using music related to the personal experience of the subject. Future studies could find more evidences about the benefits of emotion and music powers on mental health in neurodegenerative diseases in particular in accessing emotional memories. (edited)",
       source:
         "Arroyo-Anlló EM, Dauphin S, Fargeau MN, Ingrand P, Gil R. Music and emotion in Alzheimer's disease. Alzheimers Res Ther. 2019 Aug 7;11(1):69. doi: 10.1186/s13195-019-0523-y. PMID: 31391062; PMCID: PMC6686394.",
@@ -114,14 +119,18 @@ export default function ChallengeDescriptionPage(
     {
       if (mockChallenges[i].name === itemId)
       {
+        if (mockChallenges[i].category === "Alcohol")
+        {
+          setIsAlcOrSmoking(true);
+          setStars(User.alcDifficulty);
+        } else if (mockChallenges[i].category === "Smoking")
+        {
+          setIsAlcOrSmoking(true);
+          setStars(User.smokingDifficulty);
+        }
         setTitle(mockChallenges[i].title);
         setDescription(mockChallenges[i].desc);
         setCitation(mockChallenges[i].source);
-        if (mockChallenges[i].category === "Alcohol" || mockChallenges[i].category === "Smoking")
-        {
-          setIsAlcOrSmoking(true);
-          setStars(mockChallenges[i].difficulty);
-        }
         setTimeout(() => {
           setIsLoading(false);
         },2000)

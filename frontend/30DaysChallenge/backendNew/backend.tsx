@@ -2,7 +2,7 @@ import { User, Challenges, Article } from "./types";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 //import { readFileSync } from "fs";
-import data from "./data1.json";
+import data from "./data2.json";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
@@ -511,7 +511,7 @@ export async function getChallenges():Promise<Challenges[]>{
                     }
 
                     for (var x = temp[i].friends.length; x < friendsCode.length; x++) {
-                        if (!temp[i].friends.includes(friendsCode[x]) && friendsCode[x] != user.username) {
+                        if (!temp[i].friends.includes(friendsCode[x]) && friendsCode[x] != userNew.username) {
                             //console.log(count);
                             temp[i].friends[count] = friendsCode[x];
                             count++;
@@ -553,12 +553,13 @@ export async function getChallenges():Promise<Challenges[]>{
 
 export async function getChallengeDates(username:string, challengeName:string):Promise<boolean[]>{
     var array:boolean[] = [];
-    var challengeToken = userName + challengeName;
+    var challengeToken = username + challengeName;
 
     await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
         if (snapshot.exists())
                 {
                     var completedtemp:string = snapshot.child("daysCompleted").val();
+                    //console.log(completedtemp);
                     var completed = completedtemp.split(",");
                     var completedArray:boolean[] = [];
                     var j:number;

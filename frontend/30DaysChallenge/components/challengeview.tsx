@@ -5,13 +5,14 @@ import Checkbox from "expo-checkbox";
 import { COLORS } from "../colors";
 import LoadingIndicator from "./loadingindicator";
 import * as backend from "../backendNew/backend";
+import { friendsComplete } from "../backendNew/types";
 
 type CalendarProps = {
   startDate: Date;
   endDate: Date;
   completedDates: boolean[];
   challengeDay: number;
-  friends: any[];
+  friends: friendsComplete[];
   challengeTitle: string;
   updateCompletedDates: Function;
   username:string;
@@ -38,13 +39,14 @@ const ChallengeView: React.FC<CalendarProps> = ({
   }, [completedDates]);
 
   const getCheckedStates = () => {
+    console.log(friends[0]);
     const checkboxState: boolean[] = new Array(friends.length + 1).fill(false);
     if (completedDates[challengeDay - 1] == true) {
       checkboxState[0] = true;
     }
-    friends.forEach((friend) => {
-      if (friend.completedDates[challengeDay - 1] == true) {
-        checkboxState[friend + 1] = true;
+    friends.forEach((friend, index) => {
+      if (friend.completedDates[challengeDay-1] == true) {
+        checkboxState[index + 1] = true;
       }
     });
 
@@ -78,7 +80,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
               onValueChange={() => handleCheckbox(0)} />
             <Text style={styles.friendsText}>Me</Text>
           </View>
-          {friends[0] == "" ? friends.map((friend, index) => (
+          {friends[0].name != "none" ? friends.map((friend, index) => (
             <View key={index} style={styles.friends} testID={`friend-item-${index}`}>
               <Checkbox
                 key={index}

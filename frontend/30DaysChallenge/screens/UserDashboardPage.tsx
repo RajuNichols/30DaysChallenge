@@ -491,10 +491,9 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
   async function getData():Promise<boolean>{
     setIsLoading(true);
-    //await backend.sendArticles();
 
     var check1 = await backend.login("Dev", "dev");
-    console.log(check1 + " check1");
+    //console.log(check1 + " check1");
 
     usertemp = await backend.sendUser(backend.userNew.username);
 
@@ -520,11 +519,18 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
       //console.log("Past challenge assign");
 
       var friendTemp = temp[i].friends;
+      //console.log(friendTemp);
       for(var j = 0; j < friendTemp.length; j++){
         challenges.daysComplete[j] = new friendsComplete();
-        challenges.daysComplete[j].name = friendTemp[j];
+        if(friendTemp[j] != ""){
+          challenges.daysComplete[j].name = friendTemp[j];
+        }else{
+          challenges.daysComplete[j].name = "none";
+        }
         challenges.daysComplete[j].completedDates = await backend.getChallengeDates(usertemp.username, challenges.challenge.userChallengeName);
+        //console.log(challenges.daysComplete[j].completedDates +  "," + j);
       }
+      
 
       temp2[i] = challenges;
       //console.log(temp2[i]);

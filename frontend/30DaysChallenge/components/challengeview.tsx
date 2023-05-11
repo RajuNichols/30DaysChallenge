@@ -39,7 +39,7 @@ const ChallengeView: React.FC<CalendarProps> = ({
   }, [completedDates]);
 
   const getCheckedStates = () => {
-    console.log(friends[0]);
+    //console.log(friends[0]);
     const checkboxState: boolean[] = new Array(friends.length + 1).fill(false);
     if (completedDates[challengeDay - 1] == true) {
       checkboxState[0] = true;

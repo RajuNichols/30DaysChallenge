@@ -492,7 +492,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   async function getData():Promise<boolean>{
     setIsLoading(true);
 
-    var check1 = await backend.login("Dev", "dev");
+    //var check1 = await backend.login("Dev", "dev");
     //console.log(check1 + " check1");
 
     usertemp = await backend.sendUser(backend.userNew.username);

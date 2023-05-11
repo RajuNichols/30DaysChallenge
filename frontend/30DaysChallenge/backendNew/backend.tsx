@@ -2,7 +2,7 @@ import { User, Challenges, Article } from "./types";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 //import { readFileSync } from "fs";
-import data from "./data2.json";
+//import data from "./data3.json";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
@@ -779,7 +779,7 @@ export async function getFriend():Promise<string[]>{
     }
 }
 
-export async function sendArticles() {
+/*export async function sendArticles() {
     try {
         for (let i = 0; i < data.length; i++) {
             const article = data[i];
@@ -800,7 +800,7 @@ export async function sendArticles() {
     } catch (error) {
         console.error(error);
     }
-}
+}*/
 
 export async function getArticles():Promise<Article[]>{
     var articles:Article[] = [];

@@ -492,7 +492,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   async function getData():Promise<boolean>{
     setIsLoading(true);
 
-    var check1 = await backend.login("Dev", "dev");
+    //var check1 = await backend.login("Dev", "dev");
     //console.log(check1 + " check1");
 
     usertemp = await backend.sendUser(backend.userNew.username);
@@ -553,6 +553,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
           setIsLoading(false);
         }
       };
+      
       fetchData();
       //console.log(data.toString());
   
@@ -563,24 +564,6 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     }, [])
   );
 
-  useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-    }
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const updateCompletedDates = (challengeIndex:any, newCompletedDates:any) => {
     setData(prevData => {
       const newData = [...prevData]; // copy the old data
@@ -590,7 +573,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   }
 
   return isLoading ? (<LoadingIndicator/>) :(
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.pageTitle}>30 Days Challenge</Text>
       <Text style={styles.welcomeUser}>Welcome {user}</Text>
       <ScrollView style={styles.challenges}>

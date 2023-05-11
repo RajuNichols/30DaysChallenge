@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontFamily: "Inter_800ExtraBold",
     color: COLORS.black,
-    fontSize: 24,
+    fontSize: 18,
     top: "10%",
   },
   desc: {
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     position: "absolute",
     width: 327,
-    height: 295,
+    height: 300,
     top: "30%",
     backgroundColor: COLORS.gray,
     borderRadius: 6,
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
   },
   button: {
-    top: "55%",
+    top: "60%",
     alignSelf: "center",
     width: 327,
     height: 44,

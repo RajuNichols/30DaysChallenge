@@ -183,9 +183,8 @@ const styles = StyleSheet.create({
     top: "20%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
     marginLeft: 15,
-    height: "70%"
+    height: "100%"
   },
   friends: {
     paddingLeft: 5,

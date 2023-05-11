@@ -6,6 +6,7 @@ import RegisterPage from "./screens/RegisterPage";
 import QuestionnairePage from "./screens/QuestionnairePage";
 import ChallengeDescriptionPage from "./screens/ChallengeDescriptionPage";
 import ListOfChallengesPage from "./screens/ListOfChallengesPage";
+import JoinExistingChallengePage from "./screens/JoinExistingChallengePage";
 import ChallengeListItem from "./components/challengeListItem";
 import UserDashboardPage from "./screens/UserDashboardPage";
 import ChallengeDescriptionStartPage from "./screens/ChallengeDescriptionStartPage";
@@ -34,6 +35,12 @@ function HomeStack(){
                 : "ios-search-outline";
             }
 
+            if (route.name === "Join Friends") {
+              iconName = focused
+              ? "ios-add-circle-sharp"
+              : "ios-add-circle-outline";
+            }
+
 
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -43,7 +50,9 @@ function HomeStack(){
         })}
       >
       <Tab.Screen name="Dashboard" component={UserDashboardPage} />
+      <Tab.Screen name="Join Friends" component={JoinExistingChallengePage} />
       <Tab.Screen name="Challenge Search" component={ListOfChallengesPage} />
+      
     </Tab.Navigator>
   )
 }

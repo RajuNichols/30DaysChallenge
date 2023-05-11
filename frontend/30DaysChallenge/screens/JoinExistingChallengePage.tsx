@@ -19,6 +19,7 @@ import {
   import * as SplashScreen from "expo-splash-screen";
   import DismissKeyboard from "../components/dismisskeyboard";
   import { COLORS } from "../colors";
+  import * as backend from "../backendNew/backend";
   
   SplashScreen.preventAutoHideAsync();
   interface JoinExistingChallengePageProps {
@@ -55,6 +56,7 @@ import {
         console.log("Code entered: " + code);
         if (code) {
             // Navigate to the dashboard where the new challenge should be now
+            var check = backend.addChallengeWithCode(code);
             setErrorMessage("");
             props.navigation.navigate("Dashboard");
         }else{

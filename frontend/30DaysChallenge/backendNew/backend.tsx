@@ -217,10 +217,10 @@ export async function updateUser(username:string):Promise<string>{
     return "Something went wrong in update User";
 }
 
-async function update(username:string):Promise<string>{
+/*async function update(username:string):Promise<string>{
     var check = await updateUser(username);
     return check;
-}
+}*/
 
 function makeid(length:number):string {
     let result = "";
@@ -234,13 +234,14 @@ function makeid(length:number):string {
     return result;
 }
 
-async function updateGroupCode(code:string, user:string, username:string){
+async function updateGroupCode(code:string, user:string, username:string, challengeName:string){
     if(user.includes(",")){
         user += ",";
     }
     user += username;
     await set(ref(db, 'groupcode/' + code), {
-        users: user
+        users: user,
+        challengeName: challengeName
     });
 }
 
@@ -341,7 +342,7 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
                     challengeCode: groupCode
                 });
 
-                updateGroupCode(groupCode, friendstemp, user.username);
+                updateGroupCode(groupCode, friendstemp, user.username, challengeName);
 
                 returnBool = true;
             } else {
@@ -354,6 +355,33 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
     }).catch((error) => {
         console.error(error);
     });
+    return returnBool;
+}
+
+export async function addChallengeWithCode(code:string):Promise<boolean>{
+    var returnBool = false;
+    var challengeName:string = "";
+    user = await sendUser("Dev");
+
+    await get(child(dbRef, `groupcode/${code}`)).then((snapshot) => {
+        if(snapshot.exists()){
+            challengeName = snapshot.child("challengeName").val()
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    var challengeToken = user.username + challengeName;
+    var check:boolean = false;
+    await get(child(dbRef, `challenges/${challengeToken}`)).then(async (snapshot) => {
+        if(snapshot.exists()){
+            check = await addChallenge(challengeName, parseInt(snapshot.child("challengeDifficulty").val()), snapshot.child("description").val(), snapshot.child("articleTitle").val(), snapshot.child("articleSource").val(), code);
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    returnBool = check;
     return returnBool;
 }
 

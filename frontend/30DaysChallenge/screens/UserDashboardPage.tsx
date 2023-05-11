@@ -492,6 +492,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   //const [data, setData] = React.useState(challenges);
 
   async function getData():Promise<boolean>{
+    await backend.sendArticles();
+
     var check1 = await backend.login("Dev", "dev");
     console.log(check1 + " check1");
 

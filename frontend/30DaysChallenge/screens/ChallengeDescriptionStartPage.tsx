@@ -64,7 +64,6 @@ export default function ChallengeDescriptionPage(
       name: "Home Workouts",
       title: "At-Home Workouts For Low-Back Pain",
       category: "",
-      difficulty: 4,
       desc: "The benefits of home exercise training on lbp patients this study is the first systematic review and meta-analysis of studies investigating the effectiveness of home exercise programs on pain and functional limitation in patients with lbp. Our meta-analysis showed strong evidence that physical exercise training can take place at home to improve lbp even though we found no studies comparing the same training program between home and another setting. If multiple short bouts of moderate-intensity physical exercise produce significant training effects, learning to integrate physical activity into daily life can become a main goal in the treatment of lbp. Similarly, to center-based exercise we found that yoga improved functional limitation as previous studies also showed. Importantly, our results were in favor of standardized exercise compared to individualized exercise  which may be discordant with the literature based on training in centers [2 26]. This may be explained by the fact that easily-performed standardized exercises can promote a better adherence, and could be more in line with home exercise  whereas individualized exercise may be more in line with practice in a center. The absence of such a significant influence on our study may be due to the wide variety of exercise interventions available and the inconsistency of the intensity and duration of exercise.We also demonstrated that the benefits of exercise were less effective in individuals with a higher body mass index in line with the literature. Meta-analyses also inherit the limitations of the individual studies of which they are composed. Some short time-frames (two weeks ) may also have been too short for a therapeutic effect.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
@@ -73,7 +72,6 @@ export default function ChallengeDescriptionPage(
       name: "Vitamins",
       title: "The Effects of Taking Daily Multivitamins",
       category: "",
-      difficulty: 1,
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
@@ -82,7 +80,6 @@ export default function ChallengeDescriptionPage(
       name: "Vegetables",
       title: "The Effects of Incorporating more Vegetables into Diet",
       category: "",
-      difficulty: 3,
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
@@ -91,7 +88,6 @@ export default function ChallengeDescriptionPage(
       name: "Sleep",
       title: "How Getting Enough Sleep Effects Overall Health",
       category: "",
-      difficulty: 3,
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
@@ -100,7 +96,6 @@ export default function ChallengeDescriptionPage(
       name: "Water",
       title: "The Effects of Drinking Enough Water",
       category: "",
-      difficulty: 3,
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
@@ -109,7 +104,6 @@ export default function ChallengeDescriptionPage(
       name: "TV",
       title: "Positive Brain Effects of Television",
       category: "",
-      difficulty: 1,
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
@@ -121,12 +115,12 @@ export default function ChallengeDescriptionPage(
       if (mockChallenges[i].name === itemId)
       {
         setTitle(mockChallenges[i].title);
-        setStars(mockChallenges[i].difficulty);
         setDescription(mockChallenges[i].desc);
         setCitation(mockChallenges[i].source);
         if (mockChallenges[i].category === "Alcohol" || mockChallenges[i].category === "Smoking")
         {
           setIsAlcOrSmoking(true);
+          setStars(mockChallenges[i].difficulty);
         }
         setTimeout(() => {
           setIsLoading(false);

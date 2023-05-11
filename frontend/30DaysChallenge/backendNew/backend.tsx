@@ -20,6 +20,10 @@ const dbRef = ref(db);
 var user:User;
 var userName:string;
 
+export const userNew = {
+    username:""
+}
+
 export async function login(username:string, userPassword:string):Promise<boolean>{
     /*
     Connect to Database and check username and password
@@ -40,7 +44,7 @@ export async function login(username:string, userPassword:string):Promise<boolea
                 console.log("User Found.");
                 user = new User(snapshot.val(), passwordSnap.val(), snapshot.child("email").val(), snapshot.child("alcDiff").val(), snapshot.child("smokeDiff").val());
                 user.numOfChallenges = snapshot.child("numOfChallenges").val();
-                userName = username;
+                userNew.username = username;
 
                 var i:number;
 
@@ -65,6 +69,7 @@ export async function login(username:string, userPassword:string):Promise<boolea
                         //challengeNames.push(tokenArray[i]);
                     }
                 }
+
 
                 check = true;
             }else{
@@ -282,7 +287,7 @@ async function updateGroupCode(code:string, user:string, username:string, challe
 
 export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string, articleTitle:string, articleSource:string, groupCode:string):Promise<boolean>{
     var returnBool:boolean = false;
-    user = await sendUser("Dev");
+    user = await sendUser(userNew.username);
     //user.username = "Raju"
     var challengeToken = user.username + challengeName;
     var friends:string[] = [];
@@ -397,7 +402,7 @@ export async function addChallengeWithCode(code:string):Promise<boolean>{
     var returnBool = false;
     var challengeName:string = "";
     var friends:string[] = [];
-    user = await sendUser("Dev");
+    user = await sendUser(userNew.username);
 
     await get(child(dbRef, `groupcode/${code}`)).then((snapshot) => {
         if(snapshot.exists()){
@@ -450,7 +455,7 @@ async function getFriendsWithCode(code:string):Promise<string[]>{
 export async function getChallenges():Promise<Challenges[]>{
     var temp:Challenges[] = [];
 
-    user = await sendUser("Dev");
+    user = await sendUser(userNew.username);
 
     if(user != null){
         var i:number;

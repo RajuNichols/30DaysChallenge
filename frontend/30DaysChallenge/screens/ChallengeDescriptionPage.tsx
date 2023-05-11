@@ -70,12 +70,6 @@ export default function ChallengeDescriptionPage(
   
   var challenge:type.Challenges[] = [];
   async function getData():Promise<type.Challenges[]>{
-    //var check1 = backend.login("Dev", "dev");
-    //console.log(check1);
-
-    //var check2 = backend.addChallenge("water", 2, "Description", "drink water", "source");
-    //console.log(check2);
-
     return backend.getChallenges();
   }
 

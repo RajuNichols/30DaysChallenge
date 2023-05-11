@@ -138,7 +138,7 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
       console.log("Smoking total: " + smokingTotal);
       console.log("Drinking total: " + drinkingTotal);
 
-      var temp = await backend.addDifficulty("Dev", drinkingTotal, smokingTotal);
+      var temp = await backend.addDifficulty(backend.userNew.username, drinkingTotal, smokingTotal);
 
       // MATT TODO: Assign difficulties here
 

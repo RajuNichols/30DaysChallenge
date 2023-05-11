@@ -496,7 +496,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     var check1 = await backend.login("Dev", "dev");
     console.log(check1 + " check1");
 
-    usertemp = await backend.sendUser("Dev");
+    usertemp = await backend.sendUser(backend.userNew.username);
 
     setUser(usertemp.username);
 

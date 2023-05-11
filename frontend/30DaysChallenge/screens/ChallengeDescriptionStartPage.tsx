@@ -130,7 +130,7 @@ export default function ChallengeDescriptionPage(
 
     setArticles(article);
 
-    user = await backend.sendUser("Dev");
+    user = await backend.sendUser(backend.userNew.username);
     return true;
   }
 

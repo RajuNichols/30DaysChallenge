@@ -32,6 +32,12 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
   const [q3ChosenOption, setq3ChosenOption] = useState(null);
   const [q4ChosenOption, setq4ChosenOption] = useState(null);
   const [q5ChosenOption, setq5ChosenOption] = useState(null);
+  const [q6ChosenOption, setq6ChosenOption] = useState(null);
+  const [q7ChosenOption, setq7ChosenOption] = useState(null);
+  const [q8ChosenOption, setq8ChosenOption] = useState(null);
+  const [q9ChosenOption, setq9ChosenOption] = useState(null);
+  const [q10ChosenOption, setq10ChosenOption] = useState(null);
+
   const [errorMessage, setErrorMessage] = useState("");
   let [fontsLoaded, error] = useFonts({
     Inter_900Black,
@@ -58,46 +64,81 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
   }
 
   const questions = [
-    '1. Question text goes here. This question is not very short. It is quite long actually. This is a multi-line question. ',
-    '2. Question text goes here. ',
-    '3. Question text goes here. This is a medium length question. ',
-    '4. Question text goes here. This question is not very short. It is quite long actually. This is a multi-line question. ',
-    '5. Question text goes here. '
+    '1. How many cigarettes do you have per day? ',
+    '2. Time to first cigarette of the day: ',
+    '3. Having difficulty not smoking in no-smoking areas? ',
+    '4. Which cigarette would be the most difficult to give up?  ',
+    '5. Smoke more frequently in the first hours after waking:  ',
+    '6. Still smoke when ill in bed:  ',
+    '7. Have you been diagnosed with depression? ',
+    '8. When did you start drinking consistently in excess? ',
+    '9. Have you used any other drugs in the past year? ',
+    '10. How many nights do you drink per week? '
   ];
 
   const yesNoOptions = [
-    { label: 'Yes', value: 'option1' },
-    { label: 'No', value: 'option2' },
+    { label: 'Yes', value: '1' },
+    { label: 'No', value: '0' },
   ];
-  const scaleOptions = [
-    { label: 'Never', value: 'option1' },
-    { label: 'Seldom', value: 'option2' },
-    { label: 'Sometimes', value: 'option3' },
-    { label: 'Frequently', value: 'option4' },
-    { label: 'Always', value: 'option5' }
+
+  const tenOrLessOptions = [
+    { label: '10 or less', value: '0'},
+    { label: '11-20', value: '1'},
+    { label: '21-30', value: '2'},
+    { label: '31 or more', value: '3'},
   ];
-  const customOptions1 = [
-    { label: 'Drinking', value: 'option1' },
-    { label: 'Smoking', value: 'option2' },
-    { label: 'Hard Drugs', value: 'option3' },
+
+  const sixyOrMoreOptions = [
+    { label: '60 min or more', value: '0'},
+    { label: '31-60 min', value: '1'},
+    { label: '6-30 min', value: '2'},
+    { label: '0-5 min', value: '3'},
   ];
+
+  const firstInMornOptions = [
+    { label: 'First in the morning', value: '1'},
+    { label: 'Others', value: '0'},
+  ]
+
+  const youngerThanOptions = [
+    { label: 'Younger than 10', value: '4'},
+    { label: '10-15', value: '3'},
+    { label: '15-18', value: '2'},
+    { label: '18-21', value: '1'},
+    { label: '21+', value: '0'},
+  ]
+
+  const howManyNightsOptions = [
+    { label: '2 or less nights', value: '0'},
+    { label: '3 nights', value: '1'},
+    { label: '4 nights', value: '2'},
+    { label: '5+ nights', value: '3'},
+  ]
 
 
   const handleSubmit = () => {
     // #TODO
     // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
 
-    if (q1ChosenOption && q2ChosenOption && q3ChosenOption && q4ChosenOption && q5ChosenOption)
+    if (q1ChosenOption && q2ChosenOption && q3ChosenOption && q4ChosenOption && q5ChosenOption
+      && q6ChosenOption && q7ChosenOption && q8ChosenOption && q9ChosenOption && q10ChosenOption)
     {
-      console.log(
-        "User answers:\n" +
-        "Q1: " + q1ChosenOption + "\n" +
-        "Q2: " + q2ChosenOption + "\n" +
-        "Q3: " + q3ChosenOption + "\n" +
-        "Q4: " + q4ChosenOption + "\n" +
-        "Q5: " + q5ChosenOption
-      );
-      setErrorMessage("");
+      var smokingTotal = parseInt(q1ChosenOption) + 
+                          parseInt(q2ChosenOption) + 
+                          parseInt(q3ChosenOption) + 
+                          parseInt(q4ChosenOption) + 
+                          parseInt(q5ChosenOption) + 
+                          parseInt(q6ChosenOption)
+      var drinkingTotal = parseInt(q7ChosenOption) + 
+                          parseInt(q8ChosenOption) + 
+                          parseInt(q9ChosenOption) + 
+                          parseInt(q10ChosenOption)
+
+      console.log("Smoking total: " + smokingTotal);
+      console.log("Drinking total: " + drinkingTotal);
+
+      // MATT TODO: Assign difficulties here
+
       props.navigation.navigate("Home");
 
     } else {
@@ -110,14 +151,14 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
 
   return (
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-          <ScrollView > 
-            <Text style={styles.text}>30 Days Challenge</Text>
-              <View>
+          <Text style={styles.title}>30 Days Challenge</Text>
+          <ScrollView style={styles.scroll}> 
+              <View style={styles.content}>
               {/* Question 1 */}
               <View style={styles.radioButtonContainer}>
               <Text style={styles.questionText}>{ questions.at(0) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
               <RadioForm
-                  radio_props={yesNoOptions}
+                  radio_props={tenOrLessOptions}
                   initial={-1} //initial value of this group
                   buttonColor={COLORS.tan}
                   labelColor={COLORS.black}
@@ -134,7 +175,7 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
               <View style={styles.radioButtonContainer}>
               <Text style={styles.questionText}>{ questions.at(1) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
                 <RadioForm
-                  radio_props={customOptions1}
+                  radio_props={sixyOrMoreOptions}
                   initial={-1} //initial value of this group
                   buttonColor={COLORS.tan}
                   labelColor={COLORS.black}
@@ -150,7 +191,7 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
               <View style={styles.radioButtonContainer}>
               <Text style={styles.questionText}>{ questions.at(2) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
                 <RadioForm
-                  radio_props={scaleOptions}
+                  radio_props={yesNoOptions}
                   initial={-1} //initial value of this group
                   buttonColor={COLORS.tan}
                   labelColor={COLORS.black}
@@ -166,7 +207,7 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
               <View style={styles.radioButtonContainer}>
               <Text style={styles.questionText}>{ questions.at(3) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
                 <RadioForm
-                  radio_props={scaleOptions}
+                  radio_props={firstInMornOptions}
                   initial={-1} //initial value of this group
                   buttonColor={COLORS.tan}
                   labelColor={COLORS.black}
@@ -193,12 +234,95 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
                   }} 
                 />
               </View>
+
+              {/* Question 6 */}
+              <View style={styles.radioButtonContainer}>
+              <Text style={styles.questionText}>{ questions.at(5) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
+                <RadioForm
+                  radio_props={yesNoOptions}
+                  initial={-1} //initial value of this group
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
+                  onPress={(value) => {
+                    setq6ChosenOption(value);
+                  }} 
+                />
+              </View>
+
+               {/* Question 7 */}
+               <View style={styles.radioButtonContainer}>
+              <Text style={styles.questionText}>{ questions.at(6) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
+                <RadioForm
+                  radio_props={yesNoOptions}
+                  initial={-1} //initial value of this group
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
+                  onPress={(value) => {
+                    setq7ChosenOption(value);
+                  }} 
+                />
+              </View>
+
+              {/* Question 8 */}
+              <View style={styles.radioButtonContainer}>
+              <Text style={styles.questionText}>{ questions.at(7) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
+                <RadioForm
+                  radio_props={youngerThanOptions}
+                  initial={-1} //initial value of this group
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
+                  onPress={(value) => {
+                    setq8ChosenOption(value);
+                  }} 
+                />
+              </View>
+
+               {/* Question 9 */}
+              <View style={styles.radioButtonContainer}>
+              <Text style={styles.questionText}>{ questions.at(8) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
+                <RadioForm
+                  radio_props={yesNoOptions}
+                  initial={-1} //initial value of this group
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
+                  onPress={(value) => {
+                    setq9ChosenOption(value);
+                  }} 
+                />
+              </View>
+
+               {/* Question 10 */}
+              <View style={styles.radioButtonContainer}>
+              <Text style={styles.questionText}>{ questions.at(9) }<Text style={styles.selectOptionText}>Select one option.</Text></Text>
+                <RadioForm
+                  radio_props={howManyNightsOptions}
+                  initial={-1} //initial value of this group
+                  buttonColor={COLORS.tan}
+                  labelColor={COLORS.black}
+                  selectedButtonColor={"#FBB749"}
+                  selectedLabelColor={"#020202"}
+                  onPress={(value) => {
+                    setq10ChosenOption(value);
+                  }} 
+                />
+              </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity> 
             <Text style={styles.error}>{errorMessage}</Text>
-            {/* <View style={styles.padding}></View> */}
+
+            <Text style={styles.descHeader}>Citations:</Text>
+            <Text style={styles.descText}>Lai CC, Huang WH, Chang BC, Hwang LC. Development of Machine Learning Models for Prediction of Smoking Cessation Outcome. Int J Environ Res Public Health. 2021 Mar 5;18(5):2584. doi: 10.3390/ijerph18052584. PMID: 33807561; PMCID: PMC7967540. </Text>
+            <Text style={styles.descText}>Stillman MA, Sutcliff J. Predictors of relapse in alcohol use disorder: identifying individuals most vulnerable to relapse. Addict Subst Abuse 2020. 1(1): 3-8. </Text>
             </ScrollView>
         </SafeAreaView>
   );
@@ -277,5 +401,29 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     marginTop: 25
   },
+  descHeader: {
+    fontFamily: "Inter_900Black",
+    padding: 15,
+    marginBottom: -30,
+    fontSize: 20,
+  },
+  descText: {
+    fontSize: 17,
+    padding: 15,
+    fontFamily: "Inter_400Regular",
+  },
+  scroll:{
+    marginTop: "10%",
+  },
+  content:{
+    top: "-3%",
+  },
+  title:{
+    fontSize: 30,
+    fontFamily: "Inter_800ExtraBold",
+    textAlign: "center",
+    top: "5%",
+    color: COLORS.black,
+  }
 });
 

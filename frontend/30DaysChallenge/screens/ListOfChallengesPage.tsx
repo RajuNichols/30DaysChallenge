@@ -156,29 +156,12 @@ const User = {
               {filteredChallenges.map((challenge, index) => (
                   <View style={styles.challengeContainer} key={index}>
                       <Text style={styles.challengeName}>{challenge.title}</Text>
-                      <View style={styles.stars}>
-                          <DifficultyStars difficulty={challenge.difficulty} size={1}></DifficultyStars>
-                      </View>
                       <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
                                 itemId: challenge.name
                               })}>
                           <Text style={styles.buttonText}>View</Text>
                       </TouchableOpacity>
                   </View>
-              ))}
-            <Text style={styles.smallerText}>Challenges for {User.name} </Text>
-              {User.personalChallenges.map((challenge, index) => (
-              <View style={styles.challengeContainer} key={index}>
-                <Text style={styles.challengeName}>{challenge.title}</Text>
-                <View style={styles.stars}>
-                    <DifficultyStars difficulty={challenge.difficulty} size={1}></DifficultyStars>
-                </View>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
-                          itemId: challenge.name
-                        })}>
-                    <Text style={styles.buttonText}>View</Text>
-                </TouchableOpacity>
-            </View>
               ))}
             </ScrollView>
         </SafeAreaView>
@@ -291,10 +274,9 @@ const styles = StyleSheet.create({
   challengeName: {
     fontFamily: "Inter_800ExtraBold",
     color: "white",
-    paddingTop: 10,
+    paddingTop: 20,
     paddingLeft: 5,
     fontSize: 18,
-    // top: 60,
   },
 
   text2: {

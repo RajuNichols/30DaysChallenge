@@ -166,7 +166,7 @@ export default function ChallengeDescriptionPage(
     setIsOpen(!isOpen);
   };
 
-  const starDisplay = 
+  const starDisplay: any = 
   {
     alignItems: "center",
     top: "12%",

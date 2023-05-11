@@ -5,14 +5,18 @@ export class User{
     challenges:string[];
     friends:string[];
     numOfChallenges:number;
+    alcDifficulty:number;
+    smokingDifficulty:number;
  
-    constructor(username:string, userPassword:string, email:string){
+    constructor(username:string, userPassword:string, email:string, alcDifficulty:number, smokingDifficulty:number){
         this.username = username;
         this.userPassword = userPassword;
         this.email = email;
         this.challenges = [];
         this.friends = [];
         this.numOfChallenges = 0;
+        this.alcDifficulty = alcDifficulty;
+        this.smokingDifficulty = smokingDifficulty;
     }
 }
  
@@ -56,6 +60,20 @@ export class Challenges{
  
     public challengeComplete(){
         this.isComplete = true;
+    }
+}
+
+export class Article{
+    name:string;
+    title:string;
+    desc:string;
+    source:string;
+
+    constructor(name:string, title:string, desc:string, source:string){
+        this.name = name;
+        this.title = title;
+        this.desc = desc;
+        this.source = source;
     }
 }
 

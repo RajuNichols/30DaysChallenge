@@ -1,4 +1,4 @@
-import { User, Challenges } from "./types";
+import { User, Challenges, Article } from "./types";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 //import { readFileSync } from "fs";
@@ -38,7 +38,7 @@ export async function login(username:string, userPassword:string):Promise<boolea
             if(passwordSnap.val() == userPassword){
 
                 console.log("User Found.");
-                user = new User(snapshot.val(), passwordSnap.val(), snapshot.child("email").val());
+                user = new User(snapshot.val(), passwordSnap.val(), snapshot.child("email").val(), snapshot.child("alcDiff").val(), snapshot.child("smokeDiff").val());
                 user.numOfChallenges = snapshot.child("numOfChallenges").val();
                 userName = username;
 
@@ -100,7 +100,9 @@ export async function createAccount(username:string, userPassword:string, email:
                 email: email,
                 challenges: "devwater",
                 friends: "",
-                numOfChallenges: "0"
+                numOfChallenges: "0", 
+                alcDiff: "0",
+                smokeDiff: "0"
             });
 
             console.log("Added user.");
@@ -116,15 +118,15 @@ export async function createAccount(username:string, userPassword:string, email:
         check = false;
     });
 
+    var temp = await login(username, userPassword);
+
+    check = temp;
+
     return check;
 }
 
 export async function sendUser(username:string):Promise<User>{
-    // if(username == user.username){
-    //     return user;
-    // }
-
-    var temp:User = new User( "", "", "");
+    var temp:User = new User( "", "", "", 0, 0);
 
     await get(child(dbRef, `users/${username}`)).then((snapshot) => {
         if (snapshot.exists())
@@ -134,6 +136,8 @@ export async function sendUser(username:string):Promise<User>{
             temp.username = username; 
             temp.userPassword = snapshot.child("password").val();
             temp.numOfChallenges = snapshot.child("numOfChallenges").val();
+            temp.alcDifficulty = snapshot.child("alcDiff").val();
+            temp.smokingDifficulty = snapshot.child("smokeDiff").val();
 
             var i:number;
 
@@ -198,7 +202,9 @@ export async function updateUser(username:string):Promise<string>{
                 password: user.userPassword,
                 challenges: tokentemp,
                 friends: friendtemp,
-                numOfChallenges: user.numOfChallenges
+                numOfChallenges: user.numOfChallenges,
+                alcDiff: user.alcDifficulty,
+                smokeDiff: user.smokingDifficulty
             });
 
             console.log("Updated User.");
@@ -215,6 +221,34 @@ export async function updateUser(username:string):Promise<string>{
     });
 
     return "Something went wrong in update User";
+}
+
+export async function addDifficulty(username:string, alcDiff:number, smokeDiff:number){
+    user = await sendUser(username)
+    await get(child(dbRef, `users/${user.username}`)).then((snapshot) => {
+        if (snapshot.exists())
+        {
+            set(ref(db, 'users/' + user.username), {
+                password: user.userPassword,
+                challenges: snapshot.child("challenges").val(),
+                friends: snapshot.child("friends").val(),
+                numOfChallenges: user.numOfChallenges,
+                alcDiff: alcDiff,
+                smokeDiff: smokeDiff
+            });
+
+            console.log("Updated User.");
+            return "Updated user."
+
+        } else {
+            var error = "User does not exist.";
+            console.log(error);
+            return error;
+        }
+    }).catch((error) => {
+        console.error(error);
+        return error;
+    });
 }
 
 /*async function update(username:string):Promise<string>{
@@ -770,3 +804,22 @@ export async function getFriend():Promise<string[]>{
         });
     }
 }*/
+
+export async function getArticles():Promise<Article[]>{
+    var articles:Article[] = [];
+
+    await get(child(dbRef, `articles/`)).then((snapshot) => {
+        snapshot.forEach((article) => {
+            console.log(article.key);
+
+            var temp:Article = new Article(article.child("category").val(), String(article.key), article.child("description").val(), article.child("source").val())
+
+            articles.push(temp);
+        });
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    console.log(articles);
+    return articles;
+}

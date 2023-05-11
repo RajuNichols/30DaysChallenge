@@ -19,6 +19,7 @@ import * as SplashScreen from "expo-splash-screen";
 import RadioForm from 'react-native-simple-radio-button';
 import 'core-js/features/array/at';
 import { COLORS } from "../colors";
+import * as backend from "../backendNew/backend";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -116,7 +117,7 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
   ]
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // #TODO
     // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
 
@@ -136,6 +137,8 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
 
       console.log("Smoking total: " + smokingTotal);
       console.log("Drinking total: " + drinkingTotal);
+
+      var temp = await backend.addDifficulty("Dev", drinkingTotal, smokingTotal);
 
       // MATT TODO: Assign difficulties here
 

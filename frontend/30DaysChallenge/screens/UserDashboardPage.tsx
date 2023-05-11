@@ -485,7 +485,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     ],
   };*/
 
-  var usertemp:User = new User("", "", "");
+  var usertemp:User = new User("", "", "", 0, 0);
   var temp2:frontendDetails[] = [];
   //var username:string = "Matt";
 
@@ -493,6 +493,8 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
   async function getData():Promise<boolean>{
     //await backend.sendArticles();
+
+    //var x = await backend.getArticles();
 
     var check1 = await backend.login("Dev", "dev");
     console.log(check1 + " check1");

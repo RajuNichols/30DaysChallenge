@@ -22,6 +22,8 @@ import { COLORS } from "../colors";
 import BackButton from "../components/backbutton";
 import EditChallengeModal from "../components/editchallengetitle";
 import LoadingIndicator from "../components/loadingindicator";
+import { Article, User } from "../backendNew/types";
+import * as backend from "../backendNew/backend"
 
 interface ChallengeDescriptionPageProps {
   navigation: any;
@@ -41,7 +43,7 @@ export default function ChallengeDescriptionPage(
   const [isLoading, setIsLoading] = useState(true);
   const [isAlcOrSmoking, setIsAlcOrSmoking] = useState(false);
 
-  // Mock user to show how alcohol and smoking difficulties are applied
+  /*// Mock user to show how alcohol and smoking difficulties are applied
   const User = {
     name: "Melissa",
     alcDifficulty: 3,
@@ -113,30 +115,45 @@ export default function ChallengeDescriptionPage(
       source:
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
     },
-  ];
-  useEffect(() => {
-    for (var i = 0; i < mockChallenges.length; i++)
-    {
-      if (mockChallenges[i].name === itemId)
-      {
-        if (mockChallenges[i].category === "Alcohol")
-        {
-          setIsAlcOrSmoking(true);
-          setStars(User.alcDifficulty);
-        } else if (mockChallenges[i].category === "Smoking")
-        {
-          setIsAlcOrSmoking(true);
-          setStars(User.smokingDifficulty);
-        }
-        setTitle(mockChallenges[i].title);
-        setDescription(mockChallenges[i].desc);
-        setCitation(mockChallenges[i].source);
-        setTimeout(() => {
-          setIsLoading(false);
-        },2000)
-        break
-      }
+  ];*/
+  var articles:Article[] = [];
+  var user:User = new User("", "", "", 0, 0);
+
+  async function getData():Promise<boolean>{
+    var temp = await backend.getArticles();
+
+    for(var i = 0; i < temp.length; i++){
+      articles[i] = new Article(temp[i].name, temp[i].title, temp[i].desc, temp[i].source);
     }
+
+    user = await backend.sendUser("Dev");
+    return true;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      var check = await getData();
+
+      for (var i = 0; i < articles.length; i++) {
+        if (articles[i].title === itemId) {
+          if (articles[i].name === "Alcohol") {
+            setIsAlcOrSmoking(true);
+            setStars(user.alcDifficulty);
+          } else if (articles[i].title === "Smoking") {
+            setIsAlcOrSmoking(true);
+            setStars(user.smokingDifficulty);
+          }
+          setTitle(articles[i].title);
+          setDescription(articles[i].desc);
+          setCitation(articles[i].source);
+          if(check){
+            setIsLoading(false);
+          }
+          break
+        }
+      }
+    };
+    fetchData();
   }, []);
 
   let [fontsLoaded, error] = useFonts({
@@ -240,7 +257,7 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal challenge={mockChallenges[0]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking}/>
+        <EditChallengeModal challenge={articles[0]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking}/>
       </View>
     </View>
   );

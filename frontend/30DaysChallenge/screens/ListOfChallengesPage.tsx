@@ -22,6 +22,8 @@ import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
 import DifficultyStars from "../components/difficultystars";
 import ChallengeListItem from "../components/challengeListItem";
+import { Article } from "../backendNew/types";
+import * as backend from "../backendNew/backend"
 
 SplashScreen.preventAutoHideAsync();
 interface ListOfChallengesPageProps {
@@ -29,7 +31,7 @@ interface ListOfChallengesPageProps {
 }
 
 export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
-const allChallenges = 
+/*const allChallenges = 
   [
     {
       name: "Vitamins",
@@ -102,16 +104,34 @@ const User = {
       difficulty: 4,
     }
   ],
-};
+};*/
 
+  var articles:Article[] = [];
   const [searchInput, setSearchInput] = useState("");
-  const [filteredChallenges, setFilteredChallenges] = useState(allChallenges);
+  const [filteredChallenges, setFilteredChallenges] = useState(articles);
+
+  async function getData(){
+    var temp = await backend.getArticles();
+
+    for(var i = 0; i < temp.length; i++){
+      articles[i] = new Article(temp[i].name, temp[i].title, temp[i].desc, temp[i].source);
+    }
+
+    setFilteredChallenges(articles);
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getData();
+    };
+    fetchData();
+  },[]);
 
   function handleChange(text: string) {
     setSearchInput(text);
     const textName = text.toUpperCase();
 
-    const updatedFilteredChallenges = allChallenges.filter((challenge) => {
+    const updatedFilteredChallenges = articles.filter((challenge) => {
       const challengeTitle = challenge.title.toUpperCase();
       return textName === "" || challengeTitle.includes(textName);
     });
@@ -157,7 +177,7 @@ const User = {
                   <View style={styles.challengeContainer} key={index}>
                       <Text style={styles.challengeName}>{challenge.title}</Text>
                       <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
-                                itemId: challenge.name
+                                itemId: challenge.title
                               })}>
                           <Text style={styles.buttonText}>View</Text>
                       </TouchableOpacity>

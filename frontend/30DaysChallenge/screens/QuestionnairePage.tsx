@@ -137,6 +137,8 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
       console.log("Smoking total: " + smokingTotal);
       console.log("Drinking total: " + drinkingTotal);
 
+      // MATT TODO: Assign difficulties here
+
       props.navigation.navigate("Home");
 
     } else {

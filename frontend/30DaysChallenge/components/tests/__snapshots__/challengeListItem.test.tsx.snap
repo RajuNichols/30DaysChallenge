@@ -77,7 +77,7 @@ exports[`ChallengeListItem renders correctly with invalid display prop 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -194,7 +194,7 @@ exports[`ChallengeListItem renders correctly with valid display prop 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

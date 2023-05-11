@@ -490,6 +490,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   var temp2:frontendDetails[] = [];
 
   async function getData():Promise<boolean>{
+    setIsLoading(true);
     //await backend.sendArticles();
 
     var check1 = await backend.login("Dev", "dev");
@@ -547,7 +548,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
         }
       };
       fetchData();
-      console.log(data.toString());
+      //console.log(data.toString());
   
       return () => {
         // This is the cleanup function that runs when the screen is unfocused

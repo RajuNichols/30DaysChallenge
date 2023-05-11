@@ -110,6 +110,7 @@ const User = {
   var articles:Article[] = [];
   const [searchInput, setSearchInput] = useState("");
   const [filteredChallenges, setFilteredChallenges] = useState(articles);
+  const [data, setData] = useState(articles);
   const [isLoading, setIsLoading] = useState(true);
 
   async function getData():Promise<boolean>{
@@ -122,7 +123,7 @@ const User = {
 
     console.log("past for");
 
-    setFilteredChallenges(articles);
+    setData(articles);
 
     return true;
   }
@@ -130,6 +131,8 @@ const User = {
   useEffect(() => {
     const fetchData = async () => {
       var check = await getData();
+
+      setFilteredChallenges(data);
 
       if(check){
         setIsLoading(false);
@@ -142,7 +145,7 @@ const User = {
     setSearchInput(text);
     const textName = text.toUpperCase();
 
-    const updatedFilteredChallenges = articles.filter((challenge) => {
+    const updatedFilteredChallenges = data.filter((challenge) => {
       const challengeTitle = challenge.name.toUpperCase();
       return textName === "" || challengeTitle.includes(textName);
     });

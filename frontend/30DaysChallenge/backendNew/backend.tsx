@@ -2,6 +2,7 @@ import { User, Challenges, Article } from "./types";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 //import { readFileSync } from "fs";
+import data from "./data1.json";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
@@ -777,38 +778,28 @@ export async function getFriend():Promise<string[]>{
     }
 }
 
-/*export async function sendArticles(){
-    var file = readFileSync('outputTest4.txt', 'utf-8');
-    console.log(file);
+export async function sendArticles() {
+    try {
+        for (let i = 0; i < data.length; i++) {
+            const article = data[i];
+            console.log(article.title);
 
-    var category:string[] = [];
-    var title:string[] = [];
-    var source:string[] = [];
-    var id:number[] = [];
-    var label:string[] = [];
-    var summary:string[] = [];
-
-    var newlineSplit = file.split('\n');
-    for (var i=0; i<newlineSplit.length; i++) {
-        var temp = newlineSplit[i].split('\t');
-        id[i] = parseInt(temp[0]);
-        title[i] = temp[1];
-        label[i] = temp[2];
-        category[i] = temp[4];
-        summary[i] = temp[5];
-        source[i] = temp[6];
+            try {
+                await set(ref(db, 'articles/' + article.title), {
+                    category: article.category,
+                    source: article.source, // Ensure you have a source field in your JSON data
+                    description: article.summary, // Ensure you have a summary field in your JSON data
+                    label: article.label,
+                    id: article.id
+                });
+            } catch (error) {
+                console.error(`Error sending article ${article.title} to Firebase: ${error}`);
+            }
+        }
+    } catch (error) {
+        console.error(error);
     }
-
-    for(var i = 0; i < category.length; i++){
-        set(ref(db, 'articles/' + title[i]), {
-            category: category[i],
-            source: source[i],
-            description: summary[i],
-            label: label[i],
-            id: id[i]
-        });
-    }
-}*/
+}
 
 export async function getArticles():Promise<Article[]>{
     var articles:Article[] = [];

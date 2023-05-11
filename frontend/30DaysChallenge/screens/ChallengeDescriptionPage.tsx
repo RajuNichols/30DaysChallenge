@@ -82,7 +82,7 @@ export default function ChallengeDescriptionPage(
   async function begin(){
     if(challenge != null){
       challenge = await getData();
-      setTitle(challenge[itemId].userChallengeName);
+      setTitle(challenge[itemId].articleTitle);
       setStars(challenge[itemId].challengeDifficulty);
       setDescription(challenge[itemId].description);
       setCitation(challenge[itemId].articleSource);

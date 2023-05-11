@@ -42,6 +42,8 @@ export default function ChallengeDescriptionPage(
   const { itemId } = props?.route?.params;
   const [isLoading, setIsLoading] = useState(true);
   const [isAlcOrSmoking, setIsAlcOrSmoking] = useState(false);
+  const [articleIndex, setArticleIndex] = useState(0);
+  const [articles, setArticles] = useState<Article[]>([]);
 
   /*// Mock user to show how alcohol and smoking difficulties are applied
   const User = {
@@ -116,15 +118,17 @@ export default function ChallengeDescriptionPage(
         "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
     },
   ];*/
-  var articles:Article[] = [];
+  var article:Article[] = [];
   var user:User = new User("", "", "", 0, 0);
 
   async function getData():Promise<boolean>{
     var temp = await backend.getArticles();
 
     for(var i = 0; i < temp.length; i++){
-      articles[i] = new Article(temp[i].name, temp[i].title, temp[i].desc, temp[i].source);
+      article[i] = new Article(temp[i].name, temp[i].title, temp[i].desc, temp[i].source);
     }
+
+    setArticles(article);
 
     user = await backend.sendUser("Dev");
     return true;
@@ -134,18 +138,19 @@ export default function ChallengeDescriptionPage(
     const fetchData = async () => {
       var check = await getData();
 
-      for (var i = 0; i < articles.length; i++) {
-        if (articles[i].title === itemId) {
-          if (articles[i].name === "Alcohol") {
+      for (var i = 0; i < article.length; i++) {
+        if (article[i].title === itemId) {
+          setArticleIndex(i);
+          if (article[i].name === "Alcohol") {
             setIsAlcOrSmoking(true);
             setStars(user.alcDifficulty);
-          } else if (articles[i].title === "Smoking") {
+          } else if (article[i].title === "Smoking") {
             setIsAlcOrSmoking(true);
             setStars(user.smokingDifficulty);
           }
-          setTitle(articles[i].title);
-          setDescription(articles[i].desc);
-          setCitation(articles[i].source);
+          setTitle(article[i].title);
+          setDescription(article[i].desc);
+          setCitation(article[i].source);
           if(check){
             setIsLoading(false);
           }
@@ -257,7 +262,7 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal challenge={articles[0]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking}/>
+        <EditChallengeModal challenge={articles[articleIndex]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking}/>
       </View>
     </View>
   );
@@ -266,7 +271,7 @@ export default function ChallengeDescriptionPage(
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
-    width: "100%",
+    width: "100%", 
     height: "100%",
     display: "flex",
   },

@@ -24,6 +24,7 @@ import DifficultyStars from "../components/difficultystars";
 import ChallengeListItem from "../components/challengeListItem";
 import { Article } from "../backendNew/types";
 import * as backend from "../backendNew/backend"
+import LoadingIndicator from "../components/loadingindicator";
 
 SplashScreen.preventAutoHideAsync();
 interface ListOfChallengesPageProps {
@@ -109,20 +110,30 @@ const User = {
   var articles:Article[] = [];
   const [searchInput, setSearchInput] = useState("");
   const [filteredChallenges, setFilteredChallenges] = useState(articles);
+  const [isLoading, setIsLoading] = useState(true);
 
-  async function getData(){
+  async function getData():Promise<boolean>{
     var temp = await backend.getArticles();
+    console.log("past get");
 
     for(var i = 0; i < temp.length; i++){
-      articles[i] = new Article(temp[i].name, temp[i].title, temp[i].desc, temp[i].source);
+      articles[i] = temp[i];
     }
 
+    console.log("past for");
+
     setFilteredChallenges(articles);
+
+    return true;
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      await getData();
+      var check = await getData();
+
+      if(check){
+        setIsLoading(false);
+      }
     };
     fetchData();
   },[]);
@@ -132,7 +143,7 @@ const User = {
     const textName = text.toUpperCase();
 
     const updatedFilteredChallenges = articles.filter((challenge) => {
-      const challengeTitle = challenge.title.toUpperCase();
+      const challengeTitle = challenge.name.toUpperCase();
       return textName === "" || challengeTitle.includes(textName);
     });
 
@@ -161,7 +172,7 @@ const User = {
     return null;
   }
 
-  return (
+  return isLoading? (<LoadingIndicator/>) :(
     <DismissKeyboard>
       <KeyboardAvoidingView>
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
@@ -175,7 +186,7 @@ const User = {
             <ScrollView style={styles.desc}>
               {filteredChallenges.map((challenge, index) => (
                   <View style={styles.challengeContainer} key={index}>
-                      <Text style={styles.challengeName}>{challenge.title}</Text>
+                      <Text style={styles.challengeName}>{challenge.name}</Text>
                       <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
                                 itemId: challenge.title
                               })}>

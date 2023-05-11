@@ -12,6 +12,7 @@ import ChallengeView from "../components/challengeview";
 import LoadingIndicator from "../components/loadingindicator";
 import * as backend from "../backendNew/backend";
 import { User, frontendDetails, friendsComplete} from "../backendNew/types";
+import { useFocusEffect } from '@react-navigation/native';
 interface UserDashBoardProps {
   navigation: any;
 }
@@ -487,14 +488,9 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
   var usertemp:User = new User("", "", "", 0, 0);
   var temp2:frontendDetails[] = [];
-  //var username:string = "Matt";
-
-  //const [data, setData] = React.useState(challenges);
 
   async function getData():Promise<boolean>{
     //await backend.sendArticles();
-
-    //var x = await backend.getArticles();
 
     var check1 = await backend.login("Dev", "dev");
     console.log(check1 + " check1");
@@ -502,14 +498,6 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     usertemp = await backend.sendUser("Dev");
 
     setUser(usertemp.username);
-
-    //console.log(user.username);
-
-    //var check2 = await backend.addChallenge("exercise", 2, "Description", "exercise more", "source", "");
-    //console.log(check2 + " check2");
-
-    //var check3 = await backend.addChallenge("water", 2, "Description", "drink water", "source", "DSpAc");
-    //console.log(check3 + " check2");
 
     var temp = await backend.getChallenges();
 
@@ -519,15 +507,6 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     for(i = 0; i < temp.length; i++){
       var challenges:frontendDetails
       challenges = new frontendDetails();
-      // challenges.challenge.userChallengeName = temp[i].userChallengeName 
-      // challenges.challenge.challengeDifficulty = temp[i].challengeDifficulty 
-      // challenges.challenge.description = temp[i].description
-      // challenges.challenge.articleTitle = temp[i].articleTitle
-      // challenges.challenge.articleSource = temp[i].articleSource;
-      // challenges.challenge.startDate = temp[i].startDate;
-      // challenges.challenge.endDate = temp[i].endDate;
-      // challenges.challenge.daysCompleted = temp[i].daysCompleted;
-      // challenges.challenge.challengeToken = usertemp.username + temp[i].userChallengeName;
 
       var dateTemp = new Date();
       dateTemp.setHours(0, 0, 0, 0);
@@ -559,15 +538,23 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
     return true;
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      var temp = await getData();
-      if(temp){
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  },[]);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        var temp = await getData();
+        if(temp){
+          setIsLoading(false);
+        }
+      };
+      fetchData();
+      console.log(data.toString());
+  
+      return () => {
+        // This is the cleanup function that runs when the screen is unfocused
+        // You can leave it empty if there's nothing to clean up
+      };
+    }, [])
+  );
 
   useEffect(() => {
     async function prepare() {

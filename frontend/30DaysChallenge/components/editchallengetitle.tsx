@@ -28,8 +28,10 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
 
   const handleCreateChallenge = async() => {
     console.log("Create Challenge");
+    console.log(title);
+    console.log(props.challenge);
     // This is where we will call the backend endpoint to create a challenge and navigate to the userdashboard.
-    const check = await backend.addChallenge(title, parseInt(difficulty), props.challenge.desc, title, props.challenge.source, "");
+    const check = await backend.addChallenge(title, parseInt(difficulty), props.challenge.desc, props.challenge.title, props.challenge.source, "");
     console.log(check);
     console.log(title);
     //here is where it uses the challenge info

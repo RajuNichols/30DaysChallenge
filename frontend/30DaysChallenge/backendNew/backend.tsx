@@ -810,7 +810,7 @@ export async function getArticles():Promise<Article[]>{
 
     await get(child(dbRef, `articles/`)).then((snapshot) => {
         snapshot.forEach((article) => {
-            console.log(article.key);
+            //console.log(article.key);
 
             var temp:Article = new Article(article.child("category").val(), String(article.key), article.child("description").val(), article.child("source").val())
 
@@ -820,6 +820,6 @@ export async function getArticles():Promise<Article[]>{
         console.error(error);
     });
 
-    console.log(articles);
+    //console.log(articles);
     return articles;
 }

@@ -16,8 +16,8 @@ interface EditChallengeModalProps {
   closeModal: () => void;
   isOpen: boolean;
   challenge: any;
-  navigation: any;
-  isAlcOrSmoking: boolean;
+  navigation?: any;
+  isAlcOrSmoking?: boolean;
 }
 
 export default function EditChallengeModal(props: EditChallengeModalProps) {
@@ -55,7 +55,7 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
     }
   };
 
-  const difficultyDisplay = 
+  const difficultyDisplay: any = 
   {
     height: 44,
     width: 250,

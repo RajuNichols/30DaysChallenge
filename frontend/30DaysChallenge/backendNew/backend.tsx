@@ -1,7 +1,7 @@
 import { User, Challenges } from "./types";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, child, get } from "firebase/database";
-import { readFileSync } from "fs";
+//import { readFileSync } from "fs";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBC_HeFNe_YZksC9p7axJWkbS6ktgIsYX4",
@@ -235,9 +235,10 @@ function makeid(length:number):string {
 }
 
 async function updateGroupCode(code:string, user:string, username:string, challengeName:string){
-    if(user.includes(",")){
+    if(user.includes(",") || user != ""){
         user += ",";
     }
+
     user += username;
     await set(ref(db, 'groupcode/' + code), {
         users: user,
@@ -248,7 +249,7 @@ async function updateGroupCode(code:string, user:string, username:string, challe
 export async function addChallenge(challengeName:string, challengeDifficulty:number, challengeDescription:string, articleTitle:string, articleSource:string, groupCode:string):Promise<boolean>{
     var returnBool:boolean = false;
     user = await sendUser("Dev");
-    user.username = "Raju"
+    //user.username = "Raju"
     var challengeToken = user.username + challengeName;
     var friends:string[] = [];
 
@@ -268,7 +269,7 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
     }
 
     //challengeNames[user.numOfChallenges] = challengeToken;
-    await get(child(dbRef, `challenges/${challengeToken}`)).then((snapshot) => {
+    await get(child(dbRef, `challenges/${challengeToken}`)).then(async (snapshot) => {
         if (!snapshot.exists()) {
             if (user != null) {
                 if(groupCode == ""){
@@ -278,7 +279,7 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
                 user.challenges[user.numOfChallenges] = challengeToken;
                 user.numOfChallenges++;
 
-                //var string = update(user.username);
+                var string = await updateUser(user.username);
 
                 var daystemp: string = "";
                 var i: number;
@@ -361,18 +362,26 @@ export async function addChallenge(challengeName:string, challengeDifficulty:num
 export async function addChallengeWithCode(code:string):Promise<boolean>{
     var returnBool = false;
     var challengeName:string = "";
+    var friends:string[] = [];
     user = await sendUser("Dev");
 
     await get(child(dbRef, `groupcode/${code}`)).then((snapshot) => {
         if(snapshot.exists()){
-            challengeName = snapshot.child("challengeName").val()
+            challengeName = snapshot.child("challengeName").val();
+            var friendstemp = snapshot.child("users").val();
+            if(friendstemp.includes(",")){
+                friends = friendstemp.split(",");
+            }else{
+                friends[0] = friendstemp;
+            }
         }
     }).catch((error) => {
         console.error(error);
     });
 
-    var challengeToken = user.username + challengeName;
+    var challengeToken =  friends[0] + challengeName;
     var check:boolean = false;
+    
     await get(child(dbRef, `challenges/${challengeToken}`)).then(async (snapshot) => {
         if(snapshot.exists()){
             check = await addChallenge(challengeName, parseInt(snapshot.child("challengeDifficulty").val()), snapshot.child("description").val(), snapshot.child("articleTitle").val(), snapshot.child("articleSource").val(), code);
@@ -729,7 +738,7 @@ export async function getFriend():Promise<string[]>{
     }
 }
 
-export async function sendArticles(){
+/*export async function sendArticles(){
     var file = readFileSync('outputTest4.txt', 'utf-8');
     console.log(file);
 
@@ -760,4 +769,4 @@ export async function sendArticles(){
             id: id[i]
         });
     }
-}
+}*/

@@ -492,7 +492,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   //const [data, setData] = React.useState(challenges);
 
   async function getData():Promise<boolean>{
-    await backend.sendArticles();
+    //await backend.sendArticles();
 
     var check1 = await backend.login("Dev", "dev");
     console.log(check1 + " check1");
@@ -503,7 +503,7 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
 
     //console.log(user.username);
 
-    //var check2 = await backend.addChallenge("water", 2, "Description", "drink water", "source", "");
+    //var check2 = await backend.addChallenge("exercise", 2, "Description", "exercise more", "source", "");
     //console.log(check2 + " check2");
 
     //var check3 = await backend.addChallenge("water", 2, "Description", "drink water", "source", "DSpAc");

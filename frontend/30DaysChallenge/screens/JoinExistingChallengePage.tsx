@@ -52,13 +52,17 @@ import {
       return null;
     }
 
-    const handleJoinChallenge = () => {
+    const handleJoinChallenge = async () => {
         console.log("Code entered: " + code);
         if (code) {
             // Navigate to the dashboard where the new challenge should be now
-            var check = backend.addChallengeWithCode(code);
-            setErrorMessage("");
-            props.navigation.navigate("Dashboard");
+            var check = await backend.addChallengeWithCode(code);
+            if(check){
+              setErrorMessage("");
+              props.navigation.navigate("Dashboard");
+            }else{
+              setErrorMessage("Code didn't work")
+            }
         }else{
           setErrorMessage("Invalid group code.");
         }

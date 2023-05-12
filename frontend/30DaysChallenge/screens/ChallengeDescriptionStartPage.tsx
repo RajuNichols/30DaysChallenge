@@ -44,6 +44,7 @@ export default function ChallengeDescriptionPage(
   const [isAlcOrSmoking, setIsAlcOrSmoking] = useState(false);
   const [articleIndex, setArticleIndex] = useState(0);
   const [articles, setArticles] = useState<Article[]>([]);
+  const [difficulty, setDifficulty] = useState(100);
 
   /*// Mock user to show how alcohol and smoking difficulties are applied
   const User = {
@@ -144,9 +145,11 @@ export default function ChallengeDescriptionPage(
           if (article[i].name === "Alcohol") {
             setIsAlcOrSmoking(true);
             setStars(user.alcDifficulty);
-          } else if (article[i].title === "Smoking") {
+            setDifficulty(user.alcDifficulty);
+          } else if (article[i].name === "Smoking") {
             setIsAlcOrSmoking(true);
             setStars(user.smokingDifficulty);
+            setDifficulty(user.smokingDifficulty);
           }
           setTitle(article[i].title);
           setDescription(article[i].desc);
@@ -262,7 +265,7 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal challenge={articles[articleIndex]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking}/>
+        <EditChallengeModal challenge={articles[articleIndex]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking} AlcOrSmokeDifficulty={difficulty}/>
       </View>
     </View>
   );

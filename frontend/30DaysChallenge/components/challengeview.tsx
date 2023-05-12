@@ -54,17 +54,17 @@ const ChallengeView: React.FC<CalendarProps> = ({
   };
 
   const handleCheckbox = async (index: number) => {
-    if (index === 0) {
+    if (index === 0 && !completedDates[challengeDay-1]) {
       var check = backend.completeDay(username, challengeTitle, challengeDay - 1);
       console.log(check + "Challenge View");
-
-      completedDates = await backend.getChallengeDates("Dev", challengeTitle);
-      updateCompletedDates(completedDates);
 
       const newCheck = [...checkedState];
       console.log(newCheck);
       newCheck[index] = !newCheck[index];
       setCheckedState(newCheck);
+
+      completedDates = await backend.getChallengeDates(username, challengeTitle);
+      updateCompletedDates(completedDates);
     }
   };
 

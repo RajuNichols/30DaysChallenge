@@ -17,6 +17,7 @@ interface EditChallengeModalProps {
   closeModal: () => void;
   isOpen: boolean;
   challenge: any;
+  AlcOrSmokeDifficulty: number;
   navigation?: any;
   isAlcOrSmoking?: boolean;
 }
@@ -31,8 +32,14 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
     //console.log(title);
     //console.log(props.challenge);
     // This is where we will call the backend endpoint to create a challenge and navigate to the userdashboard.
-    const check = await backend.addChallenge(title, parseInt(difficulty), props.challenge.desc, props.challenge.title, props.challenge.source, "");
-    console.log(check);
+
+    console.log(props.AlcOrSmokeDifficulty);
+    if(props.isAlcOrSmoking){
+      const check = await backend.addChallenge(title, props.AlcOrSmokeDifficulty, props.challenge.desc, props.challenge.title, props.challenge.source, "");
+    }else{
+      const check = await backend.addChallenge(title, parseInt(difficulty), props.challenge.desc, props.challenge.title, props.challenge.source, "");
+    }
+    //console.log(check);
     console.log(title);
     //here is where it uses the challenge info
     console.log(props.challenge);

@@ -10,6 +10,9 @@ import {
 import { COLORS } from "../colors";
 import ChallengeView from "../components/challengeview";
 import LoadingIndicator from "../components/loadingindicator";
+import * as backend from "../backendNew/backend";
+import { User, frontendDetails, friendsComplete} from "../backendNew/types";
+import { useFocusEffect } from '@react-navigation/native';
 interface UserDashBoardProps {
   navigation: any;
 }
@@ -21,511 +24,118 @@ export default function UserDashboardPage(props: UserDashBoardProps) {
   });
 
   const [isLoading, setIsLoading] = React.useState(true);
+  const [user, setUser] = React.useState("");
+  const [data, setData] = React.useState<frontendDetails[]>([]);
 
-  //this is start of mock information
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  var usertemp:User = new User("", "", "", 0, 0);
+  var temp2:frontendDetails[] = [];
 
-  const curentDate = today
-  const startDate1 = new Date(curentDate.getTime() - 18 * 24 * 60 * 60 * 1000);
-  const startDate2 = new Date(curentDate.getTime() - 10 * 24 * 60 * 60 * 1000);
-  const startDate3 = new Date(curentDate.getTime() - 27 * 24 * 60 * 60 * 1000);
+  async function getData():Promise<boolean>{
+    setIsLoading(true);
 
-  const endDate1 = new Date(startDate1.getTime() + 30 * 24 * 60 * 60 * 1000);
-  const endDate2 = new Date(startDate2.getTime() + 30 * 24 * 60 * 60 * 1000);
-  const endDate3 = new Date(startDate3.getTime() + 30 * 24 * 60 * 60 * 1000);
+    //var check1 = await backend.login("Dev", "dev");
+    //console.log(check1 + " check1");
 
-  const User = {
-    name: "Melissa",
-    challenges: [
-      {
-        title: "Sleep",
-        start: startDate1,
-        end: endDate1,
-        difficulty: 4,
-        challengeDay: 19,
-        code: "U6BZS3",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-        friends: [
-      {
-        name: "Raju",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {
-        name: "Anusha",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {
-        name: "Matt",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {
-        name: "Caleb",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-    ],
-      },
-      {
-        title: "Listen to Music",
-        start: startDate2,
-        end: endDate2,
-        difficulty: 2,
-        challengeDay: 10,
-        code: "ZFUPKP",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-        friends: [
-      {
-        name: "Raju",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {
-        name: "Anusha",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {
-        name: "Matt",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-    ],
-      },
-      {title: "Workout/Diet",
-        start: startDate3,
-        end: endDate3,
-        difficulty: 4,
-        challengeDay: 28,
-        code: "8AH263",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-        friends: [
-      {
-        name: "Raju",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-      {
-        name: "Caleb",
-        completedDates: [
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-        ],
-      },
-    ],
+    usertemp = await backend.sendUser(backend.userNew.username);
+
+    setUser(usertemp.username);
+
+    var temp = await backend.getChallenges();
+
+    //console.log(temp[0].userChallengeName);
+
+    var i:number
+    for(i = 0; i < temp.length; i++){
+      var challenges:frontendDetails
+      challenges = new frontendDetails();
+
+      var dateTemp = new Date();
+      dateTemp.setHours(0, 0, 0, 0);
+      var daysInMilliseconds = dateTemp.getTime() - temp[i].startDate.getTime();
+
+      challenges.currentDay = (daysInMilliseconds / (24 * 60 * 60 * 1000)) + 1;
+
+      challenges.challenge = temp[i];
+
+      //console.log("Past challenge assign");
+
+      var friendTemp = temp[i].friends;
+      //console.log(friendTemp);
+      for(var j = 0; j < friendTemp.length; j++){
+        challenges.daysComplete[j] = new friendsComplete();
+        if(friendTemp[j] != ""){
+          challenges.daysComplete[j].name = friendTemp[j];
+        }else{
+          challenges.daysComplete[j].name = "none";
+        }
+        challenges.daysComplete[j].completedDates = await backend.getChallengeDates(usertemp.username, challenges.challenge.userChallengeName);
+        //console.log(challenges.daysComplete[j].completedDates +  "," + j);
       }
-    ],
-  };
+      
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000);
-  },[]);
+      temp2[i] = challenges;
+      //console.log(temp2[i]);
 
-  useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
+      //console.log("Past challenge friends");
     }
-    prepare();
-  }, []);
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+    setData(temp2);
 
+    //console.log(data);
 
-  if (!fontsLoaded) {
-    return null;
+    return true;
   }
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        var temp = await getData();
+        if(temp){
+          setIsLoading(false);
+        }
+      };
+      
+      fetchData();
+      //console.log(data.toString());
+  
+      return () => {
+        // This is the cleanup function that runs when the screen is unfocused
+        // You can leave it empty if there's nothing to clean up
+      };
+    }, [])
+  );
+
+  const updateCompletedDates = (challengeIndex:any, newCompletedDates:any) => {
+    setData(prevData => {
+      const newData = [...prevData]; // copy the old data
+      newData[challengeIndex].challenge.daysCompleted = newCompletedDates; // update the necessary field
+      return newData; // return the new data which will replace the old data
+    });
+  }
 
   return isLoading ? (<LoadingIndicator/>) :(
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.pageTitle}>30 Days Challenge</Text>
-      <Text style={styles.welcomeUser}>Welcome {User.name}</Text>
+      <Text style={styles.welcomeUser}>Welcome {user}</Text>
       <ScrollView style={styles.challenges}>
-        {User.challenges.map((challenge, index) => (
+        {data.map((challenge, index) => (
           <View style={styles.challengeView} key={index}>
             <TouchableOpacity key={index}style={styles.challengeTitleContainer} onPress={() => props.navigation.navigate("ChallengeDescriptionPage", {
-              itemId: index, codeProp: challenge.code
+              itemId: index, codeProp: challenge.challenge.code
             })}>
-              <Text key={index} style={styles.challengeTitle}>{challenge.title}</Text>
+              <Text key={index} style={styles.challengeTitle}>{challenge.challenge.userChallengeName}</Text>
             </TouchableOpacity>
 
             <View style={styles.calendar}>
               <ChallengeView
-                startDate={challenge.start}
-                endDate={challenge.end}
-                completedDates={challenge.completedDates}
-                challengeDay={challenge.challengeDay}
-                friends={challenge.friends}
+                startDate={challenge.challenge.startDate}
+                endDate={challenge.challenge.endDate}
+                completedDates={challenge.challenge.daysCompleted}
+                challengeDay={challenge.currentDay}
+                friends={challenge.daysComplete}
+                challengeTitle={challenge.challenge.userChallengeName}
+                updateCompletedDates={(newCompletedDates:any) => updateCompletedDates(index, newCompletedDates)}
+                username={user}
               />
             </View>
           </View>

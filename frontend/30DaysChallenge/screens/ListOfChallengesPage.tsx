@@ -22,6 +22,9 @@ import * as SplashScreen from "expo-splash-screen";
 import DismissKeyboard from "../components/dismisskeyboard";
 import DifficultyStars from "../components/difficultystars";
 import ChallengeListItem from "../components/challengeListItem";
+import { Article } from "../backendNew/types";
+import * as backend from "../backendNew/backend"
+import LoadingIndicator from "../components/loadingindicator";
 
 SplashScreen.preventAutoHideAsync();
 interface ListOfChallengesPageProps {
@@ -29,89 +32,46 @@ interface ListOfChallengesPageProps {
 }
 
 export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
-const allChallenges = 
-  [
-    {
-      name: "Vitamins",
-      title: "Take Vitamins",
-      difficulty: 1,
-    },
-    {
-      name: "Vegetables",
-      title: "Eat Vegetables",
-      difficulty: 3,
-    },
-    {
-      name: "Sleep",
-      title: "Get 8 Hours of Sleep",
-      difficulty: 3,
-    },
-    {
-      name: "Music",
-      title: "Listen to Music",
-      difficulty: 1,
-    },
-    {
-      name: "Diet",
-      title: "Diet",
-      difficulty: 4,
-    },
-    {
-      name: "Water",
-      title: "Drink Water",
-      difficulty: 3,
-    },
-    {
-      name: "TV",
-      title: "Watch TV",
-      difficulty: 1,
-    },
-    {
-      name: "Home Workouts",
-      title: "Workout",
-      difficulty: 4,
-    }
-  ]
 
-const User = {
-  name: "Melissa",
-  personalChallenges: [
-    {
-      name: "Vitamins",
-      title: "Take Vitamins",
-      difficulty: 1,
-    },
-    {
-      name: "Vegetables",
-      title: "Eat Vegetables",
-      difficulty: 3,
-    },
-    {
-      name: "Sleep",
-      title: "Sleep",
-      difficulty: 3,
-    },
-    {
-      name: "Music",
-      title: "Listen to Music",
-      difficulty: 1,
-    },
-    {
-      name: "Home Workouts",
-      title: "Workout",
-      difficulty: 4,
-    }
-  ],
-};
-
+  var articles:Article[] = [];
   const [searchInput, setSearchInput] = useState("");
-  const [filteredChallenges, setFilteredChallenges] = useState(allChallenges);
+  const [filteredChallenges, setFilteredChallenges] = useState(articles);
+  const [data, setData] = useState(articles);
+  const [isLoading, setIsLoading] = useState(true);
+
+  async function getData():Promise<boolean>{
+    var temp = await backend.getArticles();
+    //console.log("past get");
+
+    for(var i = 0; i < temp.length; i++){
+      articles[i] = temp[i];
+    }
+
+    //console.log("past for");
+
+    setData(articles);
+
+    return true;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      var check = await getData();
+
+      setFilteredChallenges(data);
+
+      if(check){
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  },[]);
 
   function handleChange(text: string) {
     setSearchInput(text);
     const textName = text.toUpperCase();
 
-    const updatedFilteredChallenges = allChallenges.filter((challenge) => {
+    const updatedFilteredChallenges = data.filter((challenge) => {
       const challengeTitle = challenge.title.toUpperCase();
       return textName === "" || challengeTitle.includes(textName);
     });
@@ -141,7 +101,7 @@ const User = {
     return null;
   }
 
-  return (
+  return isLoading? (<LoadingIndicator/>) :(
     <DismissKeyboard>
       <KeyboardAvoidingView>
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
@@ -157,7 +117,7 @@ const User = {
                   <View style={styles.challengeContainer} key={index}>
                       <Text style={styles.challengeName}>{challenge.title}</Text>
                       <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
-                                itemId: challenge.name
+                                itemId: challenge.title
                               })}>
                           <Text style={styles.buttonText}>View</Text>
                       </TouchableOpacity>
@@ -274,9 +234,10 @@ const styles = StyleSheet.create({
   challengeName: {
     fontFamily: "Inter_800ExtraBold",
     color: "white",
-    paddingTop: 20,
+    paddingTop: 10,
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 10,
+    width: "70%"
   },
 
   text2: {

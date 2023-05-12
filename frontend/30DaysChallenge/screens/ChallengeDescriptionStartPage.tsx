@@ -22,6 +22,8 @@ import { COLORS } from "../colors";
 import BackButton from "../components/backbutton";
 import EditChallengeModal from "../components/editchallengetitle";
 import LoadingIndicator from "../components/loadingindicator";
+import { Article, User } from "../backendNew/types";
+import * as backend from "../backendNew/backend"
 
 interface ChallengeDescriptionPageProps {
   navigation: any;
@@ -40,103 +42,53 @@ export default function ChallengeDescriptionPage(
   const { itemId } = props?.route?.params;
   const [isLoading, setIsLoading] = useState(true);
   const [isAlcOrSmoking, setIsAlcOrSmoking] = useState(false);
+  const [articleIndex, setArticleIndex] = useState(0);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [difficulty, setDifficulty] = useState(100);
+  
+  var article:Article[] = [];
+  var user:User = new User("", "", "", 0, 0);
 
-  // Mock user to show how alcohol and smoking difficulties are applied
-  const User = {
-    name: "Melissa",
-    alcDifficulty: 3,
-    smokingDifficulty: 2,
+  async function getData():Promise<boolean>{
+    var temp = await backend.getArticles();
+
+    for(var i = 0; i < temp.length; i++){
+      article[i] = new Article(temp[i].name, temp[i].title, temp[i].desc, temp[i].source);
+    }
+
+    setArticles(article);
+
+    user = await backend.sendUser(backend.userNew.username);
+    return true;
   }
 
-  const mockChallenges = [
-    {
-      name: "Diet",
-      title: "The Effects of Your Diet on Sleep -- Alcohol challenge",
-      category: "Alcohol",
-      desc: "The studies on the role of carbohydrates on sleep have mixed results. This prospective study of a much larger population of postmenopausal women population demonstrated that high-gi diet was associated with increased insomnia incidence over 3 years  and higher intakes of dietary added sugars, starch, and nonwhole/refined grains each were associated with higher incidence of insomnia. Since tryptophan competes with lnaa for transportation into the brain, this change in ratio may lead to increased tryptophan in the brain . Brain serotonin levels could indeed increase after ingestion of carbohydrate. Fatty acids are another major component of human diet including saturated fat and unsaturated fat. The relationship between fatty acids and sleep wellness has also been studied and is reviewed. Consumption of saturated fat is a major risk factor for cardiovascular disease and diabetes as has been suggested by many scientific societies. In addition, omega-3 fats are considered anti-inflammatory  consumption of which can reduce the inflammation in the body that benefit a number of chronic diseases ; thus, omega-3 fats are commonly used as nutritional supplements to prevent cardiovascular problems and stroke. However, despite the well-established role of pgd2 and pge2 in sleep regulation  studies on the consumption of their precursor omega-6 pufa on sleep wellness are rare. Numerous studies on the role of amino acids on sleep wellness and insomnia have been performed in the past decades.Tryptophan is the substrate for serotonin which has been intensively studied on its role on sleep for many decades. Fatty fish is a major source of dietary vitamin d. Multiple studies have studied the role of vitamin d on sleep. Overall, the study concluded that vitamin d deficiency is associated with a higher risk of sleep disorders including poor sleep quality short sleep duration and sleepiness. A cross-sectional study of adults in the uk suggested there is a relationship between fruit/vegetable intake and sleep wellness  and long sleepers have high plasma levels of vitamin c. However, other than that, literature actually does not have much evidence supporting the relationship of vitamin c and sleep wellness. A randomized double-blind  placebo-controlled study of vitamin b6 and b vitamins on the effects on dreaming and sleep showed no significant differences in the b6-treated group compared with the placebo in terms of time awake during the night, sleep quality, or tiredness on waking",
-      source:
-        "Zhao M, Tuo H, Wang S, Zhao L. The Effects of Dietary Nutrition on Sleep and Sleep Disorders. Mediators Inflamm. 2020 Jun 25;2020:3142874. doi: 10.1155/2020/3142874. PMID: 32684833; PMCID: PMC7334763.",
-    },
-    {
-      name: "Music",
-      title: "Music For Improving Cognitive Function in Alzheimer's Patients -- Smoking challenge",
-      category: "Smoking",
-      desc: "The present findings have certain practical and clinical implications. This study observed a global deterioration of musical abilities in ad patients. Nevertheless, the performances of musical emotions’ recognition in both ad groups are poorer than those of the control group  but they did not reach statistical significance. Thus, we can suggest that ad currently presents an aphaso-agnoso-apractic-amusia syndrome. Further studies are necessary to improve the limitations observed in this study in order to deep in the musical processing in ad. And future study cohorts should ideally encompass a wider range of ad and other neurodegenerative diseases with longitudinal assessments to determine the sensitivity and specificity of particular musical patterns  associated to histopathological and molecular data. The results of this study also suggest that it is possible to make a fast assessment of the subject’s musical abilities  considering three musical scores: extra-linguistic solfeggio and emotional recognition scores. We consider that the seashore test could be reserved only to deeply complete the musical profile of the subject. Furthermore  our data also suggest that the power of emotional music could enhance the general mental state in a more direct and involuntary neural network and it could enhance more using music related to the personal experience of the subject. Future studies could find more evidences about the benefits of emotion and music powers on mental health in neurodegenerative diseases in particular in accessing emotional memories. (edited)",
-      source:
-        "Arroyo-Anlló EM, Dauphin S, Fargeau MN, Ingrand P, Gil R. Music and emotion in Alzheimer's disease. Alzheimers Res Ther. 2019 Aug 7;11(1):69. doi: 10.1186/s13195-019-0523-y. PMID: 31391062; PMCID: PMC6686394.",
-    },
-    {
-      name: "Home Workouts",
-      title: "At-Home Workouts For Low-Back Pain",
-      category: "",
-      desc: "The benefits of home exercise training on lbp patients this study is the first systematic review and meta-analysis of studies investigating the effectiveness of home exercise programs on pain and functional limitation in patients with lbp. Our meta-analysis showed strong evidence that physical exercise training can take place at home to improve lbp even though we found no studies comparing the same training program between home and another setting. If multiple short bouts of moderate-intensity physical exercise produce significant training effects, learning to integrate physical activity into daily life can become a main goal in the treatment of lbp. Similarly, to center-based exercise we found that yoga improved functional limitation as previous studies also showed. Importantly, our results were in favor of standardized exercise compared to individualized exercise  which may be discordant with the literature based on training in centers [2 26]. This may be explained by the fact that easily-performed standardized exercises can promote a better adherence, and could be more in line with home exercise  whereas individualized exercise may be more in line with practice in a center. The absence of such a significant influence on our study may be due to the wide variety of exercise interventions available and the inconsistency of the intensity and duration of exercise.We also demonstrated that the benefits of exercise were less effective in individuals with a higher body mass index in line with the literature. Meta-analyses also inherit the limitations of the individual studies of which they are composed. Some short time-frames (two weeks ) may also have been too short for a therapeutic effect.",
-      source:
-        "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
-    },
-    {
-      name: "Vitamins",
-      title: "The Effects of Taking Daily Multivitamins",
-      category: "",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      source:
-        "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
-    },
-    {
-      name: "Vegetables",
-      title: "The Effects of Incorporating more Vegetables into Diet",
-      category: "",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      source:
-        "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
-    },
-    {
-      name: "Sleep",
-      title: "How Getting Enough Sleep Effects Overall Health",
-      category: "",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      source:
-        "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
-    },
-    {
-      name: "Water",
-      title: "The Effects of Drinking Enough Water",
-      category: "",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      source:
-        "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
-    },
-    {
-      name: "TV",
-      title: "Positive Brain Effects of Television",
-      category: "",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      source:
-        "Quentin C, Bagheri R, Ugbolue UC, Coudeyre E, Pélissier C, Descatha A, Menini T, Bouillon-Minois JB, Dutheil F. Effect of Home Exercise Training in Patients with Nonspecific Low-Back Pain: A Systematic Review and Meta-Analysis. Int J Environ Res Public Health. 2021 Aug 10;18(16):8430. doi: 10.3390/ijerph18168430. PMID: 34444189; PMCID: PMC8391468.",
-    },
-  ];
   useEffect(() => {
-    for (var i = 0; i < mockChallenges.length; i++)
-    {
-      if (mockChallenges[i].name === itemId)
-      {
-        if (mockChallenges[i].category === "Alcohol")
-        {
-          setIsAlcOrSmoking(true);
-          setStars(User.alcDifficulty);
-        } else if (mockChallenges[i].category === "Smoking")
-        {
-          setIsAlcOrSmoking(true);
-          setStars(User.smokingDifficulty);
+    const fetchData = async () => {
+      var check = await getData();
+
+      for (var i = 0; i < article.length; i++) {
+        if (article[i].title === itemId) {
+          setArticleIndex(i);
+          if (article[i].name === "Alcohol") {
+            setIsAlcOrSmoking(true);
+            setStars(user.alcDifficulty);
+            setDifficulty(user.alcDifficulty);
+          } else if (article[i].name === "Smoking") {
+            setIsAlcOrSmoking(true);
+            setStars(user.smokingDifficulty);
+            setDifficulty(user.smokingDifficulty);
+          }
+          setTitle(article[i].title);
+          setDescription(article[i].desc);
+          setCitation(article[i].source);
+          if(check){
+            setIsLoading(false);
+          }
+          break
         }
-        setTitle(mockChallenges[i].title);
-        setDescription(mockChallenges[i].desc);
-        setCitation(mockChallenges[i].source);
-        setTimeout(() => {
-          setIsLoading(false);
-        },2000)
-        break
       }
-    }
+    };
+    fetchData();
   }, []);
 
   let [fontsLoaded, error] = useFonts({
@@ -240,7 +192,7 @@ export default function ChallengeDescriptionPage(
 
       {/* -----------------Modal----------------- */}
       <View style={styles.modal}>
-        <EditChallengeModal challenge={mockChallenges[0]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking}/>
+        <EditChallengeModal challenge={articles[articleIndex]} isOpen={isOpen} closeModal={HandleModal} navigation={props.navigation} isAlcOrSmoking={isAlcOrSmoking} AlcOrSmokeDifficulty={difficulty}/>
       </View>
     </View>
   );
@@ -249,7 +201,7 @@ export default function ChallengeDescriptionPage(
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
-    width: "100%",
+    width: "100%", 
     height: "100%",
     display: "flex",
   },
@@ -257,15 +209,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontFamily: "Inter_800ExtraBold",
     color: COLORS.black,
-    fontSize: 24,
+    fontSize: 18,
     top: "10%",
+    paddingLeft: 15,
+    paddingRight: 15
   },
   desc: {
     alignSelf: "center",
     alignContent: "center",
     position: "absolute",
     width: 327,
-    height: 295,
+    height: 300,
     top: "30%",
     backgroundColor: COLORS.gray,
     borderRadius: 6,
@@ -288,7 +242,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
   },
   button: {
-    top: "55%",
+    top: "60%",
     alignSelf: "center",
     width: 327,
     height: 44,

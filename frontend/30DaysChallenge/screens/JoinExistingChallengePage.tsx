@@ -19,6 +19,7 @@ import {
   import * as SplashScreen from "expo-splash-screen";
   import DismissKeyboard from "../components/dismisskeyboard";
   import { COLORS } from "../colors";
+  import * as backend from "../backendNew/backend";
   
   SplashScreen.preventAutoHideAsync();
   interface JoinExistingChallengePageProps {
@@ -51,12 +52,17 @@ import {
       return null;
     }
 
-    const handleJoinChallenge = () => {
+    const handleJoinChallenge = async () => {
         console.log("Code entered: " + code);
         if (code) {
             // Navigate to the dashboard where the new challenge should be now
-            setErrorMessage("");
-            props.navigation.navigate("Dashboard");
+            var check = await backend.addChallengeWithCode(code);
+            if(check){
+              setErrorMessage("");
+              props.navigation.navigate("Dashboard");
+            }else{
+              setErrorMessage("Code didn't work")
+            }
         }else{
           setErrorMessage("Invalid group code.");
         }

@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontFamily: "Inter_800ExtraBold",
     color: COLORS.black,
-    fontSize: 24,
+    fontSize: 18,
     top: "10%",
   },
   stars: {
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 327,
     height: 295,
-    top: "30%",
+    top: "35%",
     backgroundColor: COLORS.gray,
     borderRadius: 6,
     shadowColor: "#000",
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
   },
   button: {
-    top: "55%",
+    top: "50%",
     alignSelf: "center",
     width: 327,
     height: 44,
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: "Inter_400Regular",
     fontSize: 15,
-    top: 530,
+    top: "60%",
     fontWeight: "bold",
   },
   inviteSection: {
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     width: 281,
     height: 36,
     borderRadius: 10,
-    top: 540,
+    top: "130%",
     alignSelf: "center",
     justifyContent: "center",
     backgroundColor: COLORS.gray,
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   copyLink: {
-    top: 541,
+    top: "130%",
     width: 40,
     height: 39,
     borderRadius: 10,

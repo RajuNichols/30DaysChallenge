@@ -58,9 +58,6 @@ export default function LandingPage(props: LandingPageProps) {
   }
 
   const handleLogin = async() => {
-    // #TODO
-    // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
-
     const response = await backend.login(username, password);
 
     console.log(

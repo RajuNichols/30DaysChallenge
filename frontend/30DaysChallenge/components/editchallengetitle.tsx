@@ -29,9 +29,6 @@ export default function EditChallengeModal(props: EditChallengeModalProps) {
 
   const handleCreateChallenge = async() => {
     console.log("Create Challenge");
-    //console.log(title);
-    //console.log(props.challenge);
-    // This is where we will call the backend endpoint to create a challenge and navigate to the userdashboard.
 
     console.log(props.AlcOrSmokeDifficulty);
     if(props.isAlcOrSmoking){

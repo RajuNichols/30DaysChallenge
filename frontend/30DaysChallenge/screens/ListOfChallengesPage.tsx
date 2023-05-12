@@ -32,80 +32,6 @@ interface ListOfChallengesPageProps {
 }
 
 export default function ListOfChallengesPage(props: ListOfChallengesPageProps) {
-/*const allChallenges = 
-  [
-    {
-      name: "Vitamins",
-      title: "Take Vitamins",
-      difficulty: 1,
-    },
-    {
-      name: "Vegetables",
-      title: "Eat Vegetables",
-      difficulty: 3,
-    },
-    {
-      name: "Sleep",
-      title: "Get 8 Hours of Sleep",
-      difficulty: 3,
-    },
-    {
-      name: "Music",
-      title: "Listen to Music",
-      difficulty: 1,
-    },
-    {
-      name: "Diet",
-      title: "Diet",
-      difficulty: 4,
-    },
-    {
-      name: "Water",
-      title: "Drink Water",
-      difficulty: 3,
-    },
-    {
-      name: "TV",
-      title: "Watch TV",
-      difficulty: 1,
-    },
-    {
-      name: "Home Workouts",
-      title: "Workout",
-      difficulty: 4,
-    }
-  ]
-
-const User = {
-  name: "Melissa",
-  personalChallenges: [
-    {
-      name: "Vitamins",
-      title: "Take Vitamins",
-      difficulty: 1,
-    },
-    {
-      name: "Vegetables",
-      title: "Eat Vegetables",
-      difficulty: 3,
-    },
-    {
-      name: "Sleep",
-      title: "Sleep",
-      difficulty: 3,
-    },
-    {
-      name: "Music",
-      title: "Listen to Music",
-      difficulty: 1,
-    },
-    {
-      name: "Home Workouts",
-      title: "Workout",
-      difficulty: 4,
-    }
-  ],
-};*/
 
   var articles:Article[] = [];
   const [searchInput, setSearchInput] = useState("");
@@ -115,13 +41,13 @@ const User = {
 
   async function getData():Promise<boolean>{
     var temp = await backend.getArticles();
-    console.log("past get");
+    //console.log("past get");
 
     for(var i = 0; i < temp.length; i++){
       articles[i] = temp[i];
     }
 
-    console.log("past for");
+    //console.log("past for");
 
     setData(articles);
 
@@ -146,7 +72,7 @@ const User = {
     const textName = text.toUpperCase();
 
     const updatedFilteredChallenges = data.filter((challenge) => {
-      const challengeTitle = challenge.name.toUpperCase();
+      const challengeTitle = challenge.title.toUpperCase();
       return textName === "" || challengeTitle.includes(textName);
     });
 
@@ -189,7 +115,7 @@ const User = {
             <ScrollView style={styles.desc}>
               {filteredChallenges.map((challenge, index) => (
                   <View style={styles.challengeContainer} key={index}>
-                      <Text style={styles.challengeName}>{challenge.name}</Text>
+                      <Text style={styles.challengeName}>{challenge.title}</Text>
                       <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ChallengeDescriptionStartPage", {
                                 itemId: challenge.title
                               })}>
@@ -308,9 +234,10 @@ const styles = StyleSheet.create({
   challengeName: {
     fontFamily: "Inter_800ExtraBold",
     color: "white",
-    paddingTop: 20,
+    paddingTop: 10,
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 10,
+    width: "70%"
   },
 
   text2: {

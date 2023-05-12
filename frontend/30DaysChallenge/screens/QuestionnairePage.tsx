@@ -118,9 +118,6 @@ export default function QuestionnairePage(props: QuestionnairePageProps) {
 
 
   const handleSubmit = async () => {
-    // #TODO
-    // This is where we will use the backend to check the login values to see if they are valid, if so we will transition to the dashboard.
-
     if (q1ChosenOption && q2ChosenOption && q3ChosenOption && q4ChosenOption && q5ChosenOption
       && q6ChosenOption && q7ChosenOption && q8ChosenOption && q9ChosenOption && q10ChosenOption)
     {

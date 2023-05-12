@@ -59,9 +59,6 @@ export default function RegisterPage(props: RegisterPageProps) {
   }
 
   const handleRegister = async() => {
-    // #TODO
-    // This is where we will use the backend to check the register values to see if they are valid, if so we will transition to the questionnaire.
-
     // Check that the user entered something for each input
     if (username == "") {
       setErrorMessage("Enter a username.");
